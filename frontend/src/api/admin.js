@@ -63,15 +63,8 @@ export const getMembers = (params) =>
 export const createMember = (data) =>
   api.post('/admin/members', data);
 
-export const updateMember = (id, data, config = {}) => {
-  if (data instanceof FormData) {
-    return api.put(`/admin/members/${id}`, data, { 
-      headers: { 'Content-Type': 'multipart/form-data' },
-      ...config
-    });
-  }
-  return api.put(`/admin/members/${id}`, data, config);
-};
+export const updateMember = (id, data, config = {}) =>
+  api.put(`/admin/members/${id}`, data, config);
 
 export const deleteMember = (id) =>
   api.delete(`/admin/members/${id}`);
@@ -81,10 +74,10 @@ export const getOrgMembers = () =>
   api.get('/admin/org');
 
 export const createOrgMember = (formData) =>
-  api.post('/admin/org', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  api.post('/admin/org', formData);
 
 export const updateOrgMember = (id, formData) =>
-  api.put(`/admin/org/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  api.put(`/admin/org/${id}`, formData);
 
 export const deleteOrgMember = (id) =>
   api.delete(`/admin/org/${id}`);
@@ -94,10 +87,10 @@ export const getTestimonials = () =>
   api.get('/admin/testimonials');
 
 export const createTestimonial = (formData) =>
-  api.post('/admin/testimonials', formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  api.post('/admin/testimonials', formData);
 
 export const updateTestimonial = (id, formData) =>
-  api.put(`/admin/testimonials/${id}`, formData, { headers: { 'Content-Type': 'multipart/form-data' } });
+  api.put(`/admin/testimonials/${id}`, formData);
 
 export const deleteTestimonial = (id) =>
   api.delete(`/admin/testimonials/${id}`);
