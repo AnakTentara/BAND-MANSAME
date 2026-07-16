@@ -5,7 +5,7 @@
 /* ---------- Core Page Layout ---------- */
 .pageContainer {
   position: relative;
-  background-color: #040108;
+  background-color: var(--color-bg);
   overflow: hidden;
   min-height: 100vh;
 }
@@ -108,7 +108,7 @@
 }
 
 .heroTitle strong {
-  background: linear-gradient(135deg, #d099ff 0%, #818cf8 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, #3b82f6 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline;
@@ -135,21 +135,21 @@
   align-items: center;
   gap: 8px;
   padding: 14px 28px;
-  background: linear-gradient(135deg, #b870ff 0%, #6b21a8 100%);
+  background: linear-gradient(135deg, var(--color-accent) 0%, var(--color-accent-hover) 100%);
   color: #fff;
   font-size: 0.9375rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(184, 112, 255, 0.4);
-  box-shadow: 0 8px 30px rgba(184, 112, 255, 0.25);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  box-shadow: 0 8px 30px rgba(139, 92, 246, 0.15);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
 }
 
 .btnPrimary:hover {
   transform: translateY(-2px);
-  border-color: rgba(184, 112, 255, 0.6);
-  box-shadow: 0 12px 40px rgba(184, 112, 255, 0.45);
+  border-color: rgba(139, 92, 246, 0.6);
+  box-shadow: 0 12px 40px rgba(139, 92, 246, 0.3);
 }
 
 .btnOutline {
@@ -157,19 +157,19 @@
   align-items: center;
   gap: 8px;
   padding: 14px 28px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.6);
   color: var(--color-text-primary);
   font-size: 0.9375rem;
   font-weight: 600;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(168, 85, 247, 0.2);
+  border: 1px solid var(--color-border-strong);
   backdrop-filter: blur(8px);
   transition: all 0.3s ease;
   cursor: pointer;
 }
 
 .btnOutline:hover {
-  background: rgba(184, 112, 255, 0.08);
+  background: rgba(139, 92, 246, 0.08);
   border-color: var(--color-accent);
 }
 
@@ -193,7 +193,7 @@
   font-weight: 800;
   color: var(--color-text-primary);
   line-height: 1.1;
-  background: linear-gradient(135deg, #ffffff 0%, #beb2d4 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -337,10 +337,10 @@
 }
 
 .instrumentCard {
-  background: rgba(15, 8, 30, 0.25);
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(184, 112, 255, 0.08);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: 32px 20px;
   display: flex;
@@ -352,10 +352,10 @@
 }
 
 .instrumentCard:hover {
-  border-color: rgba(184, 112, 255, 0.3);
-  background: rgba(25, 14, 52, 0.45);
+  border-color: var(--color-accent-border);
+  background: rgba(255, 255, 255, 0.75);
   transform: translateY(-8px);
-  box-shadow: 0 16px 40px rgba(184, 112, 255, 0.15);
+  box-shadow: 0 16px 40px rgba(139, 92, 246, 0.15);
 }
 
 .instrumentIcon {
@@ -430,10 +430,10 @@
 
 /* Visi Card */
 .visiCard {
-  background: linear-gradient(135deg, rgba(25, 14, 52, 0.35) 0%, rgba(10, 4, 20, 0.15) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(243, 232, 255, 0.45) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(184, 112, 255, 0.12);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
   display: flex;
@@ -451,7 +451,7 @@
   left: -100px;
   width: 250px;
   height: 250px;
-  background: radial-gradient(circle, rgba(184, 112, 255, 0.1) 0%, rgba(0,0,0,0) 70%);
+  background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, rgba(0,0,0,0) 70%);
   pointer-events: none;
 }
 
@@ -476,10 +476,10 @@
 
 /* Misi Card */
 .misiCard {
-  background: rgba(15, 8, 30, 0.2);
+  background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(168, 85, 247, 0.08);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
   padding: var(--space-xl);
 }
@@ -504,15 +504,15 @@
   display: flex;
   gap: var(--space-md);
   padding: 16px;
-  background: rgba(255, 255, 255, 0.02);
-  border: 1px solid rgba(255, 255, 255, 0.04);
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-sm);
   transition: all 0.3s ease;
 }
 
 .misiItem:hover {
-  background: rgba(184, 112, 255, 0.04);
-  border-color: rgba(184, 112, 255, 0.15);
+  background: rgba(139, 92, 246, 0.04);
+  border-color: var(--color-border-strong);
   transform: translateX(4px);
 }
 
@@ -574,10 +574,10 @@
 .testimonialCard {
   flex-shrink: 0;
   width: 320px;
-  background: rgba(15, 8, 30, 0.35);
+  background: rgba(255, 255, 255, 0.6);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(184, 112, 255, 0.08);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
   cursor: pointer;
@@ -585,10 +585,10 @@
 }
 
 .testimonialCard:hover {
-  border-color: rgba(184, 112, 255, 0.3);
-  background: rgba(25, 14, 52, 0.5);
+  border-color: var(--color-accent-border);
+  background: rgba(255, 255, 255, 0.85);
   transform: scale(1.03) translateY(-4px);
-  box-shadow: 0 10px 30px rgba(184, 112, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(139, 92, 246, 0.12);
 }
 
 .testimonialHeader {
@@ -651,10 +651,10 @@
 }
 
 .ctaInner {
-  background: linear-gradient(135deg, rgba(25, 14, 52, 0.45) 0%, rgba(10, 4, 20, 0.2) 100%);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.75) 0%, rgba(243, 232, 255, 0.45) 100%);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(184, 112, 255, 0.15);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   padding: var(--space-xl) var(--space-2xl);
   display: flex;
@@ -683,7 +683,7 @@
 .testimonialModalOverlay {
   position: fixed;
   inset: 0;
-  background: rgba(4, 1, 8, 0.8);
+  background: rgba(31, 18, 53, 0.6);
   backdrop-filter: blur(12px);
   z-index: 1000;
   display: flex;
@@ -693,10 +693,10 @@
 }
 
 .testimonialModalCard {
-  background: rgba(15, 8, 30, 0.45);
+  background: rgba(255, 255, 255, 0.95);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(184, 112, 255, 0.2);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   max-width: 480px;
   width: 100%;
@@ -826,5 +826,99 @@
   .cardShowcase {
     width: 260px;
     height: 320px;
+  }
+}
+
+/* ---------- Showcase Alat Musik Utama ---------- */
+.instrumentPreviewSection {
+  position: relative;
+  z-index: 10;
+  padding-bottom: var(--space-3xl);
+}
+
+.sectionSubtitle {
+  text-align: center;
+  color: var(--color-text-secondary);
+  font-size: 1rem;
+  max-width: 600px;
+  margin: -40px auto 48px auto;
+  line-height: 1.6;
+}
+
+.instrumentPreviewGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-lg);
+}
+
+.instrumentPreviewCard {
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  height: 100%;
+}
+
+.instrumentImgWrap {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.instrumentImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.instrumentPreviewCard:hover .instrumentImg {
+  transform: scale(1.08);
+}
+
+.instrumentInfoWrap {
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.instrumentSpec {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.instrumentName {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 12px;
+}
+
+.instrumentDesc {
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .instrumentPreviewGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .instrumentPreviewGrid {
+    grid-template-columns: 1fr;
+  }
+  .sectionSubtitle {
+    margin-bottom: 32px;
   }
 }

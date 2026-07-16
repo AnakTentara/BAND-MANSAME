@@ -6,44 +6,44 @@
 
 /* ---------- CSS Variables ---------- */
 :root {
-  /* Background */
-  --color-bg:        #040108;
-  --color-surface:   rgba(15, 8, 30, 0.35);
-  --color-surface-2: rgba(30, 16, 60, 0.5);
-  --color-surface-3: rgba(45, 25, 90, 0.65);
+  /* Background - Light Lavender/Purple Tinted White */
+  --color-bg:        #fcfbfe;
+  --color-surface:   rgba(255, 255, 255, 0.55);
+  --color-surface-2: rgba(240, 235, 250, 0.65);
+  --color-surface-3: rgba(225, 215, 245, 0.85);
 
   /* Border */
-  --color-border:       rgba(168, 85, 247, 0.12);
-  --color-border-strong: rgba(168, 85, 247, 0.22);
+  --color-border:       rgba(139, 92, 246, 0.12);
+  --color-border-strong: rgba(139, 92, 246, 0.25);
 
-  /* Text */
-  --color-text-primary:   #f5f2fa;
-  --color-text-secondary: #bdafdb;
-  --color-text-muted:     #7f6e9e;
+  /* Text - Dark Violet/Navy for excellent contrast (WCAG >= 4.5:1) */
+  --color-text-primary:   #1f1235;
+  --color-text-secondary: #4a3e5d;
+  --color-text-muted:     #7c7090;
 
-  /* Accent — Neon Purple MANSAME Band */
-  --color-accent:        #b870ff;
-  --color-accent-hover:  #d099ff;
-  --color-accent-dark:   #6b21a8;
-  --color-accent-subtle: rgba(184, 112, 255, 0.08);
-  --color-accent-border: rgba(184, 112, 255, 0.25);
+  /* Accent — Elegant Violet Purple MANSAME Band */
+  --color-accent:        #8b5cf6;
+  --color-accent-hover:  #7c3aed;
+  --color-accent-dark:   #4c1d95;
+  --color-accent-subtle: rgba(139, 92, 246, 0.08);
+  --color-accent-border: rgba(139, 92, 246, 0.25);
 
   /* Status */
-  --color-success:        #10b981;
-  --color-success-bg:     rgba(10, 20, 15, 0.45);
-  --color-success-border: rgba(16, 185, 129, 0.25);
-  --color-error:          #f43f5e;
-  --color-error-bg:       rgba(30, 10, 15, 0.45);
-  --color-error-border:   rgba(244, 63, 94, 0.25);
-  --color-pending:        #f59e0b;
-  --color-pending-bg:     rgba(25, 15, 10, 0.45);
-  --color-pending-border: rgba(245, 158, 11, 0.25);
+  --color-success:        #059669;
+  --color-success-bg:     rgba(209, 250, 229, 0.65);
+  --color-success-border: rgba(5, 150, 105, 0.25);
+  --color-error:          #e11d48;
+  --color-error-bg:       rgba(ffe4e6, 0.65);
+  --color-error-border:   rgba(225, 29, 72, 0.25);
+  --color-pending:        #d97706;
+  --color-pending-bg:     rgba(fef3c7, 0.65);
+  --color-pending-border: rgba(217, 119, 6, 0.25);
 
-  /* Shadow */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.5);
-  --shadow-sm: 0 4px 12px rgba(0,0,0,0.6);
-  --shadow-md: 0 8px 32px rgba(0,0,0,0.7);
-  --shadow-lg: 0 16px 48px rgba(0,0,0,0.8);
+  /* Shadow - Soft purple tinted shadows */
+  --shadow-xs: 0 1px 2px rgba(31, 18, 53, 0.05);
+  --shadow-sm: 0 4px 12px rgba(31, 18, 53, 0.08);
+  --shadow-md: 0 8px 32px rgba(31, 18, 53, 0.12);
+  --shadow-lg: 0 16px 48px rgba(31, 18, 53, 0.16);
 
   /* Border Radius */
   --radius-xs: 6px;
@@ -89,7 +89,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(168, 85, 247, 0.2) 0%, rgba(168, 85, 247, 0.4) 100%);
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.2) 0%, rgba(139, 92, 246, 0.4) 100%);
   border-radius: 10px;
 }
 
@@ -100,7 +100,7 @@
 /* Firefox compatibility */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(168, 85, 247, 0.3) transparent;
+  scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
 }
 
 html {
@@ -426,26 +426,26 @@ ul, ol {
 
 /* ---------- MANSAME Band LiquidGlass Utilities ---------- */
 .glass-panel {
-  background: rgba(15, 8, 32, 0.45);
+  background: rgba(255, 255, 255, 0.65);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(184, 112, 255, 0.15);
-  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  box-shadow: 0 8px 32px 0 rgba(31, 18, 53, 0.08);
 }
 
 .glass-card {
-  background: rgba(25, 14, 52, 0.25);
+  background: rgba(255, 255, 255, 0.45);
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(184, 112, 255, 0.08);
+  border: 1px solid rgba(139, 92, 246, 0.12);
   border-radius: var(--radius-md);
   transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .glass-card:hover {
-  border-color: rgba(184, 112, 255, 0.25);
-  background: rgba(25, 14, 52, 0.38);
-  box-shadow: 0 12px 40px 0 rgba(184, 112, 255, 0.12);
+  border-color: rgba(139, 92, 246, 0.3);
+  background: rgba(255, 255, 255, 0.65);
+  box-shadow: 0 12px 40px 0 rgba(139, 92, 246, 0.15);
   transform: translateY(-4px);
 }
 

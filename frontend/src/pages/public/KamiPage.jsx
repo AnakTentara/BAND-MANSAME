@@ -340,10 +340,10 @@ export default function KamiPage() {
       )}
 
       {/* 6. CTA Ajakan Bergabung */}
-      <section className={`section ${styles.historySection}`} style={{ borderTop: '1px solid rgba(184, 112, 255, 0.1)', background: '#040108' }}>
+      <section className={`section ${styles.historySection}`} style={{ borderTop: '1px solid var(--color-border)', background: 'var(--color-bg)' }}>
         <div className="container">
           <div className="glass-panel" style={{ padding: '40px', borderRadius: '16px', textAlign: 'center' }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: '#fff', fontSize: '1.75rem', marginBottom: '12px' }}>Ingin Menjadi Bagian Dari Kami?</h2>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--color-text-primary)', fontSize: '1.75rem', marginBottom: '12px' }}>Ingin Menjadi Bagian Dari Kami?</h2>
             <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9375rem', marginBottom: '24px', maxWidth: '580px', marginInline: 'auto' }}>
               Daftarkan dirimu sekarang untuk bergabung sebagai pemain musik atau penyanyi MANSAME Band generasi selanjutnya.
             </p>

@@ -3,17 +3,17 @@
    ═══════════════════════════════════════════════ */
 
 .header {
-  background: linear-gradient(180deg, rgba(184, 112, 255, 0.08) 0%, rgba(0,0,0,0) 100%);
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.08) 0%, rgba(252, 251, 254, 0) 100%);
   padding: 120px 0 40px 0;
   text-align: center;
-  border-bottom: 1px solid rgba(184, 112, 255, 0.10);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .title {
   font-family: var(--font-display);
   font-size: 2.25rem;
   font-weight: 800;
-  background: linear-gradient(135deg, #ffffff 0%, #b870ff 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: inline-block;
@@ -37,9 +37,8 @@
   font-weight: 600;
 }
 
-/* Tree Section */
 .treeSection {
-  background-color: #040108;
+  background-color: var(--color-bg);
   padding-block: var(--space-2xl);
 }
 
@@ -47,7 +46,7 @@
   font-family: var(--font-display);
   font-size: 1.75rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--color-text-primary);
   text-align: center;
   margin-bottom: 48px;
 }
@@ -78,25 +77,25 @@
 .searchInput {
   width: 100%;
   padding: 10px 14px 10px 38px;
-  background: rgba(4, 1, 8, 0.5);
-  border: 1px solid rgba(184, 112, 255, 0.15);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: 0.875rem;
-  color: #fff;
+  color: var(--color-text-primary);
   outline: none;
   transition: all 0.3s ease;
 }
 
 .searchInput:focus {
   border-color: var(--color-accent);
-  background: rgba(4, 1, 8, 0.7);
-  box-shadow: 0 0 10px rgba(184, 112, 255, 0.15);
+  background: var(--color-surface-2);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.15);
 }
 
 .viewToggle {
   display: flex;
-  background: rgba(4, 1, 8, 0.5);
-  border: 1px solid rgba(184, 112, 255, 0.15);
+  background: var(--color-surface-2);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
   padding: 2px;
 }
@@ -115,7 +114,7 @@
 
 .toggleBtnActive {
   background: var(--color-accent);
-  color: #fff;
+  color: #ffffff;
 }
 
 /* Grid & Cards */
@@ -174,7 +173,7 @@
   font-family: var(--font-display);
   font-size: 1.0625rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
   margin-bottom: 4px;
 }
 

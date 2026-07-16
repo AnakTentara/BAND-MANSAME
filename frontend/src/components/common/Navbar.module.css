@@ -4,8 +4,8 @@
   left: 0;
   right: 0;
   z-index: 100;
-  background-color: rgba(4, 1, 8, 0.35);
-  border-bottom: 1px solid rgba(184, 112, 255, 0.12);
+  background-color: rgba(252, 251, 254, 0.45);
+  border-bottom: 1px solid var(--color-border);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
   transition: border-color 0.25s ease, box-shadow 0.25s ease;
@@ -13,9 +13,9 @@
 }
 
 .navbar.scrolled {
-  background-color: rgba(4, 1, 8, 0.6);
-  border-bottom-color: rgba(184, 112, 255, 0.22);
-  box-shadow: 0 10px 30px -10px rgba(184, 112, 255, 0.15);
+  background-color: rgba(252, 251, 254, 0.75);
+  border-bottom-color: var(--color-border-strong);
+  box-shadow: 0 10px 30px -10px rgba(139, 92, 246, 0.08);
 }
 
 .inner {
@@ -179,10 +179,10 @@
   }
   .mobileDrawer {
     display: block;
-    background: rgba(15, 8, 30, 0.95);
+    background: rgba(252, 251, 254, 0.96);
     backdrop-filter: blur(24px);
     -webkit-backdrop-filter: blur(24px);
-    border-top: 1px solid rgba(184, 112, 255, 0.15);
+    border-top: 1px solid var(--color-border-strong);
   }
   .logo {
     margin-right: 0;

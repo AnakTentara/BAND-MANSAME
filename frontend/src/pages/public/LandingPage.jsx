@@ -35,6 +35,33 @@ const INSTRUMENTS = [
   { name: 'Keyboardist', desc: 'Mengisi harmoni pad synthesizer, piano klasik, dan efek instrumen.', icon: Key }
 ];
 
+const INSTRUMENT_PREVIEWS = [
+  {
+    name: 'Gitar Bass Hitam',
+    spec: 'Yamaha TRBX / Fender Precision Style',
+    desc: 'Gitar bass elektrik hitam presisi tinggi, menghasilkan nada low-end yang solid dan tebal untuk menyatukan ketukan drum dengan melodi gitar.',
+    img: '/media/instruments/black_bass.jpg'
+  },
+  {
+    name: 'Gitar Listrik Tosca',
+    spec: 'Ibanez / Fender Stratocaster Custom',
+    desc: 'Gitar listrik dengan warna tosca/cyan yang modern dan cerah, ideal untuk riff melodi yang tajam, solo gitar elektrik yang megah, dan suara overdrive yang dinamis.',
+    img: '/media/instruments/tosca_guitar.jpg'
+  },
+  {
+    name: 'Keyboard KORG',
+    spec: 'KORG Synthesizer Kross / Krome',
+    desc: 'Keyboard Synthesizer KORG profesional, menghadirkan pad suara yang kaya, efek piano klasik yang elegan, serta synthesizer synth-lead modern untuk melengkapi harmoni.',
+    img: '/media/instruments/korg_keyboard.jpg'
+  },
+  {
+    name: 'Drum Electric NUX',
+    spec: 'NUX DM-7X / DM-8 Mesh Kit (Hitam)',
+    desc: 'Drum elektrik NUX hitam dengan respon dinamis tinggi, memberikan ketukan ritme yang presisi, drum fill yang bertenaga, dan kemudahan dalam latihan studio maupun performa.',
+    img: '/media/instruments/nux_drum.jpg'
+  }
+];
+
 export default function LandingPage() {
   const [activeCard, setActiveCard] = useState(0);
   const [isSessionOpen, setIsSessionOpen] = useState(true);
@@ -216,6 +243,34 @@ export default function LandingPage() {
             <Link to="/kami" className={styles.learnMoreBtn}>
               Lihat Detail Struktur Kepengurusan <ArrowRight size={16} />
             </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 2.5. Showcase Alat Musik Utama ── */}
+      <section className={`section ${styles.instrumentPreviewSection}`} id="alat-musik">
+        <div className="container">
+          <h2 className={styles.sectionTitle}>
+            Alat Musik Utama Kami
+            <span className={styles.titleBar} />
+          </h2>
+          <p className={styles.sectionSubtitle}>
+            Intip instrumen premium yang kami gunakan untuk menciptakan karya musik MANSAME Band yang memukau.
+          </p>
+          
+          <div className={styles.instrumentPreviewGrid}>
+            {INSTRUMENT_PREVIEWS.map((item, index) => (
+              <div key={index} className={`glass-card ${styles.instrumentPreviewCard}`}>
+                <div className={styles.instrumentImgWrap}>
+                  <img src={item.img} alt={item.name} className={styles.instrumentImg} />
+                </div>
+                <div className={styles.instrumentInfoWrap}>
+                  <span className={styles.instrumentSpec}>{item.spec}</span>
+                  <h3 className={styles.instrumentName}>{item.name}</h3>
+                  <p className={styles.instrumentDesc}>{item.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
