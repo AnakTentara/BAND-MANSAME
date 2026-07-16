@@ -215,7 +215,7 @@ async function seedDummyOrgData() {
 }
 
 // Wildcard fallback for React routing (SPA)
-app.get('*', (req, res, next) => {
+app.get('(.*)', (req, res, next) => {
   if (req.path.startsWith('/api') || req.path.startsWith('/uploads') || req.path.includes('.')) {
     return next();
   }
