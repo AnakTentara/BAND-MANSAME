@@ -15,23 +15,19 @@ const POSITIONS = [
   { label: 'Sekretaris Umum', role: 'KABINET' },
   { label: 'Bendahara Umum', role: 'KABINET' },
   
-  // Ketua Divisi
-  { label: 'Ketua MedInfo', role: 'KABINET' },
-  { label: 'Ketua Konselor Sebaya', role: 'KABINET' },
-  { label: 'Ketua Pendidik Sebaya', role: 'KABINET' },
-  { label: 'Ketua Humas', role: 'KABINET' },
-  { label: 'Ketua Informasi', role: 'KABINET' },
-  { label: 'Ketua Konseling dan Pendamping', role: 'KABINET' },
-  { label: 'Ketua Kegiatan dan Kreativitas', role: 'KABINET' },
+  // Koordinator Seksi
+  { label: 'Koordinator Vocalis', role: 'KABINET' },
+  { label: 'Koordinator Gitarist', role: 'KABINET' },
+  { label: 'Koordinator Drummer', role: 'KABINET' },
+  { label: 'Koordinator Bassist', role: 'KABINET' },
+  { label: 'Koordinator Keyboardist', role: 'KABINET' },
   
-  // Anggota Divisi
-  { label: 'Anggota MedInfo', role: 'ANGGOTA' },
-  { label: 'Anggota Konselor Sebaya', role: 'ANGGOTA' },
-  { label: 'Anggota Pendidik Sebaya', role: 'ANGGOTA' },
-  { label: 'Anggota Humas', role: 'ANGGOTA' },
-  { label: 'Anggota Informasi', role: 'ANGGOTA' },
-  { label: 'Anggota Konseling dan Pendamping', role: 'ANGGOTA' },
-  { label: 'Anggota Kegiatan dan Kreativitas', role: 'ANGGOTA' }
+  // Anggota Seksi
+  { label: 'Anggota Vocalis', role: 'ANGGOTA' },
+  { label: 'Anggota Gitarist', role: 'ANGGOTA' },
+  { label: 'Anggota Drummer', role: 'ANGGOTA' },
+  { label: 'Anggota Bassist', role: 'ANGGOTA' },
+  { label: 'Anggota Keyboardist', role: 'ANGGOTA' }
 ];
 
 export default function AdminOrgPage() {
