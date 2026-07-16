@@ -58,7 +58,7 @@ export default function BlogPage() {
           <div className={styles.newspaperHeader}>
             <div className={styles.newspaperHeaderTop}>
               <span>Vol. III No. 4</span>
-              <span className={styles.newspaperHeaderCenter}>MANSEKU DAILY</span>
+              <span className={styles.newspaperHeaderCenter}>DAILY BAND</span>
               <span>{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
             </div>
             <h1 className={styles.newspaperBannerTitle}>Edisi Digital MANSAME Band</h1>

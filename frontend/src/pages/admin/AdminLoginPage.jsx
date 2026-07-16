@@ -46,7 +46,7 @@ export default function AdminLoginPage() {
     <div className={styles.page}>
       <div className={styles.card}>
         <div className={styles.header}>
-          <div style={{ fontSize: '3rem', marginBottom: '12px' }}>🎸</div>
+          <img src="/media/logos/mansame-band.png" alt="MANSAME Band" style={{ height: '64px', width: 'auto', borderRadius: '8px', marginBottom: '12px' }} />
           <h1 className={styles.title}>Dashboard Admin</h1>
           <p className={styles.subtitle}>MANSAME Band — Panel Administrasi</p>
         </div>

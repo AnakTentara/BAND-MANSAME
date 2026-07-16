@@ -3,9 +3,9 @@ import { useLocation } from 'react-router-dom';
 
 const DEFAULT_TITLE = 'MANSAME Band — Ekstrakurikuler Band MAN 1 Muara Enim';
 const DEFAULT_DESC = 'Ekstrakurikuler Band MANSAME (MAN 1 Muara Enim). Wadah kreativitas, ekspresi musik, aransemen, dan pengembangan bakat bermusik siswa MAN 1 Muara Enim.';
-const DEFAULT_KEYWORDS = 'Band MANSAME, MANSAME Band, Band MANSEKU, Ekstrakurikuler Band, Band Sekolah, MANSEKU, MAN 1 Muara Enim, Musik Sekolah, Ekstrakurikuler Musik, Muara Enim';
-const DEFAULT_IMAGE = '/media/logos/logo_pik-r.png';
-const BASE_URL = 'https://pikr-manseku.my.id';
+const DEFAULT_KEYWORDS = 'MANSAME Band, Band MAN 1 Muara Enim, Ekstrakurikuler Band, Band Sekolah, MAN 1 Muara Enim, Musik Sekolah, Ekstrakurikuler Musik, Muara Enim';
+const DEFAULT_IMAGE = '/media/logos/mansame-band.png';
+const BASE_URL = 'https://mansame-band.my.id';
 
 /**
  * SEO Component to dynamically manage page-level metadata.
@@ -124,9 +124,7 @@ export default function SEO({ title, description, keywords, image, type = 'websi
         "MANSAME Band",
         "Band MANSAME",
         "Band MAN 1 Muara Enim",
-        "Band MANSEKU",
-        "Eskul Band MANSEKU",
-        "Musik MANSEKU"
+        "Eskul Band MAN 1 Muara Enim"
       ],
       "description": finalDesc,
       "url": BASE_URL,

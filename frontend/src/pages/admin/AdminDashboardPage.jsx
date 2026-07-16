@@ -61,7 +61,7 @@ export default function AdminDashboardPage() {
           <div 
             className={`${styles.statCard} ${styles.clickableCard}`}
             onClick={() => navigate('/admin/anggota')}
-            title="Klik untuk buka halaman Anggota PIK-R"
+            title="Klik untuk buka halaman Anggota Band"
           >
             <div className={`${styles.statIcon} ${styles.statIconGreen}`}>
               <Users size={22} />

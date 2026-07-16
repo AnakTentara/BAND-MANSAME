@@ -68,7 +68,7 @@ export default function AdminPendaftaranPage() {
 
   const handleToggleSession = async () => {
     const actionText = isSessionOpen 
-      ? 'Menutup sesi akan memindahkan seluruh peserta LULUS ke data Anggota Tetap PIK-R, lalu membersihkan seluruh database pendaftaran calon peserta saat ini.' 
+      ? 'Menutup sesi akan memindahkan seluruh peserta LULUS ke data Anggota Tetap Band, lalu membersihkan seluruh database pendaftaran calon peserta saat ini.' 
       : 'Membuka sesi pendaftaran baru akan membersihkan data pendaftaran lama dan mengizinkan calon peserta baru mendaftar kembali.';
 
     openConfirm({
@@ -235,7 +235,7 @@ export default function AdminPendaftaranPage() {
             <p>
               {isSessionOpen
                 ? 'Calon peserta dapat melakukan pendaftaran baru melalui form publik. Penutupan sesi akan mengarsipkan data pendaftaran.'
-                : `Pendaftaran ditutup pada ${sessionInfo?.closedAt ? new Date(sessionInfo.closedAt).toLocaleString() : ''}. Sebanyak ${sessionInfo?.migratedCount || 0} anggota dipindahkan ke Anggota PIK-R.`}
+                : `Pendaftaran ditutup pada ${sessionInfo?.closedAt ? new Date(sessionInfo.closedAt).toLocaleString() : ''}. Sebanyak ${sessionInfo?.migratedCount || 0} anggota dipindahkan ke Anggota Band.`}
             </p>
           </div>
         </div>

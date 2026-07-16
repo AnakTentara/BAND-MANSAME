@@ -52,7 +52,7 @@ export default function Navbar() {
     ...customPages.map(page => ({ to: `/p/${page.slug}`, label: page.title }))
   ];
 
-  const logoUrl = "/media/logos/L_PIK-R_Title.png";
+  const logoUrl = "/media/logos/mansame-band.png";
 
   const isAdmin = !!localStorage.getItem('admin_token');
 
@@ -73,8 +73,8 @@ export default function Navbar() {
       <div className={`container ${styles.inner}`}>
         {/* Logo */}
         <Link to="/" className={styles.logo} aria-label="MANSAME Band — Beranda">
-          <div className="flex items-center gap-2" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <span style={{ fontSize: '1.5rem' }}>🎸</span>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <img src="/media/logos/mansame-band.png" alt="MANSAME Band" style={{ height: '36px', width: 'auto', borderRadius: '4px' }} />
             <span style={{ fontWeight: '800', fontSize: '1.25rem', letterSpacing: '0.05em', color: '#ffffff' }}>
               MANSAME <span style={{ color: 'var(--color-accent)' }}>BAND</span>
             </span>

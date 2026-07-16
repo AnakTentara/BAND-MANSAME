@@ -56,7 +56,7 @@ export default function AdminUsersPage() {
   };
 
   const handleDelete = async (user) => {
-    if (user.username === 'pikr-manseku') {
+    if (user.username === 'band-mansame') {
       toast.error('Akun Developer utama tidak dapat dihapus.');
       return;
     }
@@ -153,7 +153,7 @@ export default function AdminUsersPage() {
                   <td className={styles.usernameCol}>
                     <User size={14} className={styles.usernameIcon} />
                     {user.username}
-                    {user.username === 'pikr-manseku' && (
+                    {user.username === 'band-mansame' && (
                       <span className={styles.masterBadge}>Master</span>
                     )}
                   </td>
@@ -178,7 +178,7 @@ export default function AdminUsersPage() {
                       <button
                         className="btn btn-ghost text-error"
                         onClick={() => handleDelete(user)}
-                        disabled={user.username === 'pikr-manseku'}
+                        disabled={user.username === 'band-mansame'}
                         title="Hapus User"
                       >
                         <Trash2 size={14} />
@@ -214,7 +214,7 @@ export default function AdminUsersPage() {
                     placeholder="Masukkan username admin"
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
-                    disabled={editingId && username === 'pikr-manseku'}
+                    disabled={editingId && username === 'band-mansame'}
                     required
                   />
                 </div>
@@ -246,7 +246,7 @@ export default function AdminUsersPage() {
                   className="form-input"
                   value={role}
                   onChange={(e) => setRole(e.target.value)}
-                  disabled={editingId && username === 'pikr-manseku'}
+                  disabled={editingId && username === 'band-mansame'}
                 >
                   {ROLES.map(r => (
                     <option key={r.value} value={r.value}>{r.label}</option>

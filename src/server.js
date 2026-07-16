@@ -24,7 +24,7 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
 // Middleware
 app.use(cors({
-  origin: [FRONTEND_URL, 'http://localhost:25551', 'http://localhost:3000', 'https://pikr-manseku.my.id'],
+  origin: [FRONTEND_URL, 'http://localhost:25551', 'http://localhost:3000', 'https://mansame-band.my.id'],
   credentials: true
 }));
 app.use(express.json());
@@ -59,13 +59,13 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/
 
-Sitemap: https://pikr-manseku.my.id/sitemap.xml`);
+Sitemap: https://mansame-band.my.id/sitemap.xml`);
 });
 
 // SEO: Dynamic Sitemap.xml
 app.get('/sitemap.xml', async (req, res) => {
   res.header('Content-Type', 'application/xml');
-  const baseUrl = 'https://pikr-manseku.my.id';
+  const baseUrl = 'https://mansame-band.my.id';
   const staticPages = [
     '',
     '/kami',
@@ -141,10 +141,10 @@ async function seedDefaultAdmin() {
         await prisma.admin.delete({ where: { username: 'admin' } });
         console.log('Removed temporary admin account.');
       }
-      const oldDev = await prisma.admin.findUnique({ where: { username: 'pikrmanseku01' } });
+      const oldDev = await prisma.admin.findUnique({ where: { username: 'pikr-manseku' } });
       if (oldDev) {
-        await prisma.admin.delete({ where: { username: 'pikrmanseku01' } });
-        console.log('Removed old developer account pikrmanseku01.');
+        await prisma.admin.delete({ where: { username: 'pikr-manseku' } });
+        console.log('Removed old developer account pikr-manseku.');
       }
     } catch (e) {
       // Ignore errors (e.g. table not ready yet)
@@ -179,14 +179,16 @@ async function seedDummyOrgData() {
 
     const YEAR = new Date().getFullYear();
     const dummies = [
-      { name: 'Drs. Ahmad Fauzi, M.Pd', role: 'PEMBINA', jabatan: 'Pembina Ekstrakurikuler Band', yearStart: YEAR, isCurrent: true, quote: 'Musik adalah bahasa universal jiwa. Bersama MANSAME Band, mari kita salurkan kreativitas, asa, dan karya terbaik melalui alunan nada!' },
-      { name: 'Siti Rahmawati', role: 'KETUA', jabatan: 'Ketua Band MANSAME', yearStart: YEAR, isCurrent: true, quote: 'Di MANSAME Band, kita tidak hanya bermain alat musik, kita menciptakan harmoni dan kekeluargaan yang tak terlupakan.' },
-      { name: 'Muhammad Rizki', role: 'WAKIL', jabatan: 'Wakil Ketua Band', yearStart: YEAR, isCurrent: true, quote: 'Mari kembangkan bakat musikmu, temukan suaramu, dan bersinarlah di atas panggung bersama kami!' },
-      { name: 'Nurul Hidayah', role: 'KABINET', jabatan: 'Sekretaris Umum', yearStart: YEAR, isCurrent: true },
-      { name: 'Fajar Maulana', role: 'KABINET', jabatan: 'Bendahara Umum', yearStart: YEAR, isCurrent: true },
-      { name: 'Aisyah Putri', role: 'KABINET', jabatan: 'Koordinator Alat & Studio', yearStart: YEAR, isCurrent: true },
-      { name: 'Dini Permata', role: 'KABINET', jabatan: 'Koordinator Humas & Dokumentasi', yearStart: YEAR, isCurrent: true },
-      { name: 'Budi Santoso', role: 'KABINET', jabatan: 'Koordinator Aransemen & Latihan', yearStart: YEAR, isCurrent: true },
+      { name: 'Drs. Ahmad Fauzi, M.Pd', role: 'PEMBINA', jabatan: 'Pembina', yearStart: YEAR, isCurrent: true, quote: 'Musik adalah bahasa universal jiwa. Bersama MANSAME Band, mari kita salurkan kreativitas, asa, dan karya terbaik melalui alunan nada!' },
+      { name: 'Siti Rahmawati', role: 'KETUA', jabatan: 'Ketua', yearStart: YEAR, isCurrent: true, quote: 'Di MANSAME Band, kita tidak hanya bermain alat musik, kita menciptakan harmoni dan kekeluargaan yang tak terlupakan.' },
+      { name: 'Muhammad Rizki', role: 'WAKIL', jabatan: 'Wakil Ketua', yearStart: YEAR, isCurrent: true, quote: 'Mari kembangkan bakat musikmu, temukan suaramu, dan bersinarlah di atas panggung bersama kami!' },
+      { name: 'Nurul Hidayah', role: 'KABINET', jabatan: 'Sekretaris', yearStart: YEAR, isCurrent: true },
+      { name: 'Fajar Maulana', role: 'KABINET', jabatan: 'Bendahara', yearStart: YEAR, isCurrent: true },
+      { name: 'Aisyah Putri', role: 'KABINET', jabatan: 'Koordinator Vocalis', yearStart: YEAR, isCurrent: true },
+      { name: 'Dini Permata', role: 'KABINET', jabatan: 'Koordinator Gitarist', yearStart: YEAR, isCurrent: true },
+      { name: 'Budi Santoso', role: 'KABINET', jabatan: 'Koordinator Drummer', yearStart: YEAR, isCurrent: true },
+      { name: 'Reza Firmansyah', role: 'KABINET', jabatan: 'Koordinator Bassist', yearStart: YEAR, isCurrent: true },
+      { name: 'Anisa Rahma', role: 'KABINET', jabatan: 'Koordinator Keyboardist', yearStart: YEAR, isCurrent: true },
     ];
 
     for (const d of dummies) {

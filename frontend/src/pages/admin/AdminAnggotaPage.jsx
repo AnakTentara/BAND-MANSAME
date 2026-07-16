@@ -180,7 +180,7 @@ export default function AdminAnggotaPage() {
   const handleDeleteClick = (m) => {
     openConfirm({
       title: 'Hapus Anggota Tetap',
-      message: `Apakah Anda yakin ingin menghapus "${m.name}" secara permanen dari database anggota PIK-R?`,
+      message: `Apakah Anda yakin ingin menghapus "${m.name}" secara permanen dari database anggota Band?`,
       danger: true,
       onConfirm: async () => {
         try {
@@ -233,7 +233,7 @@ export default function AdminAnggotaPage() {
   return (
     <div className={styles.page}>
       <AdminHeader
-        title="Daftar Anggota PIK-R"
+        title="Daftar Anggota Band"
         subtitle={`${activeCount} Anggota Aktif | ${alumniCount} Alumni`}
       >
         {!isMedinfo && (
@@ -248,7 +248,7 @@ export default function AdminAnggotaPage() {
         <div className={styles.infoBanner}>
           <AlertTriangle size={18} />
           <span>
-            Anggota PIK-R memiliki masa aktif maksimal 3 tahun, setelah itu status otomatis berubah menjadi <strong>ALUMNI</strong>.
+            Anggota MANSAME Band memiliki masa aktif maksimal 3 tahun, setelah itu status otomatis berubah menjadi <strong>ALUMNI</strong>.
           </span>
         </div>
 

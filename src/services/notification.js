@@ -45,19 +45,19 @@ export async function sendBulkNotifications() {
           <p>Kami ingin menginformasikan bahwa terdapat <strong>revisi/perubahan</strong> pada hasil seleksi pendaftaran calon anggota MANSAME Band milik Anda.</p>
           <p>Silakan periksa kembali hasil kelulusan terbaru Anda di website resmi kami melalui link di bawah ini:</p>
           <div style="margin: 20px 0;">
-            <a href="https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}" 
+            <a href="https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}" 
                style="background-color: #8a2be2; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">
                Cek Hasil Kelulusan Terbaru
             </a>
           </div>
           <p>Jika tombol di atas tidak berfungsi, salin dan tempel link berikut ke browser Anda:</p>
-          <p><a href="https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}">https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}</a></p>
+          <p><a href="https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}">https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}</a></p>
           <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
           <p style="font-size: 12px; color: #888;">Email ini dikirim secara otomatis oleh Sistem Kelulusan MANSAME Band. Mohon tidak membalas email ini.</p>
         </div>
       `;
 
-      waText = `*⚠️ REVISI PENGUMUMAN SELEKSI MANSAME BAND*\n\nHalo *${candidate.name}*,\n\nKami menginformasikan bahwa terdapat *perubahan/revisi* pada hasil seleksi calon anggota MANSAME Band Anda.\n\nSilakan cek status kelulusan terbaru Anda dengan mengklik link berikut:\n🔗 https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nTerima kasih atas perhatiannya.`;
+      waText = `*⚠️ REVISI PENGUMUMAN SELEKSI MANSAME BAND*\n\nHalo *${candidate.name}*,\n\nKami menginformasikan bahwa terdapat *perubahan/revisi* pada hasil seleksi calon anggota MANSAME Band Anda.\n\nSilakan cek status kelulusan terbaru Anda dengan mengklik link berikut:\n🔗 https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nTerima kasih atas perhatiannya.`;
     } else {
       emailHtml = `
         <div style="font-family: Arial, sans-serif; padding: 20px; border: 1px solid #ddd; border-radius: 5px; max-width: 600px;">
@@ -66,19 +66,19 @@ export async function sendBulkNotifications() {
           <p>Terima kasih telah mengikuti rangkaian seleksi pendaftaran calon anggota MANSAME Band.</p>
           <p>Saat ini, hasil seleksi kelulusan telah resmi diumumkan. Silakan cek status kelulusan Anda melalui tombol di bawah ini:</p>
           <div style="margin: 20px 0;">
-            <a href="https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}" 
+            <a href="https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}" 
                style="background-color: #8a2be2; color: white; padding: 10px 20px; text-decoration: none; border-radius: 4px; display: inline-block; font-weight: bold;">
                Lihat Hasil Kelulusan
             </a>
           </div>
           <p>Jika tombol di atas tidak berfungsi, salin dan tempel link berikut ke browser Anda:</p>
-          <p><a href="https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}">https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}</a></p>
+          <p><a href="https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}">https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}</a></p>
           <hr style="border: 0; border-top: 1px solid #eee; margin: 20px 0;" />
           <p style="font-size: 12px; color: #888;">Email ini dikirim secara otomatis oleh Sistem Kelulusan MANSAME Band. Mohon tidak membalas email ini.</p>
         </div>
       `;
 
-      waText = `*🔔 PENGUMUMAN HASIL SELEKSI MANSAME BAND*\n\nHalo *${candidate.name}*,\n\nHasil seleksi calon anggota MANSAME Band kini sudah resmi diumumkan!\n\nSilakan cek status kelulusan Anda dengan mengklik link berikut:\n🔗 https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nSemoga sukses!`;
+      waText = `*🔔 PENGUMUMAN HASIL SELEKSI MANSAME BAND*\n\nHalo *${candidate.name}*,\n\nHasil seleksi calon anggota MANSAME Band kini sudah resmi diumumkan!\n\nSilakan cek status kelulusan Anda dengan mengklik link berikut:\n🔗 https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nSemoga sukses!`;
     }
 
     let emailSuccess = false;

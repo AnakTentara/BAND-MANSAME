@@ -1,5 +1,5 @@
 @echo off
-title PIK-R MANSEKU — Automation Startup Script
+title MANSAME Band — Automation Startup Script
 
 echo ==========================================
 echo [1/5] Memulai Git Pull

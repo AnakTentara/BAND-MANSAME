@@ -81,7 +81,7 @@ export default function AdminSettingsPage() {
       const url = window.URL.createObjectURL(new Blob([res.data]));
       const link = document.createElement('a');
       link.href = url;
-      link.setAttribute('download', 'pikr_manseku_backup.db');
+      link.setAttribute('download', 'mansame_band_backup.db');
       document.body.appendChild(link);
       link.click();
       link.remove();
@@ -176,7 +176,7 @@ export default function AdminSettingsPage() {
                     id="mysql-db"
                     type="text"
                     className="form-input"
-                    placeholder="pikr_manseku"
+                    placeholder="mansame_band"
                     value={mysqlConfig.database}
                     onChange={(e) => setMysqlConfig((f) => ({ ...f, database: e.target.value }))}
                   />
@@ -256,7 +256,7 @@ export default function AdminSettingsPage() {
                     id="smtp-from"
                     type="email"
                     className="form-input"
-                    placeholder="no-reply@pikrmanseku.com"
+                    placeholder="no-reply@mansame-band.my.id"
                     value={smtpConfig.from}
                     onChange={(e) => setSmtpConfig((f) => ({ ...f, from: e.target.value }))}
                   />

@@ -1,7 +1,7 @@
 const BASE_URL = 'http://localhost:25552';
 
 async function runTests() {
-  console.log('=== MEMULAI VERIFIKASI API BACKEND PIK-R MANSEKU ===\n');
+  console.log('=== MEMULAI VERIFIKASI API BACKEND MANSAME BAND ===\n');
 
   // Test 1: Health Check
   try {

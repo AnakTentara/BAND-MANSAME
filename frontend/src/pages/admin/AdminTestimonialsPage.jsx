@@ -112,7 +112,7 @@ export default function AdminTestimonialsPage() {
 
   return (
     <div className={styles.page}>
-      <AdminHeader title="Testimoni Alumni" subtitle="Kelola perkataan dan pesan kesan alumni PIK-R MANSEKU">
+      <AdminHeader title="Testimoni Alumni" subtitle="Kelola perkataan dan pesan kesan alumni MANSAME Band">
         <button className="btn btn-primary" onClick={handleOpenAddModal}>
           <Plus size={16} /> Tambah Testimoni
         </button>
@@ -195,7 +195,7 @@ export default function AdminTestimonialsPage() {
 
               <div className="form-group">
                 <label className="form-label">Testimoni / Pesan Kesan *</label>
-                <textarea className="form-textarea" rows={4} value={content} onChange={(e) => setContent(e.target.value)} required placeholder="Bagikan kesan pesan selama berada di PIK-R MANSEKU..." />
+                <textarea className="form-textarea" rows={4} value={content} onChange={(e) => setContent(e.target.value)} required placeholder="Bagikan kesan pesan selama berada di MANSAME Band..." />
               </div>
 
               <div className={styles.modalActions}>

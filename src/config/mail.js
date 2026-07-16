@@ -22,7 +22,7 @@ export async function sendEmail({ to, subject, html }) {
   const secure = port === 465;
   const user = smtpConfig?.user || smtpConfig?.username || process.env.SMTP_USER;
   const pass = smtpConfig?.password || process.env.SMTP_PASS;
-  const from = smtpConfig?.from || process.env.SMTP_FROM || 'kelulusan@pikr-manseku.my.id';
+  const from = smtpConfig?.from || process.env.SMTP_FROM || 'info@mansame-band.my.id';
 
   if (!user || !pass) {
     console.warn('[Mail] Kredensial SMTP tidak lengkap. Email mungkin gagal terkirim.');

@@ -41,15 +41,13 @@ export default function KamiPage() {
   const sekretarisCurrent = orgData.find(m => m.jabatan === 'Sekretaris Umum' && m.isCurrent);
   const bendaharaCurrent = orgData.find(m => m.jabatan === 'Bendahara Umum' && m.isCurrent);
 
-  // List of Divisions
+  // List of Divisions (Band Sections)
   const DIVISIONS = [
-    { name: 'MedInfo', ketuaTitle: 'Ketua MedInfo', anggotaTitle: 'Anggota MedInfo' },
-    { name: 'Konselor Sebaya', ketuaTitle: 'Ketua Konselor Sebaya', anggotaTitle: 'Anggota Konselor Sebaya' },
-    { name: 'Pendidik Sebaya', ketuaTitle: 'Ketua Pendidik Sebaya', anggotaTitle: 'Anggota Pendidik Sebaya' },
-    { name: 'Humas', ketuaTitle: 'Ketua Humas', anggotaTitle: 'Anggota Humas' },
-    { name: 'Informasi', ketuaTitle: 'Ketua Informasi', anggotaTitle: 'Anggota Informasi' },
-    { name: 'Konseling dan Pendamping', ketuaTitle: 'Ketua Konseling dan Pendamping', anggotaTitle: 'Anggota Konseling dan Pendamping' },
-    { name: 'Kegiatan dan Kreativitas', ketuaTitle: 'Ketua Kegiatan dan Kreativitas', anggotaTitle: 'Anggota Kegiatan dan Kreativitas' }
+    { name: 'Vocalis', ketuaTitle: 'Koordinator Vocalis', anggotaTitle: 'Anggota Vocalis' },
+    { name: 'Gitarist', ketuaTitle: 'Koordinator Gitarist', anggotaTitle: 'Anggota Gitarist' },
+    { name: 'Drummer', ketuaTitle: 'Koordinator Drummer', anggotaTitle: 'Anggota Drummer' },
+    { name: 'Bassist', ketuaTitle: 'Koordinator Bassist', anggotaTitle: 'Anggota Bassist' },
+    { name: 'Keyboardist', ketuaTitle: 'Koordinator Keyboardist', anggotaTitle: 'Anggota Keyboardist' }
   ];
 
   // Map division data

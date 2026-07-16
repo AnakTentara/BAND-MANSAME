@@ -7,7 +7,7 @@ import { fileURLToPath } from 'url';
 import prisma, { initDatabase, getDbProvider } from '../config/db.js';
 import { sendBulkNotifications } from '../services/notification.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkeypikrmanseku123';
+const JWT_SECRET = process.env.JWT_SECRET || 'mansameband_jwt_secret_2026';
 
 function isMemberExpired(joinYear, className) {
   const cName = (className || '').trim().toUpperCase();
@@ -276,11 +276,11 @@ export async function exportExcel(req, res) {
 
     const worksheet = XLSX.utils.json_to_sheet(data);
     const workbook = XLSX.utils.book_new();
-    XLSX.utils.book_append_sheet(workbook, worksheet, 'Pendaftar PIK-R');
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Pendaftar Band');
 
     const buffer = XLSX.write(workbook, { type: 'buffer', bookType: 'xlsx' });
 
-    res.setHeader('Content-Disposition', 'attachment; filename=rekap_pendaftar_pikr.xlsx');
+    res.setHeader('Content-Disposition', 'attachment; filename=rekap_pendaftar_band.xlsx');
     res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     return res.send(buffer);
   } catch (error) {
@@ -406,7 +406,7 @@ export async function closeSession(req, res) {
       let password = c.password;
 
       // If the candidate does not have a generated password, create a random 6-digit one now
-      if (!plainPassword || plainPassword === 'pikr2024') {
+      if (!plainPassword || plainPassword === 'band2024') {
         plainPassword = Math.floor(100000 + Math.random() * 900000).toString();
         password = await bcrypt.hash(plainPassword, 10);
       }
@@ -998,7 +998,7 @@ export async function deleteAdminUser(req, res) {
       return res.status(404).json({ message: 'User admin tidak ditemukan' });
     }
 
-    if (existing.username === 'pikr-manseku') {
+    if (existing.username === 'band-mansame') {
       return res.status(400).json({ message: 'Akun developer utama tidak dapat dihapus' });
     }
 
@@ -1007,7 +1007,7 @@ export async function deleteAdminUser(req, res) {
     }
 
     // Reassign any posts authored by this admin to the master developer admin
-    const masterDev = await prisma.admin.findUnique({ where: { username: 'pikr-manseku' } });
+    const masterDev = await prisma.admin.findUnique({ where: { username: 'band-mansame' } });
     if (masterDev) {
       await prisma.post.updateMany({
         where: { authorId: id },
@@ -1130,7 +1130,7 @@ export async function downloadBackupDb(req, res) {
     const dbPath = path.join(__dirname, '../../local.db');
 
     if (fs.existsSync(dbPath)) {
-      return res.download(dbPath, 'pikr_manseku_backup.db');
+      return res.download(dbPath, 'mansame_band_backup.db');
     } else {
       return res.status(404).json({ message: 'Database SQLite local.db tidak ditemukan di root server.' });
     }

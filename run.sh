@@ -1,13 +1,14 @@
 #!/bin/bash
 
 # ==========================================
-# PIK-R MANSEKU — Automation Startup Script
+# MANSAME Band — Automation Startup Script
 # ==========================================
 
 # Color codes for clean console styling
 GREEN='\033[0;32m'
 BLUE='\033[0;34m'
 YELLOW='\033[1;33m'
+RED='\033[0;31m'
 NC='\033[0m' # No Color
 
 echo -e "${BLUE}=== [1/5] Memulai Git Pull untuk Sinkronisasi Kode ===${NC}"

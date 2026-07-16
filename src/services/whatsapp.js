@@ -109,7 +109,7 @@ export async function initWhatsApp() {
           });
 
           if (candidate) {
-            const replyText = `Halo *${candidate.name}*,\n\nHasil kelulusan pendaftaran MANSAME Band Anda dapat dicek secara langsung melalui link berikut:\n🔗 https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nTerima kasih!`;
+            const replyText = `Halo *${candidate.name}*,\n\nHasil kelulusan pendaftaran MANSAME Band Anda dapat dicek secara langsung melalui link berikut:\n🔗 https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nTerima kasih!`;
             await replyToMessage(fromJid, replyText, msg);
           } else {
             await replyToMessage(fromJid, `Maaf, data pendaftaran dengan NISN *${query}* tidak ditemukan di database.`, msg);
@@ -126,7 +126,7 @@ export async function initWhatsApp() {
             await replyToMessage(fromJid, `Maaf, data pendaftaran dengan nama *"${query}"* tidak ditemukan di database.`, msg);
           } else if (matches[0].exact || matches[0].score > 0.95) {
             const candidate = matches[0].candidate;
-            const replyText = `Halo *${candidate.name}* (${candidate.className}),\n\nHasil kelulusan pendaftaran MANSAME Band Anda dapat dicek secara langsung melalui link berikut:\n🔗 https://pikr-manseku.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nTerima kasih!`;
+            const replyText = `Halo *${candidate.name}* (${candidate.className}),\n\nHasil kelulusan pendaftaran MANSAME Band Anda dapat dicek secara langsung melalui link berikut:\n🔗 https://mansame-band.my.id/cek-kelulusan?nisn=${candidate.nisn}\n\nTerima kasih!`;
             await replyToMessage(fromJid, replyText, msg);
           } else {
             // Suggest similar matches
@@ -136,7 +136,7 @@ export async function initWhatsApp() {
             const suggestions = matches.slice(0, 3);
             suggestions.forEach((match, index) => {
               const c = match.candidate;
-              replyText += `\n${index + 1}. *${c.name}* (Kelas ${c.className})\n🔗 https://pikr-manseku.my.id/cek-kelulusan?nisn=${c.nisn}\n`;
+              replyText += `\n${index + 1}. *${c.name}* (Kelas ${c.className})\n🔗 https://mansame-band.my.id/cek-kelulusan?nisn=${c.nisn}\n`;
             });
             
             replyText += `\nSilakan klik link di atas jika sesuai dengan nama Anda.`;

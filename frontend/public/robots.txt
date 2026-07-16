@@ -6,4 +6,4 @@ Disallow: /admin/
 Disallow: /admin
 
 # Sitemaps
-Sitemap: https://pikr-manseku.my.id/sitemap.xml
+Sitemap: https://mansame-band.my.id/sitemap.xml

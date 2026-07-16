@@ -48,7 +48,7 @@ export default function LoginPage() {
         <div className={styles.cardHeader}>
           <Link to="/">
             <img
-              src="/media/logos/logo_mansame.png"
+              src="/media/logos/mansame-band.png"
               alt="MANSAME Band"
               className={styles.logo}
             />

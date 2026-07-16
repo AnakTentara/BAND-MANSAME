@@ -1,6 +1,6 @@
 # 🏗️ Architecture
 
-Dokumen ini menjelaskan arsitektur teknis backend website PIK-R MANSEKU secara menyeluruh.
+Dokumen ini menjelaskan arsitektur teknis backend website MANSAME Band secara menyeluruh.
 
 ---
 
@@ -47,7 +47,7 @@ Dokumen ini menjelaskan arsitektur teknis backend website PIK-R MANSEKU secara m
 ## Struktur Direktori
 
 ```
-PIK-R-MANSEKU/
+MANSAME-Band/
 │
 ├── prisma/
 │   ├── schema.prisma          # Skema Prisma untuk MySQL
@@ -108,7 +108,7 @@ PIK-R-MANSEKU/
 - Handler pesan `/cek`:
   - **Input berupa angka** → Cari berdasarkan NISN (exact match).
   - **Input berupa teks** → Cari nama menggunakan algoritma kemiripan string (Dice Coefficient + Word Containment) di `src/utils/similarity.js`.
-  - Mengembalikan link cek kelulusan: `https://pikr-manseku.my.id/cek-kelulusan?nisn={NISN}`
+  - Mengembalikan link cek kelulusan: `https://mansame-band.my.id/cek-kelulusan?nisn={NISN}`
 
 ### 3. Autentikasi (`src/middlewares/auth.js`)
 - **Admin**: Login via `POST /api/admin/login` → mendapatkan **JWT Token** berlaku 7 hari. Semua route `/api/admin/*` (kecuali `/login`) membutuhkan token ini di header `Authorization: Bearer {token}`.
@@ -198,7 +198,7 @@ PIK-R-MANSEKU/
 | Field | Tipe | Keterangan |
 |---|---|---|
 | id | UUID | Primary key |
-| username | String | Unik (e.g., super admin `pikr-manseku`) |
+| username | String | Unik (e.g., super admin `band-mansame`) |
 | password | String | Hashed (bcrypt) |
 | role | String | `DEVELOPER` / `KABINET_UMUM` / `MEDINFO` |
 
@@ -234,4 +234,4 @@ PIK-R-MANSEKU/
 | Backend API | `25552` |
 | Frontend (rencana) | `25553` |
 
-CORS dikonfigurasi untuk mengizinkan request dari `http://localhost:25553` dan `https://pikr-manseku.my.id`.
+CORS dikonfigurasi untuk mengizinkan request dari `http://localhost:25553` dan `https://mansame-band.my.id`.

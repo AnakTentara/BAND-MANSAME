@@ -199,7 +199,7 @@ export default function AdminOrgPage() {
 
   return (
     <div className={styles.page}>
-      <AdminHeader title="Struktur Organisasi" subtitle="Manajemen pengurus, pembina, dan kabinet PIK-R MANSEKU">
+      <AdminHeader title="Struktur Organisasi" subtitle="Manajemen pengurus, pembina, dan seksi MANSAME Band">
         <div style={{ display: 'flex', gap: '8px' }}>
           <button className="btn btn-primary" onClick={() => handleOpenAddModal(false)}>
             <Plus size={16} /> Tambah Pengurus
@@ -338,7 +338,7 @@ export default function AdminOrgPage() {
                    <label className="form-label">
                      {isPembinaMode 
                        ? (editingId ? 'Tautkan ke Akun Pembina' : 'Tautkan ke Akun Pembina (Opsional)') 
-                       : (editingId ? 'Tautkan ke Akun Anggota' : 'Pilih Anggota PIK-R *')}
+                       : (editingId ? 'Tautkan ke Akun Anggota' : 'Pilih Anggota Band *')}
                    </label>
                    <select
                      className="form-select"

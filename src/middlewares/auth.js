@@ -4,7 +4,7 @@ import prisma from '../config/db.js';
 
 dotenv.config();
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkeypikrmanseku123';
+const JWT_SECRET = process.env.JWT_SECRET || 'mansameband_jwt_secret_2026';
 
 export async function authAdmin(req, res, next) {
   const authHeader = req.headers['authorization'];

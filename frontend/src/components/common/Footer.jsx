@@ -12,7 +12,7 @@ export default function Footer() {
         <div className={styles.brand}>
           <Link to="/" aria-label="MANSAME Band — Beranda">
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
-              <span style={{ fontSize: '1.5rem' }}>🎸</span>
+              <img src="/media/logos/mansame-band.png" alt="MANSAME Band" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} />
               <span style={{ fontWeight: '800', fontSize: '1.25rem', color: '#ffffff' }}>
                 MANSAME <span style={{ color: 'var(--color-accent)' }}>BAND</span>
               </span>

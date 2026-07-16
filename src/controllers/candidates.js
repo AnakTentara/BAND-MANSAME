@@ -2,7 +2,7 @@ import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import prisma from '../config/db.js';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'supersecretkeypikrmanseku123';
+const JWT_SECRET = process.env.JWT_SECRET || 'mansameband_jwt_secret_2026';
 
 function isMemberExpired(joinYear, className) {
   const cName = (className || '').trim().toUpperCase();
