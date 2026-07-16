@@ -1,0 +1,29 @@
+.content {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-sm);
+  color: var(--color-text-primary);
+  line-height: 1.6;
+}
+
+.content h1, .content h2, .content h3 {
+  font-family: var(--font-display);
+  margin-bottom: 1rem;
+  margin-top: 1.5rem;
+}
+
+.content p {
+  margin-bottom: 1rem;
+}
+
+.content ul, .content ol {
+  margin-bottom: 1rem;
+  padding-left: 2rem;
+}
+
+.content a {
+  color: var(--color-accent);
+  text-decoration: underline;
+}

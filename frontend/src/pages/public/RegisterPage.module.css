@@ -1,0 +1,174 @@
+.grid {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: var(--space-2xl);
+  align-items: start;
+  padding-top: var(--space-lg);
+}
+
+/* Form side */
+.formSide {
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.subtitle {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-xl);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Radio */
+.radioGroup {
+  display: flex;
+  gap: var(--space-lg);
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 0.9375rem;
+  color: var(--color-text-primary);
+}
+
+.radioInput {
+  accent-color: var(--color-accent);
+  width: 16px;
+  height: 16px;
+}
+
+.radioText {
+  font-weight: 500;
+}
+
+/* Info side */
+.infoSide {
+  position: sticky;
+  top: calc(var(--navbar-height) + var(--space-lg));
+}
+
+.infoCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-xs);
+}
+
+.infoTitle {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.infoList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.infoItem {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 0.875rem;
+  color: var(--color-text-secondary);
+  line-height: 1.55;
+}
+
+.infoItem svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--color-accent);
+}
+
+.infoContact {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+.link {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+.link:hover {
+  text-decoration: underline;
+}
+
+/* Success */
+.successCard {
+  max-width: 520px;
+  margin-inline: auto;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+.successIcon {
+  color: var(--color-success);
+}
+
+.successTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+}
+
+.successMsg {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  max-width: 400px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .infoSide {
+    position: static;
+    order: -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .pageLayout {
+    grid-template-columns: 1fr !important;
+  }
+  .infoCard {
+    order: -1;
+  }
+}
+
+@media (max-width: 480px) {
+  .formCard {
+    padding: var(--space-lg);
+  }
+  .radioGroup {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}

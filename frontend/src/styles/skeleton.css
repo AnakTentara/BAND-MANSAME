@@ -1,0 +1,169 @@
+/* ============================================================
+   Skeleton Shimmer Loading Animation
+   ============================================================ */
+
+@keyframes shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    #f1f5f9 0%,
+    #e2e8f0 40%,
+    #f1f5f9 80%
+  );
+  background-size: 400% 100%;
+  animation: shimmer 1.6s ease-in-out infinite;
+  border-radius: var(--radius-sm);
+}
+
+/* ---------- Skeleton Card (Blog Feed) ---------- */
+.skeleton-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-xs);
+}
+
+.skeleton-card__thumb {
+  height: 180px;
+  border-radius: var(--radius-sm);
+}
+
+.skeleton-card__tag {
+  height: 20px;
+  width: 80px;
+}
+
+.skeleton-card__title {
+  height: 22px;
+  width: 90%;
+}
+
+.skeleton-card__title-short {
+  height: 22px;
+  width: 60%;
+}
+
+.skeleton-card__body {
+  height: 14px;
+  width: 100%;
+}
+
+.skeleton-card__body-short {
+  height: 14px;
+  width: 70%;
+}
+
+.skeleton-card__footer {
+  display: flex;
+  gap: var(--space-md);
+  margin-top: var(--space-xs);
+}
+
+.skeleton-card__avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-card__meta {
+  height: 14px;
+  width: 120px;
+  align-self: center;
+}
+
+/* ---------- Skeleton Table (Admin) ---------- */
+.skeleton-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.skeleton-table th,
+.skeleton-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.skeleton-table th {
+  background-color: var(--color-surface-2);
+}
+
+.skeleton-table__cell {
+  height: 16px;
+  border-radius: var(--radius-xs);
+}
+
+/* ---------- Skeleton Profile (Anggota) ---------- */
+.skeleton-profile {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.skeleton-profile__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-xl);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+}
+
+.skeleton-profile__avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-profile__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.skeleton-profile__name {
+  height: 28px;
+  width: 200px;
+}
+
+.skeleton-profile__meta {
+  height: 16px;
+  width: 140px;
+}
+
+.skeleton-profile__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+}
+
+.skeleton-profile__field {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.skeleton-profile__label {
+  height: 12px;
+  width: 80px;
+}
+
+.skeleton-profile__value {
+  height: 20px;
+  width: 140px;
+}

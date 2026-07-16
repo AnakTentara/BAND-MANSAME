@@ -1,0 +1,433 @@
+.header {
+  background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  padding: 100px 0 40px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 2.25rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin-bottom: var(--space-xs);
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-md);
+}
+
+.countBadge {
+  display: inline-block;
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+/* Tree Section */
+.treeSection {
+  background-color: var(--color-bg);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  text-align: center;
+  margin-bottom: var(--space-xl);
+}
+
+.treeContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.treeLevel {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.treeLevelRow {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-3xl);
+  width: 100%;
+  max-width: 600px;
+}
+
+.treeNode {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  width: 220px;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  transition: transform 0.2s;
+}
+
+.treeNode:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+}
+
+.nodePembina {
+  border-top: 4px solid #8b5cf6;
+}
+
+.nodeKetua {
+  border-top: 4px solid var(--color-accent);
+}
+
+.nodeWakil {
+  border-top: 4px solid #3b82f6;
+}
+
+.nodeKabinet {
+  width: 180px;
+  padding: var(--space-sm);
+  border-top: 3px solid #64748b;
+}
+
+.nodeAvatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: var(--space-xs);
+  background-color: var(--color-surface-2);
+}
+
+.nodeAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.nodeAvatarSmall {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: var(--space-xs);
+  background-color: var(--color-surface-2);
+}
+
+.nodeAvatarSmall img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.treeNode h5 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin: 0 0 2px 0;
+  color: var(--color-text-primary);
+}
+
+.treeNode h6 {
+  font-size: 0.85rem;
+  font-weight: 600;
+  margin: 0 0 2px 0;
+  color: var(--color-text-primary);
+}
+
+.treeNode p {
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.initials {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.initialsSmall {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-surface-2);
+  color: var(--color-text-secondary);
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.connectorLine {
+  width: 2px;
+  height: 40px;
+  background-color: var(--color-border-strong);
+}
+
+.kabinetGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: var(--space-md);
+  width: 100%;
+  justify-content: center;
+}
+
+/* Members Section */
+.membersSection {
+  background-color: var(--color-surface);
+}
+
+.membersGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.membersGridSkeleton {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.memberCard {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  text-align: left;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.memberCard:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent-subtle);
+}
+
+.memberAvatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.avatarInitials {
+  font-size: 1.25rem;
+  font-weight: 700;
+}
+
+.memberInfo h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  margin: 0 0 2px 0;
+}
+
+.memberInfo p {
+  font-size: 0.8rem;
+  color: var(--color-text-secondary);
+  margin: 0 0 4px 0;
+}
+
+.joinYear {
+  display: inline-block;
+  font-size: 0.7rem;
+  background-color: var(--color-surface-2);
+  padding: 1px 6px;
+  border-radius: 4px;
+  color: var(--color-text-secondary);
+}
+
+.emptyText {
+  text-align: center;
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 768px) {
+  .treeLevelRow {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .kabinetGrid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    padding: 80px 0 32px 0;
+  }
+  .title {
+    font-size: 1.625rem;
+  }
+  .treeNode {
+    width: 160px;
+    padding: var(--space-sm);
+  }
+  .nodeKabinet {
+    width: 140px;
+  }
+  .kabinetGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .membersGrid,
+  .membersGridSkeleton {
+    grid-template-columns: 1fr;
+  }
+}
+.memberAvatarImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.memberJabatan {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.kabinetContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+
+
+.staffDropdown {
+  width: 100%;
+  max-width: 180px;
+  background: var(--color-surface);
+  border: 1px dashed var(--color-accent);
+  border-radius: var(--radius-sm);
+  margin-top: 8px;
+  padding: 8px;
+  box-shadow: var(--shadow-sm);
+  animation: fadeInSlide 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+}
+
+/* Connector line inside dropdown */
+.staffDropdown::before {
+  content: '';
+  position: absolute;
+  top: -9px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 8px;
+  background-color: var(--color-accent);
+}
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.staffList {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.staffNode {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px;
+  border-radius: var(--radius-xs);
+  background-color: var(--color-surface-2);
+  text-align: left;
+  transition: background-color 0.2s;
+}
+
+.staffNode:hover {
+  background-color: var(--color-accent-subtle);
+}
+
+.staffAvatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--color-surface-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--color-border);
+}
+
+.staffAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.staffInitials {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text-secondary);
+}
+
+.staffInfo {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.staffInfo strong {
+  font-size: 0.725rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.staffInfo span {
+  font-size: 0.625rem;
+  color: var(--color-text-muted);
+}

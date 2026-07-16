@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+# Disallow admin routes to avoid index of admin dashboard page
+Disallow: /admin/
+Disallow: /admin
+
+# Sitemaps
+Sitemap: https://pikr-manseku.my.id/sitemap.xml

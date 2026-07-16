@@ -1,0 +1,273 @@
+/* ── Search ── */
+.searchWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: calc(100vh - var(--navbar-height));
+}
+
+.searchCenter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 480px;
+  width: 100%;
+  padding: var(--space-xl);
+}
+
+.searchLogo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  margin-bottom: var(--space-lg);
+}
+
+.searchTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 8px;
+}
+
+.searchSub {
+  font-size: 0.9375rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: var(--space-xl);
+}
+
+.searchForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.searchInputWrap {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: 14px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.searchInput {
+  width: 100%;
+  padding: 14px 14px 14px 44px;
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  font-size: 1rem;
+  color: var(--color-text-primary);
+  background-color: var(--color-surface);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.searchInput:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+
+.errorMsg {
+  margin-top: var(--space-md);
+  color: var(--color-error);
+  font-size: 0.875rem;
+}
+
+/* ── Loading ── */
+.loadingScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #0f172a;
+  z-index: 200;
+  animation: fadeIn 0.3s ease;
+}
+
+.loadingLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.loadingText {
+  margin-top: var(--space-lg);
+  color: #94a3b8;
+  font-size: 0.9375rem;
+  letter-spacing: 0.05em;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; transform: scale(0.95); }
+  50%      { opacity: 1;   transform: scale(1.05); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ── Result Screens ── */
+.resultScreen {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  animation: fadeIn 0.5s ease;
+}
+
+.resultInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  max-width: 520px;
+  padding: var(--space-xl);
+  gap: var(--space-md);
+}
+
+.resultLogo {
+  width: 64px;
+  height: 64px;
+  object-fit: contain;
+  opacity: 0.9;
+  margin-bottom: var(--space-sm);
+}
+
+/* LULUS */
+.resultLulus {
+  background: linear-gradient(160deg, #0c4a6e 0%, #064e3b 100%);
+}
+
+.congratsTitle {
+  font-family: var(--font-display);
+  font-size: 3rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* TIDAK LULUS */
+.resultTidakLulus {
+  background: linear-gradient(160deg, #881337 0%, #4c0519 100%);
+}
+
+/* PENDING */
+.resultPending {
+  background: #1e293b;
+}
+
+/* NOT FOUND */
+.resultNotFound {
+  background: #1e293b;
+  justify-content: center;
+}
+
+.resultCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-lg);
+  max-width: 440px;
+  padding: var(--space-xl);
+}
+
+.resultTitle {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 700;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.resultHeading {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+.resultInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.resultName {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.resultNisn {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.6);
+  font-family: monospace;
+}
+
+.statusBadge {
+  display: inline-flex;
+  padding: 8px 24px;
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+
+.badgeLulus {
+  background-color: rgba(22, 163, 74, 0.2);
+  color: #4ade80;
+  border: 1.5px solid rgba(74, 222, 128, 0.4);
+}
+
+.badgeTidakLulus {
+  background-color: rgba(220, 38, 38, 0.2);
+  color: #fca5a5;
+  border: 1.5px solid rgba(252, 165, 165, 0.3);
+}
+
+.badgePending {
+  background-color: rgba(217, 119, 6, 0.2);
+  color: #fcd34d;
+  border: 1.5px solid rgba(252, 211, 77, 0.3);
+}
+
+.resultMsg {
+  font-size: 0.9375rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.7;
+  max-width: 420px;
+}
+
+.btnWhite {
+  background-color: #ffffff;
+  color: #0f172a;
+  border: none;
+  font-weight: 600;
+}
+.btnWhite:hover {
+  background-color: #f1f5f9;
+}
+
+@media (max-width: 480px) {
+  .searchCenter {
+    padding: var(--space-lg);
+  }
+  .searchTitle {
+    font-size: 1.5rem;
+  }
+}

@@ -1,0 +1,526 @@
+.hero {
+  background: linear-gradient(135deg, rgba(249, 115, 22, 0.05) 0%, rgba(255, 255, 255, 1) 100%);
+  padding: 120px 0 60px 0;
+  text-align: center;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.heroInner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+  max-width: 800px;
+}
+
+.heroLogo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: 2.75rem;
+  font-weight: 800;
+  background: linear-gradient(135deg, #f97316 0%, #ea580c 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  display: inline-block;
+  margin: 0;
+}
+
+.heroSubtitle {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* Biodata */
+.biodataSection {
+  background-color: var(--color-surface);
+}
+
+.biodataGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: var(--space-2xl);
+  align-items: center;
+}
+
+.biodataLeft h2 {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+  color: var(--color-text-primary);
+}
+
+.biodataLeft p {
+  color: var(--color-text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--space-md);
+  text-align: left;
+}
+
+.biodataRight {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.infoBox {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: var(--color-surface-2);
+  border-left: 3px solid var(--color-accent);
+  border-radius: var(--radius-md);
+  text-align: left;
+}
+
+.infoIcon {
+  color: var(--color-accent);
+  margin-top: 2px;
+}
+
+.infoBox h4 {
+  font-family: var(--font-display);
+  margin: 0 0 var(--space-xs) 0;
+  font-weight: 600;
+  color: var(--color-text-primary);
+}
+
+.infoBox p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--color-text-secondary);
+}
+
+/* Leadership */
+.leadershipSection {
+  background-color: var(--color-bg);
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 750;
+  text-align: center;
+  margin-bottom: var(--space-xl);
+  color: var(--color-text-primary);
+}
+
+.pembinaCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+  max-width: 800px;
+  margin: 0 auto var(--space-2xl) auto;
+  box-shadow: var(--shadow-sm);
+}
+
+.pembinaImgWrap {
+  width: 140px;
+  height: 140px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--color-surface-2);
+}
+
+.pembinaImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pembinaInfo {
+  text-align: left;
+}
+
+.roleLabel {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-xs);
+  text-transform: uppercase;
+}
+
+.pembinaInfo h3 {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0 0 var(--space-xs) 0;
+  color: var(--color-text-primary);
+}
+
+.duration {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--space-sm);
+}
+
+.quote {
+  font-size: 0.95rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  border-left: 3px solid var(--color-accent-subtle);
+  padding-left: var(--space-sm);
+  margin: 0;
+}
+
+.coreGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-lg);
+  max-width: 800px;
+  margin: 0 auto var(--space-3xl) auto;
+}
+
+.coreCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+}
+
+.coreImgWrap {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-bottom: var(--space-sm);
+  background-color: var(--color-surface-2);
+}
+
+.coreImgWrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.coreCard h4 {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0 0 var(--space-xs) 0;
+}
+
+.quoteSmall {
+  font-size: 0.85rem;
+  color: var(--color-text-secondary);
+  font-style: italic;
+  margin: var(--space-xs) 0 0 0;
+}
+
+.kabinetSection {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.kabinetSection h3 {
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: var(--space-lg);
+  color: var(--color-text-primary);
+}
+
+.divisiGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-2xl);
+}
+
+.divisiCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+  text-align: left;
+}
+
+.divisiTitle {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-accent);
+  margin: 0;
+  border-bottom: 2px solid var(--color-border);
+  padding-bottom: var(--space-xs);
+}
+
+.divisiKetuaCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  background: var(--color-surface-2);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-md);
+}
+
+.divisiKetuaImgWrap {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--color-surface);
+}
+
+.divisiKetuaImg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.divisiKetuaInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.divisiKetuaInfo h5 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin: 0;
+  color: var(--color-text-primary);
+}
+
+.divisiRoleLabel {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 2px;
+}
+
+.divisiAnggotaWrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs);
+}
+
+.divisiAnggotaList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.divisiAnggotaItem {
+  font-size: 0.8rem;
+  background: var(--color-surface-2);
+  color: var(--color-text-secondary);
+  padding: 4px 10px;
+  border-radius: 20px;
+  border: 1px solid var(--color-border);
+}
+
+.noKetua, .noAnggota {
+  font-size: 0.85rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  margin: 0;
+}
+
+.initialsBig, .initials, .initialsMini {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--color-accent-subtle);
+  color: var(--color-accent);
+  font-weight: 800;
+}
+
+.initialsBig { font-size: 3rem; }
+.initials { font-size: 2.2rem; }
+.initialsMini { font-size: 1.5rem; }
+
+/* Archives */
+.archiveSection {
+  background-color: var(--color-surface);
+}
+
+.accordionList {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.accordionItem {
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.accordionHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  background-color: var(--color-surface-2);
+  border: none;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-text-primary);
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.accordionHeader:hover {
+  background-color: var(--color-border-strong);
+}
+
+.accordionContent {
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border-strong);
+}
+
+.archiveGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: var(--space-md);
+}
+
+.archiveMemberCard {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  text-align: left;
+}
+
+.archiveMemberAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--color-surface-2);
+  flex-shrink: 0;
+}
+
+.archiveMemberAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.archiveMemberCard h5 {
+  margin: 0 0 2px 0;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.archiveMemberCard p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+}
+
+/* CTA */
+.cta {
+  background-color: var(--color-accent);
+  color: #fff;
+  padding: 60px 0;
+  text-align: center;
+}
+
+.ctaInner {
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+.ctaInner h2 {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+}
+
+.ctaInner p {
+  font-size: 1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+  margin: 0 0 var(--space-sm) 0;
+}
+
+.ctaInner a {
+  background-color: #fff !important;
+  color: var(--color-accent) !important;
+  border: none !important;
+}
+
+.ctaInner a:hover {
+  background-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+@media (max-width: 768px) {
+  .biodataGrid {
+    grid-template-columns: 1fr;
+  }
+  .pembinaCard {
+    flex-direction: column;
+    text-align: center;
+  }
+  .pembinaInfo {
+    text-align: center;
+  }
+  .coreGrid {
+    grid-template-columns: 1fr;
+  }
+  .heroTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero {
+    padding: 80px 0 40px 0;
+  }
+  .heroTitle {
+    font-size: 1.5rem;
+  }
+  .heroSubtitle {
+    font-size: 0.9rem;
+  }
+  .kabinetGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .archiveGrid {
+    grid-template-columns: 1fr;
+  }
+  .ctaInner h2 {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,324 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.body {
+  padding: var(--space-lg) var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Statistics Grid */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: var(--space-lg);
+}
+
+.statCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  box-shadow: var(--shadow-sm);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIconBlue {
+  background-color: rgba(37, 99, 235, 0.08);
+  color: #2563eb;
+}
+
+.statIconGreen {
+  background-color: rgba(22, 163, 74, 0.08);
+  color: #16a34a;
+}
+
+.statIconGreenLight {
+  background-color: rgba(22, 163, 74, 0.04);
+  color: #16a34a;
+  border: 1px solid rgba(22, 163, 74, 0.15);
+}
+
+.statIconRed {
+  background-color: rgba(220, 38, 38, 0.08);
+  color: #dc2626;
+}
+
+.statInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+}
+
+.statValue {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  line-height: 1.1;
+}
+
+/* Section Card */
+.sectionCard {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border-strong);
+}
+
+.headerIcon {
+  color: var(--color-accent);
+  margin-top: 2px;
+  flex-shrink: 0;
+}
+
+.sectionHeader h3 {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 800;
+  color: var(--color-text-primary);
+  margin-bottom: 3px;
+}
+
+.sectionHeader p {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* Editor Form */
+.editorForm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.formGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: var(--space-xl);
+}
+
+.formCol {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.colTitle {
+  font-family: var(--font-display);
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  border-bottom: 1.5px solid var(--color-border-strong);
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+}
+
+.rowInputs {
+  display: flex;
+  gap: var(--space-md);
+}
+
+.autoStatGroup {
+  background-color: var(--color-surface-2);
+  padding: 14px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.helperText {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  margin-top: 4px;
+}
+
+.formActions {
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border-strong);
+  align-self: flex-start;
+}
+
+/* Misi List Editor styles */
+.misiHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-sm);
+}
+
+.emptyMisiText {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  font-style: italic;
+  padding: var(--space-md);
+  background-color: var(--color-surface-2);
+  border-radius: var(--radius-sm);
+  border: 1px dashed var(--color-border-strong);
+  text-align: center;
+}
+
+.misiListEditor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.misiItemRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xs);
+  background-color: var(--color-surface-2);
+  padding: var(--space-xs) var(--space-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-border-strong);
+}
+
+.misiRowIdx {
+  font-weight: 700;
+  font-size: 0.8125rem;
+  color: var(--color-text-secondary);
+  width: 20px;
+  flex-shrink: 0;
+}
+
+.misiRowActions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.misiActionBtn {
+  background: none;
+  border: none;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.misiActionBtn:hover:not(:disabled) {
+  background-color: var(--color-border-strong);
+  color: var(--color-text-primary);
+}
+
+.misiActionBtn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.misiActionBtnDanger {
+  color: var(--color-error);
+}
+
+.misiActionBtnDanger:hover:not(:disabled) {
+  background-color: var(--color-error-bg) !important;
+  color: var(--color-error) !important;
+}
+
+@media (max-width: 900px) {
+  .formGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 900px) {
+  .statsGrid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .contentGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .statsGrid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .body {
+    padding: var(--space-md);
+  }
+  .sectionCard {
+    padding: var(--space-md);
+  }
+  .rowInputs {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: -8px;
+}
+
+.draftAlertCard {
+  border-color: #fbd38d !important;
+  background-color: #fffaf0 !important;
+  box-shadow: 0 4px 6px -1px rgba(237, 137, 54, 0.1), 0 2px 4px -1px rgba(237, 137, 54, 0.06) !important;
+}
+
+.clickableCard {
+  cursor: pointer;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s, border-color 0.2s;
+}
+
+.clickableCard:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
+  border-color: var(--color-accent) !important;
+}
+
+.clickableCard:active {
+  transform: translateY(0) scale(0.98);
+}
