@@ -20,6 +20,7 @@ import {
   // Session
   closeSession,
   openSession,
+  promoteCandidateToMember,
   // Members
   getMembers,
   createMember,
@@ -139,6 +140,7 @@ router.post('/candidates/send-notifications', authAdmin, requireRole(['DEVELOPER
 router.get('/candidates/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), getCandidateById);
 router.put('/candidates/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), updateCandidate);
 router.delete('/candidates/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), deleteCandidate);
+router.post('/candidates/:id/promote-to-member', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), promoteCandidateToMember);
 
 // Settings Management (DEVELOPER only)
 router.get('/settings', authAdmin, requireRole(['DEVELOPER']), getSettings);

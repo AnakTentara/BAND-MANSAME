@@ -1,9 +1,9 @@
 import { useState, useEffect, useMemo } from 'react';
-import { getCandidates, updateCandidate, deleteCandidate, sendNotifications, getSettings, closeSession, openSession } from '@/api/admin';
+import { getCandidates, updateCandidate, deleteCandidate, promoteCandidateToMember, sendNotifications, getSettings, closeSession, openSession } from '@/api/admin';
 import { useUIStore } from '@/stores/uiStore';
 import AdminHeader from '@/components/admin/AdminHeader';
 import SkeletonTable from '@/components/skeletons/SkeletonTable';
-import { Edit, Trash2, Search, CheckCircle, XCircle, AlertCircle, ToggleLeft, ToggleRight, Bell, FileSpreadsheet, FileJson, Mail, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Edit, Trash2, Search, CheckCircle, XCircle, AlertCircle, ToggleLeft, ToggleRight, Bell, FileSpreadsheet, FileJson, Mail, ChevronLeft, ChevronRight, UserCheck } from 'lucide-react';
 import toast from 'react-hot-toast';
 import styles from './AdminPendaftaranPage.module.css';
 import { downloadBlob } from '@/utils/truncate';
@@ -110,6 +110,25 @@ export default function AdminPendaftaranPage() {
           toast.error('Gagal mengirimkan notifikasi.');
         } finally {
           setNotifying(false);
+        }
+      },
+    });
+  };
+
+  // Promote single candidate directly to member
+  const handlePromoteToMember = (c) => {
+    // Close edit modal first so confirm dialog renders on top
+    setEditModalOpen(false);
+    openConfirm({
+      title: 'Tambahkan ke Anggota Langsung',
+      message: `Pindahkan "${c.name}" ke data Anggota Band sekarang? Pendaftar ini akan dihapus dari daftar pendaftaran dan langsung menjadi anggota aktif.`,
+      onConfirm: async () => {
+        try {
+          const res = await promoteCandidateToMember(c.id);
+          toast.success(res.data.message || `${c.name} berhasil dipindahkan ke Anggota.`);
+          fetchSessionAndCandidates();
+        } catch (err) {
+          toast.error(err.response?.data?.message || 'Gagal memindahkan ke anggota.');
         }
       },
     });
@@ -478,6 +497,15 @@ export default function AdminPendaftaranPage() {
               <div className={styles.modalActions}>
                 <button type="submit" className="btn btn-primary">
                   Simpan Perubahan
+                </button>
+                <button
+                  type="button"
+                  className="btn btn-success"
+                  onClick={() => handlePromoteToMember(selectedCandidate)}
+                  title="Pindahkan langsung ke Anggota Band tanpa menutup sesi"
+                >
+                  <UserCheck size={15} />
+                  Tambahkan ke Anggota
                 </button>
                 <button
                   type="button"

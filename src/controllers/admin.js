@@ -391,6 +391,69 @@ export async function saveSettings(req, res) {
 // SESSION LIFECYCLE
 // ─────────────────────────────────────────────────
 
+// 12b. Promote single candidate directly to Member (without closing the session)
+export async function promoteCandidateToMember(req, res) {
+  const { id } = req.params;
+  const currentYear = new Date().getFullYear();
+
+  try {
+    const candidate = await prisma.candidate.findUnique({ where: { id } });
+    if (!candidate) {
+      return res.status(404).json({ message: 'Pendaftar tidak ditemukan.' });
+    }
+
+    let plainPassword = candidate.plainPassword;
+    let password = candidate.password;
+
+    // Generate a fresh password if none exists
+    if (!plainPassword || plainPassword === 'band2024') {
+      plainPassword = Math.floor(100000 + Math.random() * 900000).toString();
+      password = await bcrypt.hash(plainPassword, 10);
+    }
+
+    // Upsert the member record
+    await prisma.member.upsert({
+      where: { nisn: candidate.nisn },
+      update: {
+        name: candidate.name,
+        className: candidate.className,
+        whatsappNumber: candidate.whatsappNumber,
+        email: candidate.email,
+        gender: candidate.gender,
+        asalSekolah: candidate.asalSekolah,
+        password,
+        plainPassword,
+        status: 'ACTIVE',
+      },
+      create: {
+        nisn: candidate.nisn,
+        name: candidate.name,
+        className: candidate.className,
+        whatsappNumber: candidate.whatsappNumber,
+        email: candidate.email,
+        gender: candidate.gender,
+        asalSekolah: candidate.asalSekolah,
+        password,
+        plainPassword,
+        status: 'ACTIVE',
+        joinYear: currentYear,
+        role: 'member',
+      },
+    });
+
+    // Remove from candidates table
+    await prisma.candidate.delete({ where: { id } });
+
+    return res.json({
+      message: `${candidate.name} berhasil dipindahkan ke Anggota Band.`,
+      memberId: candidate.nisn,
+    });
+  } catch (error) {
+    console.error('Error promoting candidate to member:', error);
+    return res.status(500).json({ message: 'Gagal memindahkan pendaftar ke anggota.' });
+  }
+}
+
 // 13. Close Registration Session → migrate LULUS → Member, clear Candidates
 export async function closeSession(req, res) {
   const currentYear = new Date().getFullYear();

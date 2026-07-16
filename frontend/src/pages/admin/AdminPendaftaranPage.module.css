@@ -221,10 +221,13 @@
   border-radius: var(--radius-lg);
   width: 100%;
   max-width: 460px;
-  max-height: 90vh; /* Responsive height limit */
+  max-height: 90vh;
   box-shadow: var(--shadow-md);
-  overflow-y: auto; /* Scroll capability */
   animation: modalScale 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  /* Flex column so header + actions are pinned, only form scrolls */
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 @keyframes modalScale {
@@ -235,10 +238,8 @@
 .modalHeader {
   padding: var(--space-lg);
   border-bottom: 1px solid var(--color-border-strong);
-  position: sticky;
-  top: 0;
   background-color: var(--color-surface);
-  z-index: 5;
+  flex-shrink: 0;
 }
 
 .modalHeader h3 {
@@ -253,17 +254,19 @@
   display: flex;
   flex-direction: column;
   gap: 16px;
+  /* Only this area scrolls */
+  overflow-y: auto;
+  flex: 1 1 auto;
 }
 
 .modalActions {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-sm);
-  padding-top: var(--space-md);
+  padding: var(--space-md) var(--space-lg);
   border-top: 1px solid var(--color-border-strong);
-  position: sticky;
-  bottom: 0;
   background-color: var(--color-surface);
-  z-index: 5;
+  flex-shrink: 0;
 }
 
 /* Pagination */

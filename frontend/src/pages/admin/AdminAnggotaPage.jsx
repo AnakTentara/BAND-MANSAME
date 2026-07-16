@@ -1,4 +1,5 @@
 import { useState, useEffect, useMemo, useRef } from 'react';
+import axios from 'axios';
 import { getMembers, createMember, updateMember, deleteMember } from '@/api/admin';
 import AdminHeader from '@/components/admin/AdminHeader';
 import SkeletonTable from '@/components/skeletons/SkeletonTable';
@@ -49,6 +50,11 @@ export default function AdminAnggotaPage() {
   });
   const [editPhotoFile, setEditPhotoFile] = useState(null);
   const [editPhotoPreview, setEditPhotoPreview] = useState('');
+
+  // Upload photo states
+  const [uploading, setUploading] = useState(false);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const abortControllerRef = useRef(null);
 
   // Add Modal State
   const [addModalOpen, setAddModalOpen] = useState(false);
@@ -104,12 +110,27 @@ export default function AdminAnggotaPage() {
     setEditModalOpen(true);
   };
 
+  const handleCancelUpload = () => {
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort();
+      setUploading(false);
+      setUploadProgress(0);
+      abortControllerRef.current = null;
+    }
+  };
+
   const handleSaveEdit = async (e) => {
     e.preventDefault();
     if (!editForm.name.trim() || !editForm.email.trim() || !editForm.whatsappNumber.trim()) {
       toast.error('Semua kolom wajib diisi.');
       return;
     }
+
+    const controller = new AbortController();
+    abortControllerRef.current = controller;
+
+    setUploading(true);
+    setUploadProgress(0);
 
     try {
       // Use FormData if there's a photo to upload
@@ -121,12 +142,29 @@ export default function AdminAnggotaPage() {
       } else {
         payload = editForm;
       }
-      await updateMember(selectedMember.id, payload);
+      await updateMember(selectedMember.id, payload, {
+        timeout: 0, // Disable timeout for uploads
+        signal: controller.signal,
+        onUploadProgress: (progressEvent) => {
+          if (progressEvent.total) {
+            const percentCompleted = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            setUploadProgress(percentCompleted);
+          }
+        }
+      });
       toast.success('Data anggota berhasil diperbarui.');
       setEditModalOpen(false);
       fetchMembers();
-    } catch {
-      toast.error('Gagal memperbarui data anggota.');
+    } catch (err) {
+      if (axios.isCancel(err) || err.name === 'CanceledError' || err.code === 'ERR_CANCELED') {
+        toast.error('Upload dibatalkan.');
+      } else {
+        toast.error('Gagal memperbarui data anggota.');
+      }
+    } finally {
+      setUploading(false);
+      setUploadProgress(0);
+      abortControllerRef.current = null;
     }
   };
 
@@ -406,8 +444,9 @@ export default function AdminAnggotaPage() {
               <p style={{ fontSize: '0.75rem', color: 'var(--color-text-muted)', marginTop: 2 }}>NISN: <strong>{selectedMember?.nisn}</strong></p>
             </div>
             <form onSubmit={handleSaveEdit} className={styles.modalForm}>
-              {/* Photo Upload */}
-              <div className={styles.photoEditSection}>
+              <fieldset disabled={uploading} style={{ border: 'none', padding: 0, margin: 0, display: 'contents' }}>
+                {/* Photo Upload */}
+                <div className={styles.photoEditSection}>
                 <div className={styles.photoEditPreview}>
                   {editPhotoPreview ? (
                     <img src={editPhotoPreview} alt="Foto" />
@@ -513,11 +552,29 @@ export default function AdminAnggotaPage() {
                     value={editForm.plainPassword}
                     onChange={(e) => setEditForm((f) => ({ ...f, plainPassword: e.target.value }))} />
                 </div>
-              </div>
+                </div>
+              </fieldset>
 
               <div className={styles.modalActions}>
-                <button type="submit" className="btn btn-primary">Simpan Perubahan</button>
-                <button type="button" className="btn btn-secondary" onClick={() => setEditModalOpen(false)}>Batal</button>
+                {uploading ? (
+                  <div style={{ width: '100%', display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                    <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.875rem' }}>
+                      <span style={{ color: 'var(--color-text-secondary)' }}>Mengupload foto profil...</span>
+                      <strong style={{ color: 'var(--color-primary)' }}>{uploadProgress}%</strong>
+                    </div>
+                    <div style={{ width: '100%', height: '8px', backgroundColor: 'var(--color-surface-2)', borderRadius: '4px', overflow: 'hidden', border: '1px solid var(--color-border)' }}>
+                      <div style={{ width: `${uploadProgress}%`, height: '100%', backgroundColor: 'var(--color-primary)', transition: 'width 0.2s ease-out' }}></div>
+                    </div>
+                    <button type="button" className="btn btn-danger" onClick={handleCancelUpload} style={{ width: '100%', marginTop: '8px', justifyContent: 'center' }}>
+                      Batal Upload
+                    </button>
+                  </div>
+                ) : (
+                  <>
+                    <button type="submit" className="btn btn-primary">Simpan Perubahan</button>
+                    <button type="button" className="btn btn-secondary" onClick={() => setEditModalOpen(false)}>Batal</button>
+                  </>
+                )}
               </div>
             </form>
           </div>
