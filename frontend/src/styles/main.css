@@ -7,49 +7,49 @@
 /* ---------- CSS Variables ---------- */
 :root {
   /* Background */
-  --color-bg:        #090412;
-  --color-surface:   #120921;
-  --color-surface-2: #1a0f2e;
-  --color-surface-3: #25163d;
+  --color-bg:        #040108;
+  --color-surface:   rgba(15, 8, 30, 0.35);
+  --color-surface-2: rgba(30, 16, 60, 0.5);
+  --color-surface-3: rgba(45, 25, 90, 0.65);
 
   /* Border */
-  --color-border:       rgba(168, 85, 247, 0.15);
-  --color-border-strong: rgba(168, 85, 247, 0.25);
+  --color-border:       rgba(168, 85, 247, 0.12);
+  --color-border-strong: rgba(168, 85, 247, 0.22);
 
   /* Text */
-  --color-text-primary:   #f4effc;
-  --color-text-secondary: #beb2d4;
-  --color-text-muted:     #8777a1;
+  --color-text-primary:   #f5f2fa;
+  --color-text-secondary: #bdafdb;
+  --color-text-muted:     #7f6e9e;
 
-  /* Accent — Purple MANSAME Band */
-  --color-accent:        #a855f7;
-  --color-accent-hover:  #bc7cf8;
-  --color-accent-dark:   #7e22ce;
-  --color-accent-subtle: rgba(168, 85, 247, 0.1);
-  --color-accent-border: rgba(168, 85, 247, 0.3);
+  /* Accent — Neon Purple MANSAME Band */
+  --color-accent:        #b870ff;
+  --color-accent-hover:  #d099ff;
+  --color-accent-dark:   #6b21a8;
+  --color-accent-subtle: rgba(184, 112, 255, 0.08);
+  --color-accent-border: rgba(184, 112, 255, 0.25);
 
   /* Status */
   --color-success:        #10b981;
-  --color-success-bg:     rgba(16, 185, 129, 0.1);
-  --color-success-border: rgba(16, 185, 129, 0.3);
+  --color-success-bg:     rgba(10, 20, 15, 0.45);
+  --color-success-border: rgba(16, 185, 129, 0.25);
   --color-error:          #f43f5e;
-  --color-error-bg:       rgba(244, 63, 94, 0.1);
-  --color-error-border:   rgba(244, 63, 94, 0.3);
-  --color-pending:        #fbbf24;
-  --color-pending-bg:     rgba(251, 191, 36, 0.1);
-  --color-pending-border: rgba(251, 191, 36, 0.3);
+  --color-error-bg:       rgba(30, 10, 15, 0.45);
+  --color-error-border:   rgba(244, 63, 94, 0.25);
+  --color-pending:        #f59e0b;
+  --color-pending-bg:     rgba(25, 15, 10, 0.45);
+  --color-pending-border: rgba(245, 158, 11, 0.25);
 
   /* Shadow */
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.04);
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.06);
-  --shadow-md: 0 4px 16px rgba(0,0,0,0.08);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10);
+  --shadow-xs: 0 1px 2px rgba(0,0,0,0.5);
+  --shadow-sm: 0 4px 12px rgba(0,0,0,0.6);
+  --shadow-md: 0 8px 32px rgba(0,0,0,0.7);
+  --shadow-lg: 0 16px 48px rgba(0,0,0,0.8);
 
   /* Border Radius */
-  --radius-xs: 4px;
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 14px;
+  --radius-xs: 6px;
+  --radius-sm: 10px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
 
   /* Typography */
   --font-sans:    'Inter', system-ui, -apple-system, sans-serif;
@@ -67,7 +67,7 @@
   /* Layout */
   --max-width:         1200px;
   --sidebar-width:     260px;
-  --navbar-height:     68px;
+  --navbar-height:     72px;
   --admin-header-height: 60px;
 }
 
@@ -413,5 +413,34 @@ ul, ol {
   h3 {
     font-size: 1.2rem !important;
   }
+}
+
+/* ---------- MANSAME Band LiquidGlass Utilities ---------- */
+.glass-panel {
+  background: rgba(15, 8, 32, 0.45);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(184, 112, 255, 0.15);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.5);
+}
+
+.glass-card {
+  background: rgba(25, 14, 52, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(184, 112, 255, 0.08);
+  border-radius: var(--radius-md);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card:hover {
+  border-color: rgba(184, 112, 255, 0.25);
+  background: rgba(25, 14, 52, 0.38);
+  box-shadow: 0 12px 40px 0 rgba(184, 112, 255, 0.12);
+  transform: translateY(-4px);
+}
+
+.purple-glow-glow {
+  filter: drop-shadow(0 0 12px rgba(184, 112, 255, 0.5));
 }
 

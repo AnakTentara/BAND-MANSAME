@@ -1,9 +1,10 @@
 .footer {
-  background-color: var(--color-text-primary);
-  color: #cbd5e1;
+  background-color: #030008;
+  color: var(--color-text-secondary);
   padding-top: var(--space-3xl);
   margin-top: var(--space-3xl);
-  border-top: 3px solid var(--color-accent);
+  border-top: 1px solid rgba(184, 112, 255, 0.15);
+  box-shadow: 0 -15px 40px rgba(184, 112, 255, 0.05);
 }
 
 .grid {

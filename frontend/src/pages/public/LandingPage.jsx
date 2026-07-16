@@ -1,15 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Users, Calendar, BookOpen } from 'lucide-react';
+import { ArrowRight, Users, Calendar, Award, Sparkles, Mic, Music, Disc, Volume2, Key } from 'lucide-react';
 import { getPublicSettings } from '@/api/candidates';
 import { getPublicTestimonials } from '@/api/public';
 import SEO from '@/components/common/SEO';
 import { getUploadUrl } from '@/api/axios';
 import styles from './LandingPage.module.css';
 
-const HERO_SLIDES = [
-  { src: '/media/heros/hero1.jpeg', alt: 'Kegiatan MANSAME Band 1' },
-  { src: '/media/heros/hero2.jpeg', alt: 'Kegiatan MANSAME Band 2' },
+// 9 Hero images with their exact extensions
+const HERO_IMAGES = [
+  { src: '/media/heros/hero1.webp', alt: 'MANSAME Band Auditions' },
+  { src: '/media/heros/hero2.jpg', alt: 'Live Performance Concert' },
+  { src: '/media/heros/hero3.jpeg', alt: 'Band Rehearsal Sessions' },
+  { src: '/media/heros/hero4.jpeg', alt: 'Guitar Solo Performance' },
+  { src: '/media/heros/hero5.jpeg', alt: 'Drum Beat Rhythms' },
+  { src: '/media/heros/hero6.jpeg', alt: 'Keyboard Synth Pad' },
+  { src: '/media/heros/hero7.jpeg', alt: 'Bass Line Weaving' },
+  { src: '/media/heros/hero8.jpeg', alt: 'Stage Concert Lighting' },
+  { src: '/media/heros/hero9.jpeg', alt: 'Studio Recording Gear' }
 ];
 
 const DEFAULT_MISI = [
@@ -19,55 +27,28 @@ const DEFAULT_MISI = [
   'Membangun kerja sama tim yang solid serta melatih kepercayaan diri tampil di atas panggung.',
 ];
 
-function ScrollReveal({ children, delay = 0 }) {
-  const [isVisible, setIsVisible] = useState(false);
-  const domRef = useRef();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          setIsVisible(entry.isIntersecting);
-        });
-      },
-      { 
-        threshold: 0.1,
-        rootMargin: "-40px 0px -40px 0px"
-      }
-    );
-
-    const current = domRef.current;
-    if (current) observer.observe(current);
-
-    return () => {
-      if (current) observer.unobserve(current);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={domRef}
-      className={`${styles.revealFade} ${isVisible ? styles.revealFadeActive : ''}`}
-      style={{ transitionDelay: `${delay}ms` }}
-    >
-      {children}
-    </div>
-  );
-}
+const INSTRUMENTS = [
+  { name: 'Vocalis', desc: 'Menuntun harmoni lagu lewat vokal dan teknik vokal yang matang.', icon: Mic },
+  { name: 'Gitarist', desc: 'Menciptakan melodi, riff elektrik, dan harmoni ritme yang memukau.', icon: Music },
+  { name: 'Drummer', desc: 'Menjaga tempo, dinamika ketukan, dan menjadi jantung detak ritme band.', icon: Disc },
+  { name: 'Bassist', desc: 'Menghubungkan ketukan drum dengan harmoni nada bass yang dalam.', icon: Volume2 },
+  { name: 'Keyboardist', desc: 'Mengisi harmoni pad synthesizer, piano klasik, dan efek instrumen.', icon: Key }
+];
 
 export default function LandingPage() {
-  const [activeSlide, setActiveSlide] = useState(0);
+  const [activeCard, setActiveCard] = useState(0);
   const [isSessionOpen, setIsSessionOpen] = useState(true);
   const [content, setContent] = useState(null);
   const [webEditorConfig, setWebEditorConfig] = useState(null);
   const [testimonials, setTestimonials] = useState([]);
   const [selectedTestimonial, setSelectedTestimonial] = useState(null);
 
+  // Auto rotate hero cards
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % HERO_SLIDES.length);
-    }, 5000);
-    return () => clearInterval(timer);
+    const interval = setInterval(() => {
+      setActiveCard((prev) => (prev + 1) % HERO_IMAGES.length);
+    }, 4000);
+    return () => clearInterval(interval);
   }, []);
 
   useEffect(() => {
@@ -108,11 +89,8 @@ export default function LandingPage() {
   const tahunBerdiri = webEditorConfig?.tentangKami?.yearFounded || content?.tahunBerdiri || '2023';
   const aktifType = webEditorConfig?.tentangKami?.activeMembersType || 'Real';
   const aktifFake = webEditorConfig?.tentangKami?.activeMembersFakeValue || '';
-  const anggotaAktif = (aktifType === 'Fake' || aktifType === 'Real+Fake') ? aktifFake : '50+'; // ideally this should also combine real if Real+Fake, but keeping simple for UI display
+  const anggotaAktif = (aktifType === 'Fake' || aktifType === 'Real+Fake') ? aktifFake : '50+';
   const kegiatan = webEditorConfig?.tentangKami?.activitiesCount || content?.kegiatan || '10+ Event';
-  
-  const aboutText1 = webEditorConfig?.tentangKami?.aboutText1 || content?.aboutText1 || 'MANSAME Band adalah organisasi ekstrakurikuler musik dan band yang menaungi minat bakat seni musik siswa di MAN 1 Muara Enim. Kami hadir sebagai studio kreativitas bagi siswa-siswi yang ingin mendalami instrumen gitar, bass, drum, keyboard, vokal, hingga teknik sound engineering.';
-  const aboutText2 = webEditorConfig?.tentangKami?.aboutText2 || content?.aboutText2 || 'Dengan studio latihan mandiri dan bimbingan yang bersahabat, MANSAME Band berkomitmen menciptakan generasi muda yang kreatif, percaya diri, dan berprestasi di bidang seni pertunjukan serta festival musik.';
   
   const visi = webEditorConfig?.visiMisi?.visi || content?.visi || 'Menjadi wadah kreativitas seni musik remaja yang aktif, produktif, kompak, dan berprestasi, serta menjunjung tinggi harmoni kebersamaan.';
   
@@ -122,280 +100,189 @@ export default function LandingPage() {
     : DEFAULT_MISI;
 
   return (
-    <div className="page-wrapper">
+    <div className={styles.pageContainer}>
       <SEO />
 
-      {/* ── Hero ── */}
+      {/* Decorative Blobs */}
+      <div className={styles.blobLeft} />
+      <div className={styles.blobRight} />
+
+      {/* ── 1. Hero Section ── */}
       <section className={styles.hero} id="beranda">
-        {/* Full-width slideshow background */}
-        <div className={styles.slideshowContainer}>
-          <div className={styles.slideshow}>
-            {HERO_SLIDES.map((slide, i) => (
-              <div
-                key={i}
-                className={`${styles.slide} ${i === activeSlide ? styles.active : ''}`}
-              >
-                <img
-                  src={slide.src}
-                  alt={slide.alt}
-                  className={styles.slideImg}
-                />
+        <div className="container">
+          <div className={styles.heroGrid}>
+            
+            {/* Left Info Column */}
+            <div className={styles.heroLeft}>
+              <div className={styles.tagBadge}>
+                <div className={styles.tagDot} />
+                <span>Audisi Terbuka 2026</span>
               </div>
-            ))}
-          </div>
-          {/* Transition overlay: smooth vertical and horizontal fade to white */}
-          <div className={styles.heroOverlay} />
-        </div>
+              <h1 className={styles.heroTitle}>
+                Jelajahi Nada, <br />
+                Temukan <strong>Harmonimu</strong>
+              </h1>
+              <p className={styles.heroDesc}>
+                {heroDesc}
+              </p>
+              
+              <div className={styles.heroBtns}>
+                <Link to="/daftar" className={styles.btnPrimary}>
+                  {isSessionOpen ? 'Gabung Audisi Sekarang' : 'Audisi Ditutup'}
+                  <ArrowRight size={18} />
+                </Link>
+                <Link to="/cek-kelulusan" className={styles.btnOutline}>
+                  Cek Kelulusan
+                </Link>
+              </div>
 
-        {/* Foreground Content */}
-        <div className={`container ${styles.heroInner}`}>
-          <div className={styles.heroContent}>
-            {/* Mobile Badges (Visible on mobile only) */}
-            <div className={styles.mobileBadges}>
-              <div className={styles.slideBadge}>
-                <div className={styles.slideBadgeIcon}>
-                  <Users size={16} />
+              <div className={styles.heroStats}>
+                <div className={styles.heroStat}>
+                  <span className={styles.heroStatNum}>{anggotaAktif}</span>
+                  <span className={styles.heroStatLabel}>Anggota Aktif</span>
                 </div>
-                <div className={styles.slideBadgeText}>
-                  <span className={styles.slideBadgeNum}>Latihan Studio</span>
-                  <span className={styles.slideBadgeLabel}>MANSAME Band</span>
+                <div className={styles.heroStat}>
+                  <span className={styles.heroStatNum}>{kegiatan}</span>
+                  <span className={styles.heroStatLabel}>Pertunjukan Stage</span>
                 </div>
-              </div>
-              <div className={styles.slideBadge}>
-                <div className={styles.slideBadgeIcon} style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}>
-                  <BookOpen size={16} />
-                </div>
-                <div className={styles.slideBadgeText}>
-                  <span className={styles.slideBadgeNum}>Komposisi Musik</span>
-                  <span className={styles.slideBadgeLabel}>Harmoni Kreatif</span>
+                <div className={styles.heroStat}>
+                  <span className={styles.heroStatNum}>{tahunBerdiri}</span>
+                  <span className={styles.heroStatLabel}>Tahun Berdiri</span>
                 </div>
               </div>
             </div>
 
-            <p className={styles.heroEyebrow}>
-              <span />
-              Selamat Datang di
-            </p>
-            <h1 className={styles.heroTitle}>
-              {webTitle.includes(' ') ? (
-                <>
-                  {webTitle.split(' ')[0]} <strong>{webTitle.substring(webTitle.indexOf(' ') + 1)}</strong>
-                </>
-              ) : (
-                <strong>{webTitle}</strong>
-              )}
-            </h1>
-            <p className={styles.heroDesc}>
-              {heroDesc}
-            </p>
-            <div className={styles.heroBtns}>
-              <Link to="/daftar" className={styles.heroBtnPrimary}>
-                {isSessionOpen ? 'Daftar Sekarang' : 'Pendaftaran Ditutup'}
-                <ArrowRight size={16} />
-              </Link>
-              <Link to="/cek-kelulusan" className={styles.heroBtnOutline}>
-                Cek Kelulusan
-              </Link>
-            </div>
-
-            <div className={styles.heroStats}>
-              <div className={styles.heroStat}>
-                <span className={styles.heroStatNum}>{anggotaAktif}</span>
-                <span className={styles.heroStatLabel}>Anggota Aktif</span>
+            {/* Right Card Rotation Column */}
+            <div className={styles.heroRight}>
+              <div className={styles.cardShowcase}>
+                {HERO_IMAGES.map((img, index) => {
+                  let cardClass = styles.showcaseCard;
+                  if (index === activeCard) {
+                    cardClass += ` ${styles.cardActive}`;
+                  } else if (index === (activeCard + 1) % HERO_IMAGES.length) {
+                    cardClass += ` ${styles.cardNext}`;
+                  } else if (index === (activeCard - 1 + HERO_IMAGES.length) % HERO_IMAGES.length) {
+                    cardClass += ` ${styles.cardPrev}`;
+                  }
+                  
+                  return (
+                    <div key={index} className={cardClass}>
+                      <img src={img.src} alt={img.alt} className={styles.showcaseImg} />
+                    </div>
+                  );
+                })}
               </div>
-              <div className={styles.heroStat}>
-                <span className={styles.heroStatNum}>{kegiatan}</span>
-                <span className={styles.heroStatLabel}>Program Kegiatan</span>
-              </div>
-              <div className={styles.heroStat}>
-                <span className={styles.heroStatNum}>{tahunBerdiri}</span>
-                <span className={styles.heroStatLabel}>Tahun Berdiri</span>
+              
+              <div className={styles.showcaseControls}>
+                {HERO_IMAGES.map((_, index) => (
+                  <button 
+                    key={index} 
+                    onClick={() => setActiveCard(index)}
+                    className={`${styles.controlDot} ${index === activeCard ? styles.controlDotActive : ''}`}
+                    aria-label={`Lihat Slide ${index + 1}`}
+                  />
+                ))}
               </div>
             </div>
-          </div>
-        </div>
 
-        {/* Floating Badge Left */}
-        <div className={styles.badgeLeft}>
-          <div className={styles.slideBadge}>
-            <div className={styles.slideBadgeIcon}>
-              <Users size={18} />
-            </div>
-            <div className={styles.slideBadgeText}>
-              <span className={styles.slideBadgeNum}>Latihan Studio</span>
-              <span className={styles.slideBadgeLabel}>MANSAME Band</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Floating Badge Right */}
-        <div className={styles.badgeRight}>
-          <div className={styles.slideBadge} style={{ animationDelay: '0.3s' }}>
-            <div className={styles.slideBadgeIcon} style={{ background: 'linear-gradient(135deg, #10b981 0%, #059669 100%)' }}>
-              <BookOpen size={18} />
-            </div>
-            <div className={styles.slideBadgeText}>
-              <span className={styles.slideBadgeNum}>Komposisi Musik</span>
-              <span className={styles.slideBadgeLabel}>Remaja Kreatif &amp; Berbakat</span>
-            </div>
-          </div>
-        </div>
-
-        {/* Dot navigation */}
-        <div className={styles.slideDots}>
-          {HERO_SLIDES.map((_, i) => (
-            <button
-              key={i}
-              className={`${styles.slideDot} ${i === activeSlide ? styles.activeDot : ''}`}
-              onClick={() => setActiveSlide(i)}
-              aria-label={`Slide ${i + 1}`}
-            />
-          ))}
-        </div>
-      </section>
-
-      {/* ── Tentang ── */}
-      <section className="section" id="tentang">
-        <div className={`container ${styles.aboutGrid}`}>
-          <ScrollReveal>
-            <div className={styles.aboutText}>
-              <h2 className={styles.sectionTitle}>
-                Tentang Kami
-                <span className={styles.titleBar} />
-              </h2>
-              <p className={styles.aboutDesc}>{aboutText1}</p>
-              <p className={styles.aboutDesc}>{aboutText2}</p>
-              <Link to="/kami" className={styles.learnMoreLink}>
-                Pelajari Lebih Lanjut <ArrowRight size={16} />
-              </Link>
-            </div>
-          </ScrollReveal>
-
-          <div className={styles.aboutStats}>
-            <ScrollReveal delay={0}>
-              <div className={styles.statCard}>
-                <div className={styles.statIcon}>
-                  <Calendar size={20} />
-                </div>
-                <div>
-                  <div className={styles.statValue}>{tahunBerdiri}</div>
-                  <div className={styles.statLabel}>Tahun Berdiri</div>
-                </div>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={100}>
-              <div className={styles.statCard}>
-                <div className={styles.statIcon}>
-                  <Users size={20} />
-                </div>
-                <div>
-                  <div className={styles.statValue}>{anggotaAktif}</div>
-                  <div className={styles.statLabel}>Anggota Aktif</div>
-                </div>
-              </div>
-            </ScrollReveal>
-            <ScrollReveal delay={200}>
-              <div className={styles.statCard}>
-                <div className={styles.statIcon}>
-                  <BookOpen size={20} />
-                </div>
-                <div>
-                  <div className={styles.statValue}>{kegiatan}</div>
-                  <div className={styles.statLabel}>Kegiatan</div>
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
         </div>
       </section>
 
-      {/* ── Visi Misi ── */}
+      {/* ── 2. Tentang Kami: Instrument Showcase ── */}
+      <section className={`section ${styles.instrumentsSection}`} id="tentang">
+        <div className="container">
+          <h2 className={styles.sectionTitle}>
+            Seksi Musik Kami
+            <span className={styles.titleBar} />
+          </h2>
+          
+          <div className={styles.instrumentsGrid}>
+            {INSTRUMENTS.map((inst, index) => {
+              const IconComp = inst.icon;
+              return (
+                <div key={index} className={styles.instrumentCard}>
+                  <div className={styles.instrumentIcon}>
+                    <IconComp size={24} />
+                  </div>
+                  <h3>{inst.name}</h3>
+                  <p>{inst.desc}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className={styles.aboutLinkContainer}>
+            <Link to="/kami" className={styles.learnMoreBtn}>
+              Lihat Detail Struktur Kepengurusan <ArrowRight size={16} />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3. Visi Misi Section ── */}
       <section className={`section ${styles.visiMisiSection}`} id="visi-misi">
         <div className="container">
-          <ScrollReveal>
-            <h2 className={styles.sectionTitle}>
-              Visi &amp; Misi
-              <span className={styles.titleBar} />
-            </h2>
-          </ScrollReveal>
-
           <div className={styles.visiMisiGrid}>
-            <ScrollReveal delay={100}>
-              <div className={styles.visiCard}>
-                <span className={styles.visiLabel}>Visi</span>
-                <blockquote className={styles.visiQuote}>{visi}</blockquote>
-              </div>
-            </ScrollReveal>
+            
+            {/* Visi Left Column */}
+            <div className={styles.visiCard}>
+              <span className={styles.visiLabel}>Visi Utama</span>
+              <blockquote className={styles.visiQuote}>
+                "{visi}"
+              </blockquote>
+            </div>
 
-            <ScrollReveal delay={200}>
-              <div className={styles.misiCard}>
-                <span className={styles.misiLabel}>Misi</span>
-                <ol className={styles.misiList}>
-                  {misiList.map((item, i) => (
-                    <li key={i} className={styles.misiItem}>
-                      <span className={styles.misiNum}>{i + 1}</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ol>
+            {/* Misi Right Column */}
+            <div className={styles.misiCard}>
+              <span className={styles.misiLabel}>Misi Kami</span>
+              <div className={styles.misiList}>
+                {misiList.map((item, index) => (
+                  <div key={index} className={styles.misiItem}>
+                    <div className={styles.misiNum}>{index + 1}</div>
+                    <div className={styles.misiText}>{item}</div>
+                  </div>
+                ))}
               </div>
-            </ScrollReveal>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* ── Testimonials (Apa Kata Alumni?) ── */}
+      {/* ── 4. Testimonials Section ── */}
       {testimonials.length > 0 && (
         <section className={`section ${styles.testimonialsSection}`} id="apa-kata-alumni">
           <div className={styles.testimonialsHeaderWrap}>
             <div className="container">
-              <ScrollReveal>
-                <h2 className={styles.sectionTitle}>
-                  Apa Kata Alumni?
-                  <span className={styles.titleBar} />
-                </h2>
-              </ScrollReveal>
+              <h2 className={styles.sectionTitle}>
+                Suara dari Alumni
+                <span className={styles.titleBar} />
+              </h2>
             </div>
           </div>
 
           <div className={styles.marqueeContainer}>
             <div className={styles.marqueeTrack}>
-              {/* Set 1 */}
-              {testimonials.map((t) => (
-                <div key={`${t.id}-1`} className={styles.testimonialCard} onClick={() => setSelectedTestimonial(t)}>
-                  <div className={styles.testimonialPhotoWrap}>
+              {/* Double mapping for seamless infinite loops */}
+              {[...testimonials, ...testimonials].map((t, index) => (
+                <div 
+                  key={`${t.id}-${index}`} 
+                  className={styles.testimonialCard} 
+                  onClick={() => setSelectedTestimonial(t)}
+                >
+                  <div className={styles.testimonialHeader}>
                     {t.photoPath ? (
-                      <img src={getUploadUrl(t.photoPath)} alt={t.name} className={styles.testimonialPhoto} />
+                      <img src={getUploadUrl(t.photoPath)} alt={t.name} className={styles.profilePic} />
                     ) : (
-                      <div className={styles.testimonialPhotoPlaceholder}>{t.name[0]}</div>
+                      <div className={styles.profilePlaceholder}>{t.name[0]}</div>
                     )}
-                    <div className={styles.testimonialMetaOverlay}>
-                      <h4 className={styles.testimonialName}>{t.name}</h4>
-                      <span className={styles.testimonialBadge}>Angkatan {t.angkatan}</span>
+                    <div className={styles.profileMeta}>
+                      <h4 className={styles.profileName}>{t.name}</h4>
+                      <span className={styles.profileYear}>Angkatan {t.angkatan}</span>
                     </div>
                   </div>
-                  <div className={styles.testimonialContent}>
-                    <p className={styles.testimonialText}>"{t.content}"</p>
-                  </div>
-                </div>
-              ))}
-              {/* Set 2 (Duplikasi untuk Seamless Infinite Scroll) */}
-              {testimonials.map((t) => (
-                <div key={`${t.id}-2`} className={styles.testimonialCard} onClick={() => setSelectedTestimonial(t)}>
-                  <div className={styles.testimonialPhotoWrap}>
-                    {t.photoPath ? (
-                      <img src={getUploadUrl(t.photoPath)} alt={t.name} className={styles.testimonialPhoto} />
-                    ) : (
-                      <div className={styles.testimonialPhotoPlaceholder}>{t.name[0]}</div>
-                    )}
-                    <div className={styles.testimonialMetaOverlay}>
-                      <h4 className={styles.testimonialName}>{t.name}</h4>
-                      <span className={styles.testimonialBadge}>Angkatan {t.angkatan}</span>
-                    </div>
-                  </div>
-                  <div className={styles.testimonialContent}>
-                    <p className={styles.testimonialText}>"{t.content}"</p>
-                  </div>
+                  <p className={styles.testimonialText}>"{t.content}"</p>
                 </div>
               ))}
             </div>
@@ -403,34 +290,32 @@ export default function LandingPage() {
         </section>
       )}
 
-      {/* ── CTA Bottom ── */}
+      {/* ── 5. CTA Bottom ── */}
       <section className={styles.ctaSection}>
-        <div className={`container ${styles.ctaInner}`}>
-          <ScrollReveal>
+        <div className={`container`}>
+          <div className={styles.ctaInner}>
             <div>
               <h2 className={styles.ctaTitle}>
-                {isSessionOpen ? 'Tertarik bergabung dengan MANSAME Band?' : 'Pendaftaran Saat Ini Ditutup'}
+                {isSessionOpen ? 'Siap Guncang Panggung Bersama?' : 'Audisi Ditutup Sementara'}
               </h2>
               <p className={styles.ctaSub}>
                 {isSessionOpen 
-                  ? 'Daftarkan dirimu sekarang dan jadilah bagian dari komunitas musik terbaik MAN 1 Muara Enim.'
-                  : 'Nantikan pembukaan pendaftaran sesi berikutnya. Terus pantau media sosial kami!'
+                  ? 'Daftarkan bakat bermusikmu sekarang. Jadilah bagian dari grup band resmi MAN 1 Muara Enim.'
+                  : 'Sesi registrasi calon anggota baru sedang ditutup. Pantau instagram kami untuk sesi berikutnya!'
                 }
               </p>
             </div>
-          </ScrollReveal>
-          {isSessionOpen && (
-            <ScrollReveal delay={150}>
-              <Link to="/daftar" className="btn btn-primary btn-lg">
-                Daftar Sekarang
+            {isSessionOpen && (
+              <Link to="/daftar" className={styles.btnPrimary}>
+                Gabung Sekarang
                 <ArrowRight size={18} />
               </Link>
-            </ScrollReveal>
-          )}
+            )}
+          </div>
         </div>
       </section>
 
-      {/* Testimonial Popup Modal */}
+      {/* Testimonial Modal Popup */}
       {selectedTestimonial && (
         <div className={styles.testimonialModalOverlay} onClick={() => setSelectedTestimonial(null)}>
           <div className={styles.testimonialModalCard} onClick={(e) => e.stopPropagation()}>
@@ -452,4 +337,3 @@ export default function LandingPage() {
     </div>
   );
 }
-

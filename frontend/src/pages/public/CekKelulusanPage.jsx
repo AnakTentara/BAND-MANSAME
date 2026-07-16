@@ -1,8 +1,9 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useSearchParams, Link } from 'react-router-dom';
 import { checkStatus } from '@/api/candidates';
-import { Search } from 'lucide-react';
+import { Search, MapPin, Calendar, Heart, Share2, CornerUpLeft } from 'lucide-react';
 import SEO from '@/components/common/SEO';
+import toast from 'react-hot-toast';
 import styles from './CekKelulusanPage.module.css';
 
 const STAGES = { SEARCH: 'search', LOADING: 'loading', RESULT: 'result' };
@@ -20,7 +21,7 @@ export default function CekKelulusanPage() {
     setStage(STAGES.LOADING);
     setResult(null);
 
-    // Artificial 2s delay for dramatic SNBP-like reveal
+    // Artificial 2s delay for dramatic reveal
     await new Promise((r) => setTimeout(r, 2000));
 
     try {
@@ -45,7 +46,7 @@ export default function CekKelulusanPage() {
       setNisn(paramNisn);
       doCheck(paramNisn);
     }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [searchParams, doCheck]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -59,16 +60,39 @@ export default function CekKelulusanPage() {
     setError('');
   };
 
+  const handleShare = () => {
+    const shareUrl = `${window.location.origin}/cek-kelulusan?nisn=${nisn}`;
+    navigator.clipboard.writeText(shareUrl);
+    toast.success('Link tiket kelulusan disalin ke clipboard!');
+  };
+
+  const Barcode = () => (
+    <div className={styles.stubBarcode}>
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineLg}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineSm}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineMd}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineSm}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineLg}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineMd}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineSm}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineLg}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineSm}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineMd}`} />
+      <div className={`${styles.barcodeLine} ${styles.barcodeLineLg}`} />
+    </div>
+  );
+
   // ── Search Stage ──
   if (stage === STAGES.SEARCH) {
     return (
-      <div className={`page-wrapper ${styles.searchWrapper}`}>
-        <SEO title="Cek Kelulusan Seleksi" description="Halaman pengumuman resmi hasil seleksi penerimaan anggota baru MANSAME Band MAN 1 Muara Enim. Masukkan NISN Anda untuk melihat status kelulusan." />
+      <div className={styles.searchWrapper}>
+        <SEO title="Cek Kelulusan Seleksi" description="Halaman pengumuman resmi hasil seleksi penerimaan anggota baru MANSAME Band. Masukkan NISN Anda untuk melihat status kelulusan." />
+        
         <div className={styles.searchCenter}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '16px', textAlign: 'center' }}>🎸</div>
-          <h1 className={styles.searchTitle}>Pengumuman Kelulusan</h1>
+          <div className={styles.guitarIcon}>🎸</div>
+          <h1 className={styles.searchTitle}>Cek Kelulusan</h1>
           <p className={styles.searchSub}>
-            Masukkan NISN untuk melihat hasil seleksi anggota MANSAME Band
+            Masukkan 10 digit NISN pendaftaran kamu untuk melihat status audisi penerimaan MANSAME Band.
           </p>
 
           <form onSubmit={handleSubmit} className={styles.searchForm}>
@@ -77,15 +101,15 @@ export default function CekKelulusanPage() {
               <input
                 type="text"
                 className={styles.searchInput}
-                placeholder="Masukkan NISN..."
+                placeholder="Masukkan NISN kamu..."
                 value={nisn}
                 onChange={(e) => setNisn(e.target.value)}
                 maxLength={10}
                 autoFocus
               />
             </div>
-            <button type="submit" className="btn btn-primary btn-lg" disabled={!nisn.trim()}>
-              Cek Hasil
+            <button type="submit" className="btn btn-primary btn-lg" disabled={!nisn.trim()} style={{ justifyContent: 'center' }}>
+              Cek Hasil Audisi
             </button>
           </form>
 
@@ -99,8 +123,8 @@ export default function CekKelulusanPage() {
   if (stage === STAGES.LOADING) {
     return (
       <div className={styles.loadingScreen}>
-        <div style={{ fontSize: '3.5rem', marginBottom: '16px', animation: 'pulse 1.5s infinite', textAlign: 'center' }}>🎸</div>
-        <p className={styles.loadingText}>Memuat data...</p>
+        <div className={styles.loadingGlow}>⚡</div>
+        <p className={styles.loadingText}>Memeriksa Lembar Audisi...</p>
       </div>
     );
   }
@@ -108,15 +132,15 @@ export default function CekKelulusanPage() {
   // ── Result Stage ──
   if (result?.notFound) {
     return (
-      <div className={`${styles.resultScreen} ${styles.resultNotFound}`}>
+      <div className={styles.resultScreen}>
         <SEO title="NISN Tidak Ditemukan" description="Pengecekan kelulusan seleksi MANSAME Band: NISN tidak ditemukan dalam database." />
-        <div className={styles.resultCard}>
-          <h2 className={styles.resultHeading}>NISN Tidak Ditemukan</h2>
-          <p className={styles.resultMsg}>
-            NISN <strong>{nisn}</strong> tidak ditemukan dalam sistem.
-            Pastikan NISN yang dimasukkan sudah benar.
+        <div className={styles.searchCenter}>
+          <div className={styles.guitarIcon} style={{ filter: 'grayscale(1)' }}>🎟️</div>
+          <h1 className={styles.searchTitle}>Tidak Ditemukan</h1>
+          <p className={styles.searchSub}>
+            Maaf, NISN <strong>{nisn}</strong> tidak terdaftar dalam database pendaftaran audisi kami. Pastikan nomor yang diinput sudah benar.
           </p>
-          <button onClick={handleReset} className="btn btn-secondary btn-lg">
+          <button onClick={handleReset} className="btn btn-secondary btn-lg" style={{ width: '100%', justifyContent: 'center' }}>
             Coba Lagi
           </button>
         </div>
@@ -127,28 +151,80 @@ export default function CekKelulusanPage() {
   const status = result?.status || result?.candidate?.status;
   const name = result?.name || result?.candidate?.name || '—';
   const candidateNisn = result?.nisn || result?.candidate?.nisn || nisn;
+  const className = result?.className || result?.candidate?.className || '—';
+  const serialNo = `MNSM-AUD-${candidateNisn.substring(0, 4)}-${candidateNisn.substring(6)}`;
 
   if (status === 'LULUS') {
     return (
-      <div className={`${styles.resultScreen} ${styles.resultLulus}`}>
-        <SEO title="Selamat! Anda Dinyatakan Lulus" description="Selamat! Hasil seleksi menyatakan Anda LULUS menjadi anggota/pengurus MANSAME Band." />
-        <div className={styles.resultInner}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '16px', textAlign: 'center' }}>🎸</div>
-          <h1 className={styles.congratsTitle}>SELAMAT!</h1>
-          <div className={styles.resultInfo}>
-            <p className={styles.resultName}>{name}</p>
-            <p className={styles.resultNisn}>NISN: {candidateNisn}</p>
+      <div className={styles.resultScreen}>
+        <SEO title="Selamat! Anda Lulus Seleksi" description="Selamat! Hasil seleksi menyatakan Anda LULUS menjadi bagian dari grup MANSAME Band." />
+        <div className={styles.ticketWrap}>
+          
+          <div className={styles.ticketBody}>
+            {/* Stamp */}
+            <div className={`${styles.stamp} ${styles.stampLulus}`}>Selected</div>
+
+            {/* Left Column */}
+            <div className={styles.ticketMain}>
+              <div className={styles.ticketHeader}>
+                <span className={styles.ticketTag}>VIP Access Pass</span>
+                <span className={styles.ticketSerial}>{serialNo}</span>
+              </div>
+
+              <h2 className={`${styles.ticketTitle} ${styles.ticketTitleLulus}`}>
+                MANSAME BAND AUDITION
+              </h2>
+
+              <div className={styles.ticketInfo}>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>Nama Musisi</span>
+                  <span className={styles.infoVal}>{name}</span>
+                </div>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>NISN Peserta</span>
+                  <span className={styles.infoVal}>{candidateNisn}</span>
+                </div>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>Kelas Asal</span>
+                  <span className={styles.infoVal}>{className}</span>
+                </div>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>Status Audisi</span>
+                  <span className={styles.infoVal} style={{ color: 'var(--color-success)' }}>LULUS / INITIATED</span>
+                </div>
+              </div>
+
+              <div className={styles.ticketFooter}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <MapPin size={12} /> <span>Studio Musik MANSAME Band</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px', marginTop: '4px' }}>
+                  <Calendar size={12} /> <span>Bawa kartu identitas &amp; login profil untuk aktivasi pass</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Sobek Column */}
+            <div className={styles.ticketStub}>
+              <span className={styles.stubHeader}>CONCERT STUB</span>
+              <div className={styles.stubGlowGlow}>⚡</div>
+              <Barcode />
+            </div>
           </div>
-          <div className={`${styles.statusBadge} ${styles.badgeLulus}`}>
-            DINYATAKAN LULUS
+
+          {/* Action Row */}
+          <div className={styles.ticketActionRow}>
+            <Link to="/login" className="btn btn-lg btn-primary">
+              Aktivasi Akun Musisi
+            </Link>
+            <button onClick={handleShare} className="btn btn-lg btn-secondary">
+              <Share2 size={16} /> Bagikan Pass
+            </button>
+            <button onClick={handleReset} className="btn btn-lg btn-ghost">
+              <CornerUpLeft size={16} /> Kembali
+            </button>
           </div>
-          <p className={styles.resultMsg}>
-            Anda dinyatakan <strong>LULUS</strong> seleksi sebagai anggota MANSAME Band.
-            Silakan login untuk melihat profil dan informasi selanjutnya.
-          </p>
-          <Link to="/login" className={`btn btn-lg ${styles.btnWhite}`}>
-            Login Anggota →
-          </Link>
+
         </div>
       </div>
     );
@@ -156,25 +232,66 @@ export default function CekKelulusanPage() {
 
   if (status === 'TIDAK_LULUS') {
     return (
-      <div className={`${styles.resultScreen} ${styles.resultTidakLulus}`}>
-        <SEO title="Hasil Seleksi: Tetap Semangat" description="Hasil seleksi menyatakan Anda belum lulus seleksi MANSAME Band kali ini. Jangan berkecil hati dan tetap semangat!" />
-        <div className={styles.resultInner}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '16px', textAlign: 'center' }}>🎸</div>
-          <h1 className={styles.resultTitle}>Hasil Seleksi</h1>
-          <div className={styles.resultInfo}>
-            <p className={styles.resultName}>{name}</p>
-            <p className={styles.resultNisn}>NISN: {candidateNisn}</p>
+      <div className={styles.resultScreen}>
+        <SEO title="Hasil Seleksi: Tetap Semangat" description="Audisi MANSAME Band menyatakan Anda belum lulus kali ini. Tetap berkarya!" />
+        <div className={styles.ticketWrap}>
+          
+          <div className={styles.ticketBody} style={{ filter: 'grayscale(0.6)' }}>
+            {/* Stamp */}
+            <div className={`${styles.stamp} ${styles.stampGagal}`}>Keep Practicing</div>
+
+            {/* Left Column */}
+            <div className={styles.ticketMain}>
+              <div className={styles.ticketHeader}>
+                <span className={styles.ticketTag} style={{ background: 'rgba(255,255,255,0.05)', color: '#94a3b8', borderColor: '#475569' }}>Standard Stub</span>
+                <span className={styles.ticketSerial}>{serialNo}</span>
+              </div>
+
+              <h2 className={`${styles.ticketTitle} ${styles.ticketTitleGagal}`}>
+                MANSAME BAND AUDITION
+              </h2>
+
+              <div className={styles.ticketInfo}>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>Nama Musisi</span>
+                  <span className={styles.infoVal}>{name}</span>
+                </div>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>NISN Peserta</span>
+                  <span className={styles.infoVal}>{candidateNisn}</span>
+                </div>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>Kelas Asal</span>
+                  <span className={styles.infoVal}>{className}</span>
+                </div>
+                <div className={styles.infoField}>
+                  <span className={styles.infoLabel}>Status Audisi</span>
+                  <span className={styles.infoVal} style={{ color: 'var(--color-error)' }}>BELUM LULUS</span>
+                </div>
+              </div>
+
+              <div className={styles.ticketFooter}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Heart size={12} /> <span>Terima kasih telah berpartisipasi. Jangan patah semangat!</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Sobek Column */}
+            <div className={styles.ticketStub}>
+              <span className={styles.stubHeader}>STANDARD PASS</span>
+              <div className={styles.stubGlowGlow} style={{ opacity: 0.3 }}>🎸</div>
+              <Barcode />
+            </div>
           </div>
-          <div className={`${styles.statusBadge} ${styles.badgeTidakLulus}`}>
-            TIDAK LULUS
+
+          {/* Action Row */}
+          <div className={styles.ticketActionRow}>
+            <button onClick={handleReset} className="btn btn-lg btn-secondary">
+              <CornerUpLeft size={16} /> Cek NISN Lain
+            </button>
           </div>
-          <p className={styles.resultMsg}>
-            Mohon maaf, Anda belum dinyatakan lulus pada seleksi kali ini.
-            Jangan berkecil hati — tetap semangat berlatih dan coba lagi di kesempatan berikutnya!
-          </p>
-          <button onClick={handleReset} className={`btn btn-lg ${styles.btnWhite}`}>
-            Kembali
-          </button>
+
         </div>
       </div>
     );
@@ -182,24 +299,66 @@ export default function CekKelulusanPage() {
 
   // PENDING
   return (
-    <div className={`${styles.resultScreen} ${styles.resultPending}`}>
-      <SEO title="Status Seleksi: Menunggu Pengumuman" description="Status seleksi pendaftaran MANSAME Band Anda saat ini masih dalam proses peninjauan." />
-      <div className={styles.resultInner}>
-        <div style={{ fontSize: '3.5rem', marginBottom: '16px', textAlign: 'center' }}>🎸</div>
-        <h1 className={styles.resultTitle}>Status Masih Pending</h1>
-        <div className={styles.resultInfo}>
-          <p className={styles.resultName}>{name}</p>
-          <p className={styles.resultNisn}>NISN: {candidateNisn}</p>
+    <div className={styles.resultScreen}>
+      <SEO title="Status Seleksi: Menunggu Pengumuman" description="Status pendaftaran MANSAME Band Anda saat ini masih dalam proses peninjauan." />
+      <div className={styles.ticketWrap}>
+        
+        <div className={styles.ticketBody}>
+          {/* Stamp */}
+          <div className={`${styles.stamp} ${styles.stampPending}`}>Pending review</div>
+
+          {/* Left Column */}
+          <div className={styles.ticketMain}>
+            <div className={styles.ticketHeader}>
+              <span className={styles.ticketTag} style={{ background: 'rgba(245,158,11,0.1)', color: '#f59e0b', borderColor: '#f59e0b' }}>Review Pass</span>
+              <span className={styles.ticketSerial}>{serialNo}</span>
+            </div>
+
+            <h2 className={styles.ticketTitle} style={{ color: '#f59e0b' }}>
+              MANSAME BAND AUDITION
+            </h2>
+
+            <div className={styles.ticketInfo}>
+              <div className={styles.infoField}>
+                <span className={styles.infoLabel}>Nama Musisi</span>
+                <span className={styles.infoVal}>{name}</span>
+              </div>
+              <div className={styles.infoField}>
+                <span className={styles.infoLabel}>NISN Peserta</span>
+                <span className={styles.infoVal}>{candidateNisn}</span>
+              </div>
+              <div className={styles.infoField}>
+                <span className={styles.infoLabel}>Kelas Asal</span>
+                <span className={styles.infoVal}>{className}</span>
+              </div>
+              <div className={styles.infoField}>
+                <span className={styles.infoLabel}>Status Audisi</span>
+                <span className={styles.infoVal} style={{ color: '#f59e0b' }}>DALAM PENINJAUAN</span>
+              </div>
+            </div>
+
+            <div className={styles.ticketFooter}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                <Sparkles size={12} /> <span>Hasil audisi kamu sedang diperiksa secara teliti oleh juri. Cek berkala!</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Sobek Column */}
+          <div className={styles.ticketStub}>
+            <span className={styles.stubHeader}>STUB REVIEW</span>
+            <div className={styles.stubGlowGlow} style={{ color: '#f59e0b' }}>⏳</div>
+            <Barcode />
+          </div>
         </div>
-        <div className={`${styles.statusBadge} ${styles.badgePending}`}>
-          MENUNGGU SELEKSI
+
+        {/* Action Row */}
+        <div className={styles.ticketActionRow}>
+          <button onClick={handleReset} className="btn btn-lg btn-secondary">
+            <CornerUpLeft size={16} /> Kembali
+          </button>
         </div>
-        <p className={styles.resultMsg}>
-          Data Anda masih dalam proses seleksi. Silakan cek kembali nanti.
-        </p>
-        <button onClick={handleReset} className={`btn btn-lg ${styles.btnWhite}`}>
-          Cek Ulang
-        </button>
+
       </div>
     </div>
   );
