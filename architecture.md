@@ -11,13 +11,13 @@ Dokumen ini menjelaskan arsitektur teknis backend website MANSAME Band secara me
 │                         CLIENT LAYER                             │
 │                                                                   │
 │   Browser (Frontend)           WhatsApp (User)                   │
-│   Port 25553                   Command: /cek                     │
+│   Port 25545                   Command: /cek                     │
 └──────────────────┬──────────────────────────┬────────────────────┘
                    │ HTTP/REST                │ Baileys WS
                    ▼                          ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                     BACKEND (Node.js + Express)                  │
-│                         Port 25552                               │
+│                         Port 25546                               │
 │                                                                   │
 │   ┌────────────────┐   ┌───────────────┐   ┌─────────────────┐  │
 │   │  REST API      │   │  WhatsApp Bot │   │  Email Service  │  │
@@ -231,7 +231,7 @@ MANSAME-Band/
 
 | Service | Port |
 |---|---|
-| Backend API | `25552` |
-| Frontend (rencana) | `25553` |
+| Backend API | `25546` |
+| Frontend (rencana) | `25545` |
 
-CORS dikonfigurasi untuk mengizinkan request dari `http://localhost:25553` dan `https://mansame-band.my.id`.
+CORS dikonfigurasi untuk mengizinkan request dari `http://localhost:25545` dan `https://mansame-band.my.id`.

@@ -19,12 +19,12 @@ const __dirname = path.dirname(__filename);
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
-const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
+const PORT = process.env.PORT || 25546;
+const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:25545';
 
 // Middleware
 app.use(cors({
-  origin: [FRONTEND_URL, 'http://localhost:25551', 'http://localhost:3000', 'https://mansame-band.my.id'],
+  origin: [FRONTEND_URL, 'http://localhost:25545', 'http://localhost:25546', 'https://mansame-band.my.id'],
   credentials: true
 }));
 app.use(express.json());

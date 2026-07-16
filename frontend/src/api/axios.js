@@ -53,7 +53,7 @@ export const getUploadUrl = (path) => {
   }
   
   if (window.location.hostname === 'localhost') {
-    return `http://localhost:25552${cleanPath}`;
+    return `http://localhost:25546${cleanPath}`;
   }
   
   const apiPath = cleanPath.startsWith('/api') ? cleanPath : `/api${cleanPath}`;

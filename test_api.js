@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:25552';
+const BASE_URL = 'http://localhost:25546';
 
 async function runTests() {
   console.log('=== MEMULAI VERIFIKASI API BACKEND MANSAME BAND ===\n');

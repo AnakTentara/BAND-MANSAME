@@ -299,7 +299,7 @@ export default function BlogPostPage() {
               __html: (() => {
                 if (!post.content) return '';
                 const cleanBase = window.location.hostname === 'localhost' 
-                  ? 'http://localhost:25552/uploads' 
+                  ? 'http://localhost:25546/uploads' 
                   : `${window.location.origin}/api/uploads`;
                 return post.content.replace(/src="\/uploads\//g, `src="${cleanBase}/`);
               })()

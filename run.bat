@@ -53,8 +53,8 @@ echo.
 echo ==========================================
 echo [5/5] Menjalankan Backend ^& Frontend (Concurrently)
 echo ==========================================
-echo Backend  : http://localhost:25552
-echo Frontend : http://localhost:25551
+echo Backend  : http://localhost:25546
+echo Frontend : http://localhost:25545
 echo Tekan Ctrl+C untuk menghentikan kedua server.
 echo.
 

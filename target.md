@@ -35,7 +35,7 @@ Dokumen ini berisi target pengembangan website MANSAME Band secara keseluruhan, 
   - [x] Command `/cek [Nama]` dengan algoritma string similarity
   - [x] Command `/cek [NISN]` untuk pencarian eksak
   - [x] Saran nama mirip jika tidak ditemukan persis
-- [x] Deployment-ready untuk Pterodactyl (Port `25552`)
+- [x] Deployment-ready untuk Pterodactyl (Port `25546`)
 - [x] Git repository terhubung ke GitHub
 
 ---

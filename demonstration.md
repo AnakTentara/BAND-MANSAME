@@ -38,7 +38,7 @@ Website **MANSAME Band** dirancang sebagai pusat informasi, pendaftaran anggota 
 
 ## 3. Informasi Teknis
 - **Domain**: https://mansame-band.my.id
-- **Backend**: Node.js + Express (Port 25552)
+- **Backend**: Node.js + Express (Port 25546)
 - **Frontend**: React + Vite
 - **Database**: MySQL (utama) + SQLite (fallback)
 - **WhatsApp Bot**: Baileys (scan QR dari terminal)
