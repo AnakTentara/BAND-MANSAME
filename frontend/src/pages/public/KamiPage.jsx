@@ -1,47 +1,48 @@
 import { useState, useEffect } from 'react';
-import { getPublicOrg } from '@/api/public';
+import { Link } from 'react-router-dom';
+import { Calendar, MapPin, Award, ChevronUp, ChevronDown, Music, Users, Shield, Heart } from 'lucide-react';
 import { getPublicSettings } from '@/api/candidates';
-import { ChevronDown, ChevronUp, Users, Calendar, MapPin, Award } from 'lucide-react';
+import { getPublicOrg } from '@/api/public';
 import SEO from '@/components/common/SEO';
 import { getUploadUrl } from '@/api/axios';
 import styles from './KamiPage.module.css';
 
 export default function KamiPage() {
-  const [orgData, setOrgData] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [expandedYear, setExpandedYear] = useState(null);
+  const [orgData, setOrgData] = useState([]);
   const [webEditorConfig, setWebEditorConfig] = useState(null);
+  const [expandedYear, setExpandedYear] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const [orgRes, settingsRes] = await Promise.all([
-          getPublicOrg(),
-          getPublicSettings()
-        ]);
-        setOrgData(orgRes.data || []);
-        if (settingsRes.data?.webEditorConfig) {
-          setWebEditorConfig(settingsRes.data.webEditorConfig);
-        }
-      } catch (err) {
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchData();
+    loadData();
   }, []);
 
-  // Filter current active leadership
-  const pembinaCurrent = orgData.find(m => m.jabatan === 'Pembina' && m.isCurrent);
-  const ketuaCurrent = orgData.find(m => m.jabatan === 'Ketua Umum' && m.isCurrent);
-  const wakilCurrent = orgData.find(m => m.jabatan === 'Wakil Ketua Umum' && m.isCurrent);
-  
-  // Sekretaris & Bendahara (Pengurus Harian Inti)
-  const sekretarisCurrent = orgData.find(m => m.jabatan === 'Sekretaris Umum' && m.isCurrent);
-  const bendaharaCurrent = orgData.find(m => m.jabatan === 'Bendahara Umum' && m.isCurrent);
+  const loadData = async () => {
+    try {
+      setLoading(true);
+      const [orgRes, settingsRes] = await Promise.all([
+        getPublicOrg(),
+        getPublicSettings()
+      ]);
+      setOrgData(orgRes.data || []);
+      if (settingsRes.data?.webEditorConfig) {
+        setWebEditorConfig(settingsRes.data.webEditorConfig);
+      }
+    } catch (err) {
+      console.error('Failed to load Tentang Kami data:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  // List of Divisions (Band Sections)
+  // Filter current members
+  const pembinaCurrent = orgData.find(m => m.role === 'PEMBINA' && m.isCurrent);
+  const ketuaCurrent = orgData.find(m => m.role === 'KETUA' && m.isCurrent);
+  const wakilCurrent = orgData.find(m => m.role === 'WAKIL' && m.isCurrent);
+  const sekretarisCurrent = orgData.find(m => m.jabatan?.toLowerCase().includes('sekretaris') && m.isCurrent);
+  const bendaharaCurrent = orgData.find(m => m.jabatan?.toLowerCase().includes('bendahara') && m.isCurrent);
+
+  // List of Instruments/Divisions (Band Sections)
   const DIVISIONS = [
     { name: 'Vocalis', ketuaTitle: 'Koordinator Vocalis', anggotaTitle: 'Anggota Vocalis' },
     { name: 'Gitarist', ketuaTitle: 'Koordinator Gitarist', anggotaTitle: 'Anggota Gitarist' },
@@ -89,15 +90,16 @@ export default function KamiPage() {
   const aboutText2 = tentangKami.aboutText2 || 'Melalui latihan rutin di studio, kolaborasi kelompok, dan keterlibatan dalam berbagai festival sekolah maupun regional, kami bertekad melahirkan generasi muda yang kreatif, percaya diri, kompak, dan berprestasi.';
 
   return (
-    <div className="page-wrapper">
+    <div className={styles.pageWrapper}>
       <SEO 
         title="Tentang Kami" 
         description="Profil lengkap MANSAME Band MAN 1 Muara Enim. Ketahui visi, misi, struktur pengurus aktif, pimpinan, dan perjalanan sejarah band kami." 
       />
+      
       {/* 1. Hero Section */}
       <section className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
-          <div style={{ fontSize: '3rem', marginBottom: '12px' }}>🎸</div>
+          <div style={{ fontSize: '3.5rem', marginBottom: '12px', filter: 'drop-shadow(0 0 10px rgba(184,112,255,0.4))' }}>🎸</div>
           <h1 className={styles.heroTitle}>Tentang MANSAME Band</h1>
           <p className={styles.heroSubtitle}>
             Ekstrakurikuler Seni Musik &amp; Band MAN 1 Muara Enim. Wadah pengembangan karakter, kekompakan, dan bakat bermusik.
@@ -115,21 +117,21 @@ export default function KamiPage() {
           </div>
           <div className={styles.biodataRight}>
             <div className={styles.infoBox}>
-              <Calendar className={styles.infoIcon} />
+              <Calendar className={styles.infoIcon} size={20} />
               <div>
                 <h4>Tahun Berdiri</h4>
                 <p>Resmi didirikan pada tahun {tahunBerdiri}</p>
               </div>
             </div>
             <div className={styles.infoBox}>
-              <MapPin className={styles.infoIcon} />
+              <MapPin className={styles.infoIcon} size={20} />
               <div>
                 <h4>Instansi Induk</h4>
                 <p>MAN 1 Muara Enim, Sumatera Selatan</p>
               </div>
             </div>
             <div className={styles.infoBox}>
-              <Award className={styles.infoIcon} />
+              <Award className={styles.infoIcon} size={20} />
               <div>
                 <h4>Sekretariat</h4>
                 <p>Jl. Jend. Ahmad Yani No.1, Muara Enim, Kec. Muara Enim, Kab. Muara Enim</p>
@@ -145,7 +147,9 @@ export default function KamiPage() {
           <h2 className={styles.sectionTitle}>Pimpinan &amp; Pengurus Aktif</h2>
           
           {loading ? (
-            <div className="spinner" style={{ margin: '40px auto' }} />
+            <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 0' }}>
+              <div className="spinner" />
+            </div>
           ) : (
             <>
               {/* Pembina Card */}
@@ -155,15 +159,15 @@ export default function KamiPage() {
                     {pembinaCurrent.photoPath ? (
                       <img src={getUploadUrl(pembinaCurrent.photoPath)} alt={pembinaCurrent.name} />
                     ) : (
-                      <div className={styles.initialsBig}>{pembinaCurrent.name[0]}</div>
+                      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '2rem', fontWeight: '800', color: 'var(--color-accent)' }}>{pembinaCurrent.name[0]}</div>
                     )}
                   </div>
                   <div className={styles.pembinaInfo}>
                     <span className={styles.roleLabel}>PEMBINA BAND</span>
-                    <h3>{pembinaCurrent.name}</h3>
-                    <p className={styles.duration}>Menjabat sejak {pembinaCurrent.yearStart}</p>
+                    <h3 className={styles.pembinaName}>{pembinaCurrent.name}</h3>
+                    <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '12px' }}>Menjabat sejak {pembinaCurrent.yearStart}</p>
                     {pembinaCurrent.quote && (
-                      <blockquote className={styles.quote}>
+                      <blockquote className={styles.pembinaQuote}>
                         "{pembinaCurrent.quote}"
                       </blockquote>
                     )}
@@ -179,12 +183,12 @@ export default function KamiPage() {
                       {ketuaCurrent.photoPath ? (
                         <img src={getUploadUrl(ketuaCurrent.photoPath)} alt={ketuaCurrent.name} />
                       ) : (
-                        <div className={styles.initials}>{ketuaCurrent.name[0]}</div>
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{ketuaCurrent.name[0]}</div>
                       )}
                     </div>
-                    <span className={styles.roleLabel}>KETUA UMUM</span>
-                    <h4>{ketuaCurrent.name}</h4>
-                    {ketuaCurrent.quote && <p className={styles.quoteSmall}>"{ketuaCurrent.quote}"</p>}
+                    <span className={styles.coreRole}>KETUA UMUM</span>
+                    <h4 className={styles.coreName}>{ketuaCurrent.name}</h4>
+                    {ketuaCurrent.quote && <p className={styles.coreQuote}>"{ketuaCurrent.quote}"</p>}
                   </div>
                 )}
 
@@ -194,130 +198,135 @@ export default function KamiPage() {
                       {wakilCurrent.photoPath ? (
                         <img src={getUploadUrl(wakilCurrent.photoPath)} alt={wakilCurrent.name} />
                       ) : (
-                        <div className={styles.initials}>{wakilCurrent.name[0]}</div>
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{wakilCurrent.name[0]}</div>
                       )}
                     </div>
-                    <span className={styles.roleLabel}>WAKIL KETUA</span>
-                    <h4>{wakilCurrent.name}</h4>
-                    {wakilCurrent.quote && <p className={styles.quoteSmall}>"{wakilCurrent.quote}"</p>}
+                    <span className={styles.coreRole}>WAKIL KETUA</span>
+                    <h4 className={styles.coreName}>{wakilCurrent.name}</h4>
+                    {wakilCurrent.quote && <p className={styles.coreQuote}>"{wakilCurrent.quote}"</p>}
+                  </div>
+                )}
+
+                {sekretarisCurrent && (
+                  <div className={styles.coreCard}>
+                    <div className={styles.coreImgWrap}>
+                      {sekretarisCurrent.photoPath ? (
+                        <img src={getUploadUrl(sekretarisCurrent.photoPath)} alt={sekretarisCurrent.name} />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{sekretarisCurrent.name[0]}</div>
+                      )}
+                    </div>
+                    <span className={styles.coreRole}>SEKRETARIS UMUM</span>
+                    <h4 className={styles.coreName}>{sekretarisCurrent.name}</h4>
+                    {sekretarisCurrent.quote && <p className={styles.coreQuote}>"{sekretarisCurrent.quote}"</p>}
+                  </div>
+                )}
+
+                {bendaharaCurrent && (
+                  <div className={styles.coreCard}>
+                    <div className={styles.coreImgWrap}>
+                      {bendaharaCurrent.photoPath ? (
+                        <img src={getUploadUrl(bendaharaCurrent.photoPath)} alt={bendaharaCurrent.name} />
+                      ) : (
+                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{bendaharaCurrent.name[0]}</div>
+                      )}
+                    </div>
+                    <span className={styles.coreRole}>BENDAHARA UMUM</span>
+                    <h4 className={styles.coreName}>{bendaharaCurrent.name}</h4>
+                    {bendaharaCurrent.quote && <p className={styles.coreQuote}>"{bendaharaCurrent.quote}"</p>}
                   </div>
                 )}
               </div>
-
-               {/* Sekretaris & Bendahara */}
-               <div className={styles.coreGrid}>
-                 {sekretarisCurrent && (
-                   <div className={styles.coreCard}>
-                     <div className={styles.coreImgWrap}>
-                       {sekretarisCurrent.photoPath ? (
-                         <img src={getUploadUrl(sekretarisCurrent.photoPath)} alt={sekretarisCurrent.name} />
-                       ) : (
-                         <div className={styles.initials}>{sekretarisCurrent.name[0]}</div>
-                       )}
-                     </div>
-                     <span className={styles.roleLabel}>SEKRETARIS UMUM</span>
-                     <h4>{sekretarisCurrent.name}</h4>
-                     {sekretarisCurrent.quote && <p className={styles.quoteSmall}>"{sekretarisCurrent.quote}"</p>}
-                   </div>
-                 )}
-
-                 {bendaharaCurrent && (
-                   <div className={styles.coreCard}>
-                     <div className={styles.coreImgWrap}>
-                       {bendaharaCurrent.photoPath ? (
-                         <img src={getUploadUrl(bendaharaCurrent.photoPath)} alt={bendaharaCurrent.name} />
-                       ) : (
-                         <div className={styles.initials}>{bendaharaCurrent.name[0]}</div>
-                       )}
-                     </div>
-                     <span className={styles.roleLabel}>BENDAHARA UMUM</span>
-                     <h4>{bendaharaCurrent.name}</h4>
-                     {bendaharaCurrent.quote && <p className={styles.quoteSmall}>"{bendaharaCurrent.quote}"</p>}
-                   </div>
-                 )}
-               </div>
-
-               {/* Divisi & Anggota */}
-               {activeDivisions.length > 0 && (
-                 <div className={styles.kabinetSection}>
-                   <h3 style={{ textAlign: 'center', marginBottom: '24px' }}>Divisi Kepengurusan</h3>
-                   <div className={styles.divisiGrid}>
-                     {activeDivisions.map(d => (
-                       <div key={d.name} className={styles.divisiCard}>
-                         <h4 className={styles.divisiTitle}>Divisi {d.name}</h4>
-                         
-                         {/* Ketua Divisi */}
-                         {d.ketua ? (
-                           <div className={styles.divisiKetuaCard}>
-                             <div className={styles.divisiKetuaImgWrap}>
-                               {d.ketua.photoPath ? (
-                                 <img src={getUploadUrl(d.ketua.photoPath)} alt={d.ketua.name} className={styles.divisiKetuaImg} />
-                               ) : (
-                                 <div className={styles.initialsMini}>{d.ketua.name[0]}</div>
-                               )}
-                             </div>
-                             <div className={styles.divisiKetuaInfo}>
-                               <span className={styles.divisiRoleLabel}>Ketua Divisi</span>
-                               <h5>{d.ketua.name}</h5>
-                             </div>
-                           </div>
-                         ) : (
-                           <p className={styles.noKetua}>Tidak ada ketua aktif</p>
-                         )}
-
-                         {/* Anggota Divisi */}
-                         <div className={styles.divisiAnggotaWrap}>
-                           <span className={styles.divisiRoleLabel}>Anggota Divisi:</span>
-                           {d.anggota.length > 0 ? (
-                             <ul className={styles.divisiAnggotaList}>
-                               {d.anggota.map(a => (
-                                 <li key={a.id} className={styles.divisiAnggotaItem}>
-                                   {a.name}
-                                 </li>
-                               ))}
-                             </ul>
-                           ) : (
-                             <p className={styles.noAnggota}>Belum ada anggota</p>
-                           )}
-                         </div>
-                       </div>
-                     ))}
-                   </div>
-                 </div>
-               )}
             </>
           )}
         </div>
       </section>
 
-      {/* 4. Arsip Kepemimpinan */}
-      {!loading && archiveYears.length > 0 && (
-        <section className={`section ${styles.archiveSection}`}>
+      {/* 4. Divisi & Anggota (Band Sections) */}
+      {!loading && activeDivisions.length > 0 && (
+        <section className={styles.divisionsSection}>
           <div className="container">
-            <h2 className={styles.sectionTitle}>Arsip Kepengurusan (Masa Jabatan)</h2>
-            <div className={styles.accordionList}>
+            <h2 className={styles.sectionTitle}>Seksi Instrumen &amp; Anggota</h2>
+            
+            {activeDivisions.map(d => (
+              <div key={d.name} className={styles.divisionGroup}>
+                <h3 className={styles.divisionTitle}>
+                  <Music size={22} className="purple-glow" /> Seksi {d.name}
+                </h3>
+                
+                {/* Koordinator (Ketua) */}
+                {d.ketua && (
+                  <div className={styles.divisionLeader}>
+                    <span className={styles.leaderTitle}>Koordinator Seksi</span>
+                    <div className={styles.leaderCard}>
+                      {d.ketua.photoPath ? (
+                        <img src={getUploadUrl(d.ketua.photoPath)} alt={d.ketua.name} className={styles.leaderImg} />
+                      ) : (
+                        <div style={{ width: '52px', height: '52px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.1rem', fontWeight: '800', color: 'var(--color-accent)' }}>{d.ketua.name[0]}</div>
+                      )}
+                      <div>
+                        <h4 className={styles.leaderName}>{d.ketua.name}</h4>
+                        <p className={styles.leaderClass}>Kelas {d.ketua.className || '—'}</p>
+                      </div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Anggota Seksi */}
+                <div style={{ marginTop: '24px' }}>
+                  <span className={styles.membersTitle}>Pemain / Anggota Seksi:</span>
+                  {d.anggota.length > 0 ? (
+                    <div className={styles.membersGrid}>
+                      {d.anggota.map(a => (
+                        <div key={a.id} className={styles.memberMiniCard}>
+                          {a.photoPath ? (
+                            <img src={getUploadUrl(a.photoPath)} alt={a.name} className={styles.memberMiniImg} />
+                          ) : (
+                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.1)', fontSize: '0.8rem', fontWeight: '800', color: 'var(--color-accent)', flexShrink: 0 }}>{a.name[0]}</div>
+                          )}
+                          <div>
+                            <div className={styles.memberMiniName}>{a.name}</div>
+                            <div className={styles.memberMiniClass}>Kelas {a.className || '—'}</div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Belum ada pemain aktif terdaftar.</p>
+                  )}
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* 5. Arsip Kepemimpinan */}
+      {!loading && archiveYears.length > 0 && (
+        <section className={`section ${styles.historySection}`}>
+          <div className="container">
+            <h2 className={styles.sectionTitle}>Arsip Kepengurusan (Sejarah Periode)</h2>
+            <p className={styles.historyIntro}>
+              Perjalanan sejarah kepengurusan dan alumni yang telah berkontribusi besar dalam membangun MANSAME Band dari masa ke masa.
+            </p>
+            
+            <div className={styles.historyAccordion}>
               {archiveYears.map(year => (
-                <div key={year} className={styles.accordionItem}>
-                  <button className={styles.accordionHeader} onClick={() => toggleYear(year)}>
-                    <span>Kepengurusan Tahun {year}</span>
+                <div key={year} className={`${styles.archiveYearItem} ${expandedYear === year ? styles.archiveYearItemActive : ''}`}>
+                  <button className={styles.yearHeader} onClick={() => toggleYear(year)}>
+                    <div className={styles.yearTitle}>
+                      <Users size={18} />
+                      <span>Kepengurusan Periode Tahun {year}</span>
+                    </div>
                     {expandedYear === year ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                   </button>
                   {expandedYear === year && (
-                    <div className={styles.accordionContent}>
+                    <div className={styles.yearContent}>
                       <div className={styles.archiveGrid}>
                         {archivesGrouped[year].map(m => (
-                          <div key={m.id} className={styles.archiveMemberCard}>
-                            <div className={styles.archiveMemberAvatar}>
-                              {m.photoPath ? (
-                                <img src={getUploadUrl(m.photoPath)} alt={m.name} />
-                              ) : (
-                                <div className={styles.initialsMini}>{m.name[0]}</div>
-                              )}
-                            </div>
-                            <div>
-                              <h5>{m.name}</h5>
-                              <p>{m.jabatan} ({m.role})</p>
-                            </div>
+                          <div key={m.id} className={styles.archiveCard}>
+                            <span className={styles.archiveCardName}>{m.name}</span>
+                            <span className={styles.archiveCardRole}>{m.jabatan || m.role}</span>
                           </div>
                         ))}
                       </div>
@@ -330,12 +339,16 @@ export default function KamiPage() {
         </section>
       )}
 
-      {/* 5. CTA Ajakan Bergabung */}
-      <section className={styles.cta}>
-        <div className={`container ${styles.ctaInner}`}>
-          <h2>Ingin Menjadi Bagian Dari Kami?</h2>
-          <p>Daftarkan dirimu sekarang untuk bergabung sebagai pemain musik atau anggota MANSAME Band generasi selanjutnya.</p>
-          <a href="/daftar" className="btn btn-primary btn-lg">Daftar Sekarang</a>
+      {/* 6. CTA Ajakan Bergabung */}
+      <section className={`section ${styles.historySection}`} style={{ borderTop: '1px solid rgba(184, 112, 255, 0.1)', background: '#040108' }}>
+        <div className="container">
+          <div className="glass-panel" style={{ padding: '40px', borderRadius: '16px', textAlign: 'center' }}>
+            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: '#fff', fontSize: '1.75rem', marginBottom: '12px' }}>Ingin Menjadi Bagian Dari Kami?</h2>
+            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9375rem', marginBottom: '24px', maxWidth: '580px', marginInline: 'auto' }}>
+              Daftarkan dirimu sekarang untuk bergabung sebagai pemain musik atau penyanyi MANSAME Band generasi selanjutnya.
+            </p>
+            <Link to="/daftar" className="btn btn-primary btn-lg">Daftar Sekarang</Link>
+          </div>
         </div>
       </section>
     </div>

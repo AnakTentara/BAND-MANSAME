@@ -42,15 +42,15 @@
 .desktopNav {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 1px;
 }
 
 .navLink {
-  padding: 7px 14px;
-  font-size: 0.875rem;
+  padding: 6px 10px;
+  font-size: 0.8125rem;
   font-weight: 500;
   color: var(--color-text-secondary);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-xs);
   transition: color 0.15s, background-color 0.15s;
   white-space: nowrap;
 }
@@ -169,7 +169,7 @@
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .desktopNav,
   .actions {
     display: none;
@@ -179,6 +179,10 @@
   }
   .mobileDrawer {
     display: block;
+    background: rgba(15, 8, 30, 0.95);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border-top: 1px solid rgba(184, 112, 255, 0.15);
   }
   .logo {
     margin-right: 0;

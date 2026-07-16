@@ -1,6 +1,10 @@
+/* ═══════════════════════════════════════════════
+   MANSAME Band — RegisterPage (Pendaftaran) LiquidGlass CSS
+   ═══════════════════════════════════════════════ */
+
 .grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr;
+  grid-template-columns: 1.3fr 1fr;
   gap: var(--space-2xl);
   align-items: start;
   padding-top: var(--space-lg);
@@ -14,10 +18,14 @@
 
 .title {
   font-family: var(--font-display);
-  font-size: 1.75rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: #fff;
+  background: linear-gradient(135deg, #ffffff 0%, #b870ff 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   margin-bottom: 8px;
+  letter-spacing: -0.01em;
 }
 
 .subtitle {
@@ -29,13 +37,29 @@
 .form {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: 24px;
 }
 
-/* Radio */
+/* Translucent Inputs */
+.formInputCustom {
+  background: rgba(4, 1, 8, 0.5) !important;
+  border: 1px solid rgba(184, 112, 255, 0.2) !important;
+  color: #fff !important;
+  border-radius: var(--radius-sm) !important;
+  transition: all 0.3s ease !important;
+}
+
+.formInputCustom:focus {
+  border-color: var(--color-accent) !important;
+  box-shadow: 0 0 0 3px var(--color-accent-subtle), 0 0 15px rgba(184, 112, 255, 0.15) !important;
+  background: rgba(4, 1, 8, 0.7) !important;
+}
+
+/* Radio Group */
 .radioGroup {
   display: flex;
   gap: var(--space-lg);
+  margin-top: 4px;
 }
 
 .radioLabel {
@@ -45,6 +69,16 @@
   cursor: pointer;
   font-size: 0.9375rem;
   color: var(--color-text-primary);
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-xs);
+  transition: all 0.2s ease;
+}
+
+.radioLabel:hover {
+  background: rgba(184, 112, 255, 0.05);
+  border-color: rgba(184, 112, 255, 0.2);
 }
 
 .radioInput {
@@ -54,121 +88,128 @@
 }
 
 .radioText {
-  font-weight: 500;
+  font-weight: 600;
 }
 
-/* Info side */
+/* Info side sticky card */
 .infoSide {
   position: sticky;
   top: calc(var(--navbar-height) + var(--space-lg));
 }
 
 .infoCard {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  background: rgba(25, 14, 52, 0.25);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(184, 112, 255, 0.12);
   border-radius: var(--radius-md);
   padding: var(--space-xl);
-  box-shadow: var(--shadow-xs);
+  box-shadow: var(--shadow-md);
 }
 
 .infoTitle {
   font-family: var(--font-display);
-  font-size: 1rem;
+  font-size: 1.125rem;
   font-weight: 700;
-  color: var(--color-text-primary);
+  color: #fff;
   margin-bottom: var(--space-md);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border-bottom: 1px solid rgba(184, 112, 255, 0.1);
+  padding-bottom: 12px;
 }
 
 .infoList {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .infoItem {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
+  gap: 12px;
   font-size: 0.875rem;
   color: var(--color-text-secondary);
-  line-height: 1.55;
+  line-height: 1.6;
 }
 
 .infoItem svg {
   flex-shrink: 0;
-  margin-top: 2px;
+  margin-top: 3px;
   color: var(--color-accent);
 }
 
 .infoContact {
   font-size: 0.8125rem;
   color: var(--color-text-muted);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding-top: 16px;
+  margin-top: 16px;
 }
 
 .link {
   color: var(--color-accent);
-  font-weight: 600;
+  font-weight: 700;
+  transition: color 0.2s ease;
 }
+
 .link:hover {
+  color: var(--color-accent-hover);
   text-decoration: underline;
 }
 
-/* Success */
+/* Success Card */
 .successCard {
-  max-width: 520px;
-  margin-inline: auto;
+  max-width: 540px;
+  margin: var(--space-2xl) auto;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: var(--space-lg);
-  padding: var(--space-3xl) var(--space-lg);
+  padding: var(--space-3xl) var(--space-xl);
+  background: rgba(25, 14, 52, 0.25);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 15px 40px rgba(16, 185, 129, 0.1);
+  animation: successPop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes successPop {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 .successIcon {
   color: var(--color-success);
+  filter: drop-shadow(0 0 10px rgba(16, 185, 129, 0.4));
 }
 
 .successTitle {
   font-family: var(--font-display);
-  font-size: 1.5rem;
-  font-weight: 700;
-  color: var(--color-text-primary);
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #fff;
 }
 
 .successMsg {
   font-size: 1rem;
   color: var(--color-text-secondary);
   line-height: 1.7;
-  max-width: 400px;
+  max-width: 440px;
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .grid {
     grid-template-columns: 1fr;
+    gap: var(--space-2xl);
   }
   .infoSide {
     position: static;
-    order: -1;
-  }
-}
-
-@media (max-width: 900px) {
-  .pageLayout {
-    grid-template-columns: 1fr !important;
-  }
-  .infoCard {
-    order: -1;
-  }
-}
-
-@media (max-width: 480px) {
-  .formCard {
-    padding: var(--space-lg);
-  }
-  .radioGroup {
-    flex-direction: column;
-    gap: var(--space-sm);
   }
 }
