@@ -76,9 +76,14 @@ export default function AlumniPage() {
           )}
 
           {loading ? (
-            <div className={styles.gridSkeleton}>
+            <div className={styles.grid}>
               {[1, 2, 3, 4].map(n => (
-                <div key={n} className={`${styles.card} skeleton`} style={{ height: 120 }} />
+                <div key={n} className="skeleton-alumni-card">
+                  <div className="skeleton-alumni-avatar skeleton" />
+                  <div className="skeleton-alumni-name skeleton" />
+                  <div className="skeleton-alumni-role skeleton" />
+                  <div className="skeleton-alumni-badge skeleton" />
+                </div>
               ))}
             </div>
           ) : filteredAlumni.length === 0 ? (

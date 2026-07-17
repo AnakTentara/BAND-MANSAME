@@ -12,6 +12,7 @@ import {
 } from '../controllers/candidates.js';
 import { authCandidate } from '../middlewares/auth.js';
 import prisma from '../config/db.js';
+import { compressImageInPlace } from '../utils/imageCompressor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -32,7 +33,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  limits: { fileSize: 25 * 1024 * 1024 }, // 25MB — will be compressed server-side
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) cb(null, true);
     else cb(new Error('Only image files are allowed'));
@@ -66,6 +67,12 @@ router.post('/login', loginCandidate);
 
 // Protected Candidate Routes
 router.get('/me', authCandidate, getProfile);
-router.put('/me', authCandidate, upload.single('photo'), updateProfile);
+router.put('/me', authCandidate, upload.single('photo'), async (req, res, next) => {
+  // After multer saves the file, compress it before passing to controller
+  if (req.file) {
+    await compressImageInPlace(req.file.path);
+  }
+  return updateProfile(req, res, next);
+});
 
 export default router;

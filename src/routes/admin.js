@@ -47,6 +47,7 @@ import {
   getDashboardStats,
 } from '../controllers/admin.js';
 import { authAdmin, requireRole } from '../middlewares/auth.js';
+import { compressImageInPlace } from '../utils/imageCompressor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -63,7 +64,7 @@ const storage = multer.diskStorage({
 });
 const upload = multer({
   storage,
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB
+  limits: { fileSize: 25 * 1024 * 1024 }, // 25MB — compressed server-side
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) cb(null, true);
     else cb(new Error('Only image files are allowed'));
@@ -161,22 +162,37 @@ router.delete('/files', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), d
 router.post('/session/close', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), closeSession);
 router.post('/session/open', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), openSession);
 
-// Member CRUD (MEDINFO can read, but only DEVELOPER and KABINET_UMUM can create/edit/delete)
+// Member CRUD
 router.get('/members', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM', 'MEDINFO']), getMembers);
 router.post('/members', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), createMember);
-router.put('/members/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), updateMember);
+router.put('/members/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), async (req, res, next) => {
+  if (req.file) await compressImageInPlace(req.file.path);
+  return updateMember(req, res, next);
+});
 router.delete('/members/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), deleteMember);
 
-// Org Member CRUD (DEVELOPER and KABINET_UMUM only)
+// Org Member CRUD
 router.get('/org', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), getOrgMembers);
-router.post('/org', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), createOrgMember);
-router.put('/org/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), updateOrgMember);
+router.post('/org', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), async (req, res, next) => {
+  if (req.file) await compressImageInPlace(req.file.path);
+  return createOrgMember(req, res, next);
+});
+router.put('/org/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), async (req, res, next) => {
+  if (req.file) await compressImageInPlace(req.file.path);
+  return updateOrgMember(req, res, next);
+});
 router.delete('/org/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), deleteOrgMember);
 
-// Testimonials CRUD (DEVELOPER and KABINET_UMUM only)
+// Testimonials CRUD
 router.get('/testimonials', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), getTestimonials);
-router.post('/testimonials', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), createTestimonial);
-router.put('/testimonials/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), updateTestimonial);
+router.post('/testimonials', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), async (req, res, next) => {
+  if (req.file) await compressImageInPlace(req.file.path);
+  return createTestimonial(req, res, next);
+});
+router.put('/testimonials/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), upload.single('photo'), async (req, res, next) => {
+  if (req.file) await compressImageInPlace(req.file.path);
+  return updateTestimonial(req, res, next);
+});
 router.delete('/testimonials/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM']), deleteTestimonial);
 
 // Blog Image Upload Endpoint (All roles can write posts and upload images inside them)

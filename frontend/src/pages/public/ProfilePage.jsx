@@ -383,6 +383,11 @@ export default function ProfilePage() {
                         onChange={(e) => {
                           const file = e.target.files[0];
                           if (file) {
+                            if (file.size > 25 * 1024 * 1024) {
+                              toast.error('Ukuran foto maksimal 25MB. Silakan pilih file yang lebih kecil.');
+                              e.target.value = '';
+                              return;
+                            }
                             setPhotoFile(file);
                             setPhotoPreview(URL.createObjectURL(file));
                           }

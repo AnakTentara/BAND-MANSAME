@@ -70,7 +70,13 @@ export default function AnggotaPublikPage() {
           <h2 className={styles.sectionTitle}>Bagan Kepengurusan Tahun Ini</h2>
           
           {loading ? (
-            <div className="spinner" style={{ margin: '40px auto' }} />
+            <div className={styles.boardSection}>
+              <div className={styles.boardGridCenter}>
+                <div className={`${styles.memberCardHighlight} skeleton`} style={{ height: '170px', border: 'none' }} />
+                <div className={`${styles.memberCardHighlight} skeleton`} style={{ height: '170px', border: 'none' }} />
+                <div className={`${styles.memberCardHighlight} skeleton`} style={{ height: '170px', border: 'none' }} />
+              </div>
+            </div>
           ) : (
             <div className={styles.boardContainer}>
               
@@ -182,9 +188,15 @@ export default function AnggotaPublikPage() {
           <h2 className={styles.sectionTitle}>Daftar Anggota Aktif</h2>
           
           {loading ? (
-            <div className={styles.membersGridSkeleton}>
+            <div className={styles.membersGrid}>
               {[1, 2, 3, 4, 5, 6].map(n => (
-                <div key={n} className={`${styles.memberCard} skeleton`} style={{ height: 100 }} />
+                <div key={n} className="skeleton-member-card">
+                  <div className="skeleton-member-avatar skeleton" />
+                  <div className="skeleton-member-info">
+                    <div className="skeleton-member-name skeleton" />
+                    <div className="skeleton-member-role skeleton" />
+                  </div>
+                </div>
               ))}
             </div>
           ) : (() => {

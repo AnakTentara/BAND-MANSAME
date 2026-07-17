@@ -1,5 +1,5 @@
 /* ============================================================
-   Skeleton Shimmer Loading Animation
+   Skeleton Shimmer Loading Animation — Premium Light Mode
    ============================================================ */
 
 @keyframes shimmer {
@@ -7,22 +7,25 @@
   100% { background-position: -200% center; }
 }
 
+/* ---------- Base shimmer class ---------- */
 .skeleton {
   background: linear-gradient(
     90deg,
-    #f1f5f9 0%,
-    #e2e8f0 40%,
-    #f1f5f9 80%
+    rgba(139, 92, 246, 0.05) 0%,
+    rgba(139, 92, 246, 0.12) 40%,
+    rgba(139, 92, 246, 0.05) 80%
   );
   background-size: 400% 100%;
   animation: shimmer 1.6s ease-in-out infinite;
   border-radius: var(--radius-sm);
 }
 
-/* ---------- Skeleton Card (Blog Feed) ---------- */
+/* ---------- Skeleton Card (Blog / Berita Feed) ---------- */
 .skeleton-card {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-lg);
   display: flex;
@@ -38,7 +41,8 @@
 
 .skeleton-card__tag {
   height: 20px;
-  width: 80px;
+  width: 72px;
+  border-radius: 999px;
 }
 
 .skeleton-card__title {
@@ -48,17 +52,17 @@
 
 .skeleton-card__title-short {
   height: 22px;
-  width: 60%;
+  width: 55%;
 }
 
 .skeleton-card__body {
-  height: 14px;
+  height: 13px;
   width: 100%;
 }
 
 .skeleton-card__body-short {
-  height: 14px;
-  width: 70%;
+  height: 13px;
+  width: 68%;
 }
 
 .skeleton-card__footer {
@@ -68,16 +72,97 @@
 }
 
 .skeleton-card__avatar {
-  width: 32px;
-  height: 32px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   flex-shrink: 0;
 }
 
 .skeleton-card__meta {
-  height: 14px;
-  width: 120px;
+  height: 13px;
+  width: 110px;
   align-self: center;
+}
+
+/* ---------- Skeleton Member Card (AnggotaPublikPage) ---------- */
+.skeleton-member-card {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: var(--shadow-xs);
+}
+
+.skeleton-member-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.skeleton-member-info {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.skeleton-member-name {
+  height: 17px;
+  width: 55%;
+}
+
+.skeleton-member-role {
+  height: 13px;
+  width: 40%;
+}
+
+.skeleton-member-badge {
+  height: 20px;
+  width: 60px;
+  border-radius: 999px;
+}
+
+/* ---------- Skeleton Alumni Card ---------- */
+.skeleton-alumni-card {
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-xs);
+}
+
+.skeleton-alumni-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.skeleton-alumni-name {
+  height: 16px;
+  width: 80%;
+}
+
+.skeleton-alumni-role {
+  height: 13px;
+  width: 60%;
+}
+
+.skeleton-alumni-badge {
+  height: 22px;
+  width: 72px;
+  border-radius: 999px;
 }
 
 /* ---------- Skeleton Table (Admin) ---------- */
@@ -89,7 +174,7 @@
 .skeleton-table th,
 .skeleton-table td {
   padding: 14px 16px;
-  border-bottom: 1px solid var(--color-border-strong);
+  border-bottom: 1px solid var(--color-border);
 }
 
 .skeleton-table th {
@@ -101,7 +186,7 @@
   border-radius: var(--radius-xs);
 }
 
-/* ---------- Skeleton Profile (Anggota) ---------- */
+/* ---------- Skeleton Profile (Anggota Self Profile) ---------- */
 .skeleton-profile {
   display: flex;
   flex-direction: column;
@@ -113,9 +198,12 @@
   align-items: center;
   gap: var(--space-lg);
   padding: var(--space-xl);
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-xs);
 }
 
 .skeleton-profile__avatar {
@@ -149,8 +237,10 @@
 }
 
 .skeleton-profile__field {
-  background-color: var(--color-surface);
-  border: 1px solid var(--color-border-strong);
+  background: rgba(255, 255, 255, 0.60);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   padding: var(--space-md);
   display: flex;

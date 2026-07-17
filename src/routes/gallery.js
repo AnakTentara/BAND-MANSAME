@@ -5,6 +5,7 @@ import fs from 'fs';
 import { fileURLToPath } from 'url';
 import prisma from '../config/db.js';
 import { authAdmin, requireRole } from '../middlewares/auth.js';
+import { compressImageInPlace } from '../utils/imageCompressor.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,7 +28,7 @@ const galleryStorage = multer.diskStorage({
 
 const uploadGallery = multer({
   storage: galleryStorage,
-  limits: { fileSize: 8 * 1024 * 1024 }, // 8MB
+  limits: { fileSize: 25 * 1024 * 1024 }, // 25MB — compressed server-side
   fileFilter: (req, file, cb) => {
     if (file.mimetype.startsWith('image/')) cb(null, true);
     else cb(new Error('Hanya file gambar yang diizinkan'));
@@ -92,6 +93,9 @@ router.post('/admin', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM', 'MEDI
       const { title, description, category, isFeatured, sortOrder } = req.body;
       if (!title) return res.status(400).json({ message: 'Judul foto wajib diisi' });
 
+      // Compress setelah upload
+      await compressImageInPlace(req.file.path);
+
       const photoPath = `/uploads/gallery/${req.file.filename}`;
       const photo = await prisma.galleryPhoto.create({
         data: {
@@ -122,6 +126,8 @@ router.put('/admin/:id', authAdmin, requireRole(['DEVELOPER', 'KABINET_UMUM', 'M
 
       let photoPath = existing.photoPath;
       if (req.file) {
+        // Compress dulu sebelum simpan path
+        await compressImageInPlace(req.file.path);
         // Hapus file lama
         const oldFile = path.join(__dirname, '../../public', existing.photoPath);
         if (fs.existsSync(oldFile)) fs.unlinkSync(oldFile);
