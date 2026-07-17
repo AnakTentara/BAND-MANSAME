@@ -190,7 +190,7 @@
   font-family: var(--font-display);
   font-size: 1.5rem;
   font-weight: 800;
-  color: #fff;
+  color: var(--color-text-primary);
   margin-bottom: 12px;
 }
 
@@ -264,7 +264,7 @@
   font-family: var(--font-display);
   font-size: 1.125rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
   margin-bottom: 12px;
 }
 
@@ -338,7 +338,7 @@
 .leaderName {
   font-family: var(--font-display);
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
   font-size: 1.0625rem;
 }
 
@@ -392,7 +392,7 @@
 .memberMiniName {
   font-size: 0.875rem;
   font-weight: 600;
-  color: #fff;
+  color: var(--color-text-primary);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -458,7 +458,7 @@
   font-family: var(--font-display);
   font-size: 1.25rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
   display: flex;
   align-items: center;
   gap: 12px;
@@ -506,7 +506,7 @@
 .archiveCardName {
   font-size: 0.875rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--color-text-primary);
 }
 
 .archiveCardRole {

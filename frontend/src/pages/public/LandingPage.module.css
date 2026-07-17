@@ -306,7 +306,7 @@
 }
 
 .titleGlow {
-  background: linear-gradient(135deg, #ffffff 30%, #b870ff 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 30%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   display: block;
@@ -317,10 +317,10 @@
   display: block;
   width: 64px;
   height: 4px;
-  background: linear-gradient(90deg, #b870ff, #6366f1);
+  background: linear-gradient(90deg, var(--color-accent), #6366f1);
   margin: 16px auto 0;
   border-radius: 2px;
-  box-shadow: 0 0 10px rgba(184, 112, 255, 0.5);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.3);
 }
 
 /* ---------- Tentang Kami (Instrument Gallery) ---------- */
