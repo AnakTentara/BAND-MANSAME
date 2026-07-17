@@ -75,7 +75,7 @@ export default function Navbar() {
         <Link to="/" className={styles.logo} aria-label="MANSAME Band — Beranda">
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <img src="/media/logos/mansame-band.png" alt="MANSAME Band" style={{ height: '36px', width: 'auto', borderRadius: '4px' }} />
-            <span style={{ fontWeight: '800', fontSize: '1.25rem', letterSpacing: '0.05em', color: '#ffffff' }}>
+            <span style={{ fontWeight: '800', fontSize: '1.25rem', letterSpacing: '0.05em', color: 'var(--color-text-primary)' }}>
               MANSAME <span style={{ color: 'var(--color-accent)' }}>BAND</span>
             </span>
           </div>

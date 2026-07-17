@@ -128,7 +128,7 @@
   border-radius: var(--radius-sm);
   overflow: hidden;
   margin-bottom: var(--space-md);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--color-border);
 }
 
 .thumbnail {
@@ -201,9 +201,9 @@
 .empty {
   text-align: center;
   padding: 80px 24px;
-  background: rgba(15, 8, 30, 0.25);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(16px);
-  border: 1px solid rgba(184, 112, 255, 0.08);
+  border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   color: var(--color-text-muted);
 }
