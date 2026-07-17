@@ -64,7 +64,7 @@ export default function AnggotaPublikPage() {
         </div>
       </section>
 
-      {/* 2. Org Tree (Pengurus) */}
+      {/* 2. Bagan Kepengurusan (Pengurus) */}
       <section className={`section ${styles.treeSection}`}>
         <div className="container">
           <h2 className={styles.sectionTitle}>Bagan Kepengurusan Tahun Ini</h2>
@@ -72,111 +72,105 @@ export default function AnggotaPublikPage() {
           {loading ? (
             <div className="spinner" style={{ margin: '40px auto' }} />
           ) : (
-            <div className={styles.treeContainer}>
-              {/* Level 1: Pembina */}
-              {pembina && (
-                <div className={styles.treeLevel}>
-                  <div className={`${styles.treeNode} ${styles.nodePembina}`}>
-                    <div className={styles.nodeAvatar}>
-                      {(pembina.effectivePhoto || pembina.photoPath) ? (
-                        <img src={getUploadUrl(pembina.effectivePhoto || pembina.photoPath)} alt={pembina.name} />
-                      ) : (
-                        <div className={styles.initials}>{pembina.name[0]}</div>
-                      )}
+            <div className={styles.boardContainer}>
+              
+              {/* Jajaran Pembina & BPH Utama */}
+              <div className={styles.boardSection}>
+                <h3 className={styles.boardSectionTitle}>Pimpinan &amp; Pembina</h3>
+                <div className={styles.boardGridCenter}>
+                  {pembina && (
+                    <div className={styles.memberCardHighlight}>
+                      <div className={styles.avatarWrap}>
+                        {(pembina.effectivePhoto || pembina.photoPath) ? (
+                          <img src={getUploadUrl(pembina.effectivePhoto || pembina.photoPath)} alt={pembina.name} className={styles.memberAvatarImg} />
+                        ) : (
+                          <div className={styles.avatarInitials}>{pembina.name[0]}</div>
+                        )}
+                      </div>
+                      <h4>{pembina.name}</h4>
+                      <span className={styles.roleBadgePembina}>{pembina.jabatan}</span>
                     </div>
-                    <h5>{pembina.name}</h5>
-                    <p>{pembina.jabatan}</p>
-                  </div>
-                </div>
-              )}
-
-              {/* Vertical Line Connector */}
-              {(pembina && (ketua || wakil)) && <div className={styles.connectorLine} />}
-
-              {/* Level 2: Ketua & Wakil */}
-              {(ketua || wakil) && (
-                <div className={styles.treeLevelRow}>
+                  )}
                   {ketua && (
-                    <div className={`${styles.treeNode} ${styles.nodeKetua}`}>
-                      <div className={styles.nodeAvatar}>
+                    <div className={styles.memberCardHighlight}>
+                      <div className={styles.avatarWrap}>
                         {(ketua.effectivePhoto || ketua.photoPath) ? (
-                          <img src={getUploadUrl(ketua.effectivePhoto || ketua.photoPath)} alt={ketua.name} />
+                          <img src={getUploadUrl(ketua.effectivePhoto || ketua.photoPath)} alt={ketua.name} className={styles.memberAvatarImg} />
                         ) : (
-                          <div className={styles.initials}>{ketua.name[0]}</div>
+                          <div className={styles.avatarInitials}>{ketua.name[0]}</div>
                         )}
                       </div>
-                      <h5>{ketua.name}</h5>
-                      <p>{ketua.jabatan}</p>
+                      <h4>{ketua.name}</h4>
+                      <span className={styles.roleBadgeKetua}>{ketua.jabatan}</span>
                     </div>
                   )}
-
                   {wakil && (
-                    <div className={`${styles.treeNode} ${styles.nodeWakil}`}>
-                      <div className={styles.nodeAvatar}>
+                    <div className={styles.memberCardHighlight}>
+                      <div className={styles.avatarWrap}>
                         {(wakil.effectivePhoto || wakil.photoPath) ? (
-                          <img src={getUploadUrl(wakil.effectivePhoto || wakil.photoPath)} alt={wakil.name} />
+                          <img src={getUploadUrl(wakil.effectivePhoto || wakil.photoPath)} alt={wakil.name} className={styles.memberAvatarImg} />
                         ) : (
-                          <div className={styles.initials}>{wakil.name[0]}</div>
+                          <div className={styles.avatarInitials}>{wakil.name[0]}</div>
                         )}
                       </div>
-                      <h5>{wakil.name}</h5>
-                      <p>{wakil.jabatan}</p>
+                      <h4>{wakil.name}</h4>
+                      <span className={styles.roleBadgeWakil}>{wakil.jabatan}</span>
                     </div>
                   )}
                 </div>
-              )}
+              </div>
 
-              {/* Line Connector to Kabinet */}
-              {kabinet.length > 0 && <div className={styles.connectorLine} />}
-
-              {/* Level 3: Kabinet */}
+              {/* Jajaran Kabinet / Divisi */}
               {kabinet.length > 0 && (
-                <div className={styles.kabinetGrid}>
-                  {kabinet.map(k => {
-                    const staff = getDivisionStaff(k.jabatan);
-                    const hasStaff = staff.length > 0;
-
-                    return (
-                      <div key={k.id} className={styles.kabinetContainer}>
-                        <div className={`${styles.treeNode} ${styles.nodeKabinet}`}>
-                          <div className={styles.nodeAvatarSmall}>
-                            {(k.effectivePhoto || k.photoPath) ? (
-                              <img src={getUploadUrl(k.effectivePhoto || k.photoPath)} alt={k.name} />
-                            ) : (
-                              <div className={styles.initialsSmall}>{k.name[0]}</div>
-                            )}
+                <div className={styles.boardSection} style={{ marginTop: '48px' }}>
+                  <h3 className={styles.boardSectionTitle}>Jajaran Koordinator &amp; Divisi</h3>
+                  <div className={styles.divisionsGrid}>
+                    {kabinet.map(k => {
+                      const staff = getDivisionStaff(k.jabatan);
+                      return (
+                        <div key={k.id} className={styles.divisionCard}>
+                          {/* Leader of Division */}
+                          <div className={styles.divisionLeader}>
+                            <div className={styles.avatarWrapSmall}>
+                              {(k.effectivePhoto || k.photoPath) ? (
+                                <img src={getUploadUrl(k.effectivePhoto || k.photoPath)} alt={k.name} className={styles.memberAvatarImgSmall} />
+                              ) : (
+                                <div className={styles.avatarInitialsSmall}>{k.name[0]}</div>
+                              )}
+                            </div>
+                            <div className={styles.leaderInfo}>
+                              <h5>{k.name}</h5>
+                              <span className={styles.roleBadgeKabinet}>{k.jabatan}</span>
+                            </div>
                           </div>
-                          <h6>{k.name}</h6>
-                          <p>{k.jabatan}</p>
-                        </div>
 
-                        {/* Statically open Staff List */}
-                        {hasStaff && (
-                          <div className={styles.staffDropdown}>
-                            <div className={styles.staffList}>
+                          {/* Staff under this Division */}
+                          {staff.length > 0 && (
+                            <div className={styles.staffGrid}>
                               {staff.map(s => (
-                                <div key={s.id} className={styles.staffNode}>
-                                  <div className={styles.staffAvatar}>
+                                <div key={s.id} className={styles.staffCard}>
+                                  <div className={styles.avatarWrapMini}>
                                     {(s.effectivePhoto || s.photoPath) ? (
-                                      <img src={getUploadUrl(s.effectivePhoto || s.photoPath)} alt={s.name} />
+                                      <img src={getUploadUrl(s.effectivePhoto || s.photoPath)} alt={s.name} className={styles.memberAvatarImgMini} />
                                     ) : (
-                                      <div className={styles.staffInitials}>{s.name[0]}</div>
+                                      <div className={styles.avatarInitialsMini}>{s.name[0]}</div>
                                     )}
                                   </div>
-                                  <div className={styles.staffInfo}>
-                                    <strong>{s.name}</strong>
+                                  <div className={styles.staffText}>
+                                    <h6>{s.name}</h6>
                                     <span>{s.jabatan}</span>
                                   </div>
                                 </div>
                               ))}
                             </div>
-                          </div>
-                        )}
-                      </div>
-                    );
-                  })}
+                          )}
+                        </div>
+                      );
+                    })}
+                  </div>
                 </div>
               )}
+
             </div>
           )}
         </div>
