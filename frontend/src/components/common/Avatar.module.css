@@ -1,0 +1,63 @@
+/* ─────────────────────────────────────────────
+   Avatar Component Styles
+───────────────────────────────────────────── */
+
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+  background: rgba(184, 112, 255, 0.15);
+  border: 2px solid rgba(184, 112, 255, 0.35);
+  transition: border-color 0.2s ease, transform 0.2s ease;
+}
+
+.avatar:hover {
+  border-color: var(--color-accent);
+}
+
+/* Size variants */
+.sm {
+  width: 32px;
+  height: 32px;
+}
+
+.md {
+  width: 44px;
+  height: 44px;
+}
+
+.lg {
+  width: 64px;
+  height: 64px;
+}
+
+.xl {
+  width: 96px;
+  height: 96px;
+}
+
+.img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.initials {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--color-accent);
+  line-height: 1;
+  user-select: none;
+  /* Font size computed from parent or set via sizeVariant */
+}
+
+/* Font-size per variant */
+.sm .initials  { font-size: 0.75rem; }
+.md .initials  { font-size: 1rem; }
+.lg .initials  { font-size: 1.375rem; }
+.xl .initials  { font-size: 2rem; }

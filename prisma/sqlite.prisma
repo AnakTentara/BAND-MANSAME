@@ -157,3 +157,14 @@ model AlumniTestimonial {
   updatedAt   DateTime @updatedAt
 }
 
+model GalleryPhoto {
+  id          String   @id @default(uuid())
+  title       String
+  description String?
+  photoPath   String
+  category    String   @default("Umum")
+  isFeatured  Boolean  @default(false)
+  sortOrder   Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

@@ -11,6 +11,7 @@ import candidateRoutes from './routes/candidates.js';
 import blogRoutes from './routes/blog.js';
 import forumRoutes from './routes/forum.js';
 import publicRoutes from './routes/public.js';
+import galleryRoutes from './routes/gallery.js';
 import { initWhatsApp } from './services/whatsapp.js';
 
 const __filename = fileURLToPath(import.meta.url);
@@ -46,6 +47,7 @@ app.use('/api/candidates', candidateRoutes);
 app.use('/api/blog', blogRoutes);
 app.use('/api/forum', forumRoutes);
 app.use('/api/public', publicRoutes);
+app.use('/api/gallery', galleryRoutes);
 
 // Serve static files from frontend build
 const frontendDistPath = path.join(__dirname, '../frontend/dist');

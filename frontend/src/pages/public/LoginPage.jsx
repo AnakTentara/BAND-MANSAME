@@ -45,20 +45,26 @@ export default function LoginPage() {
   return (
     <div className={`page-wrapper ${styles.wrapper}`}>
       <div className={styles.card}>
+        {/* Header */}
         <div className={styles.cardHeader}>
-          <Link to="/">
+          <Link to="/" className={styles.logoWrap}>
             <img
               src="/media/logos/mansame-band.png"
               alt="MANSAME Band"
               className={styles.logo}
             />
+            <span className={styles.logoBrand}>
+              MANSAME <span className={styles.logoAccent}>BAND</span>
+            </span>
           </Link>
+          <div className={styles.divider} />
           <h1 className={styles.title}>Login Anggota</h1>
           <p className={styles.subtitle}>
             Masuk menggunakan NISN dan password yang diberikan oleh administrator.
           </p>
         </div>
 
+        {/* Form */}
         <form onSubmit={handleSubmit} className={styles.form} noValidate>
           <div className="form-group">
             <label className="form-label" htmlFor="login-nisn">NISN</label>
@@ -99,12 +105,11 @@ export default function LoginPage() {
 
           <button
             type="submit"
-            className="btn btn-primary"
+            className={`btn btn-primary ${styles.submitBtn}`}
             disabled={loading}
-            style={{ width: '100%', justifyContent: 'center', marginTop: 8 }}
           >
             {loading && <span className="spinner" />}
-            {loading ? 'Memproses...' : 'Masuk'}
+            {loading ? 'Memproses...' : 'Masuk ke Akun'}
           </button>
         </form>
 

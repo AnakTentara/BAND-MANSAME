@@ -60,7 +60,7 @@ export default function BeritaPage() {
           {/* Newspaper Header */}
           <div className={styles.newspaperHeader}>
             <div className={styles.newspaperHeaderTop}>
-              <span>Vol. III No. 4</span>
+              <span>Vol. {total > 0 ? `${Math.ceil(total / 10)} No. ${total}` : '— No. —'}</span>
               <span className={styles.newspaperHeaderCenter}>DAILY BAND</span>
               <span>{new Date().toLocaleDateString('id-ID', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}</span>
             </div>

@@ -24,6 +24,13 @@
   margin: 0 auto;
 }
 
+.heroEmoji {
+  font-size: 3.5rem;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 0 10px rgba(184,112,255,0.4));
+  display: block;
+}
+
 .heroTitle {
   font-family: var(--font-display);
   font-size: 3rem;
@@ -516,6 +523,58 @@
   font-weight: 600;
 }
 
+.pembinaMeta {
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 12px;
+}
+
+.spinnerWrap {
+  display: flex;
+  justify-content: center;
+  padding: 40px 0;
+}
+
+/* Members Container */
+.membersContainer {
+  margin-top: 24px;
+}
+
+.emptyMembers {
+  font-style: italic;
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+}
+
+/* CTA Section */
+.ctaSection {
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.ctaBox {
+  padding: 40px;
+  border-radius: var(--radius-lg);
+  text-align: center;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  font-size: 1.75rem;
+  margin-bottom: 12px;
+}
+
+.ctaDesc {
+  color: var(--color-text-secondary);
+  font-size: 0.9375rem;
+  margin-bottom: 24px;
+  max-width: 580px;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
 /* Responsive */
 @media (max-width: 1024px) {
   .coreGrid {
@@ -553,5 +612,8 @@
   }
   .archiveGrid {
     grid-template-columns: 1fr;
+  }
+  .heroTitle {
+    font-size: 2rem;
   }
 }

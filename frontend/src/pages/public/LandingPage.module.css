@@ -13,30 +13,31 @@
 /* Background Glowing Blobs */
 .blobLeft, .blobRight {
   position: absolute;
-  width: 450px;
-  height: 450px;
+  width: 560px;
+  height: 560px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(184, 112, 255, 0.16) 0%, rgba(99, 102, 241, 0.05) 50%, rgba(0,0,0,0) 100%);
-  filter: blur(80px);
+  background: radial-gradient(circle, rgba(184, 112, 255, 0.28) 0%, rgba(99, 102, 241, 0.10) 50%, rgba(0,0,0,0) 100%);
+  filter: blur(100px);
   pointer-events: none;
   z-index: 0;
-  animation: floatBlobs 12s infinite alternate ease-in-out;
+  animation: floatBlobs 14s infinite alternate ease-in-out;
 }
 
 .blobLeft {
-  top: 10%;
-  left: -150px;
+  top: 5%;
+  left: -180px;
 }
 
 .blobRight {
-  bottom: 20%;
-  right: -150px;
-  animation-delay: 3s;
+  bottom: 15%;
+  right: -180px;
+  animation-delay: 4s;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.22) 0%, rgba(139, 92, 246, 0.08) 50%, rgba(0,0,0,0) 100%);
 }
 
 @keyframes floatBlobs {
   0% { transform: translateY(0) scale(1); }
-  100% { transform: translateY(40px) scale(1.1); }
+  100% { transform: translateY(50px) scale(1.12); }
 }
 
 /* ---------- Hero Section ---------- */

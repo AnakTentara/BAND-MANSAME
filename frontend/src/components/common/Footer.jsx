@@ -41,6 +41,8 @@ export default function Footer() {
           <h3 className={styles.groupTitle}>Navigasi</h3>
           <ul className={styles.linkList}>
             <li><Link to="/" className={styles.link}>Beranda</Link></li>
+            <li><Link to="/kami" className={styles.link}>Tentang Kami</Link></li>
+            <li><Link to="/galeri" className={styles.link}>Galeri Foto</Link></li>
             <li><Link to="/blog" className={styles.link}>Blog & Artikel</Link></li>
             <li><Link to="/daftar" className={styles.link}>Pendaftaran Anggota</Link></li>
             <li><Link to="/cek-kelulusan" className={styles.link}>Cek Kelulusan</Link></li>
@@ -52,7 +54,8 @@ export default function Footer() {
           <h3 className={styles.groupTitle}>Akses</h3>
           <ul className={styles.linkList}>
             <li><Link to="/login" className={styles.link}>Login Anggota</Link></li>
-            <li><Link to="/admin/login" className={styles.link}>Dashboard Admin</Link></li>
+            <li><Link to="/daftar" className={styles.link}>Daftar Anggota</Link></li>
+            <li><Link to="/cek-kelulusan" className={styles.link}>Cek Kelulusan</Link></li>
           </ul>
         </div>
 

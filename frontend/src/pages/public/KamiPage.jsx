@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Calendar, MapPin, Award, ChevronUp, ChevronDown, Music, Users, Shield, Heart } from 'lucide-react';
+import { Calendar, MapPin, Award, ChevronUp, ChevronDown, Music, Users } from 'lucide-react';
 import { getPublicSettings } from '@/api/candidates';
 import { getPublicOrg } from '@/api/public';
 import SEO from '@/components/common/SEO';
+import Avatar from '@/components/common/Avatar';
 import { getUploadUrl } from '@/api/axios';
 import styles from './KamiPage.module.css';
 
@@ -42,7 +43,6 @@ export default function KamiPage() {
   const sekretarisCurrent = orgData.find(m => m.jabatan?.toLowerCase().includes('sekretaris') && m.isCurrent);
   const bendaharaCurrent = orgData.find(m => m.jabatan?.toLowerCase().includes('bendahara') && m.isCurrent);
 
-  // List of Instruments/Divisions (Band Sections)
   const DIVISIONS = [
     { name: 'Vocalis', ketuaTitle: 'Koordinator Vocalis', anggotaTitle: 'Anggota Vocalis' },
     { name: 'Gitarist', ketuaTitle: 'Koordinator Gitarist', anggotaTitle: 'Anggota Gitarist' },
@@ -51,20 +51,14 @@ export default function KamiPage() {
     { name: 'Keyboardist', ketuaTitle: 'Koordinator Keyboardist', anggotaTitle: 'Anggota Keyboardist' }
   ];
 
-  // Map division data
   const activeDivisions = DIVISIONS.map(div => {
     const ketua = orgData.find(m => m.jabatan === div.ketuaTitle && m.isCurrent);
     const anggota = orgData.filter(m => m.jabatan === div.anggotaTitle && m.isCurrent);
-    return {
-      ...div,
-      ketua,
-      anggota
-    };
+    return { ...div, ketua, anggota };
   }).filter(d => d.ketua || d.anggota.length > 0);
 
   const ROLE_ORDER = { PEMBINA: 1, KETUA: 2, WAKIL: 3, KABINET: 4, ANGGOTA: 5 };
 
-  // Group historic archives by start year
   const archivesGrouped = orgData.reduce((acc, m) => {
     if (m.isCurrent) return acc;
     const year = m.yearStart;
@@ -73,7 +67,6 @@ export default function KamiPage() {
     return acc;
   }, {});
 
-  // Sort archive members for each year
   Object.keys(archivesGrouped).forEach(year => {
     archivesGrouped[year].sort((a, b) => (ROLE_ORDER[a.role] ?? 9) - (ROLE_ORDER[b.role] ?? 9));
   });
@@ -99,7 +92,7 @@ export default function KamiPage() {
       {/* 1. Hero Section */}
       <section className={styles.hero}>
         <div className={`container ${styles.heroInner}`}>
-          <div style={{ fontSize: '3.5rem', marginBottom: '12px', filter: 'drop-shadow(0 0 10px rgba(184,112,255,0.4))' }}>🎸</div>
+          <div className={styles.heroEmoji}>🎸</div>
           <h1 className={styles.heroTitle}>Tentang MANSAME Band</h1>
           <p className={styles.heroSubtitle}>
             Ekstrakurikuler Seni Musik &amp; Band MAN 1 Muara Enim. Wadah pengembangan karakter, kekompakan, dan bakat bermusik.
@@ -147,7 +140,7 @@ export default function KamiPage() {
           <h2 className={styles.sectionTitle}>Pimpinan &amp; Pengurus Aktif</h2>
           
           {loading ? (
-            <div style={{ display: 'flex', justifyContent: 'center', padding: '40px 0' }}>
+            <div className={styles.spinnerWrap}>
               <div className="spinner" />
             </div>
           ) : (
@@ -159,13 +152,13 @@ export default function KamiPage() {
                     {pembinaCurrent.photoPath ? (
                       <img src={getUploadUrl(pembinaCurrent.photoPath)} alt={pembinaCurrent.name} />
                     ) : (
-                      <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '2rem', fontWeight: '800', color: 'var(--color-accent)' }}>{pembinaCurrent.name[0]}</div>
+                      <Avatar name={pembinaCurrent.name} sizeVariant="xl" />
                     )}
                   </div>
                   <div className={styles.pembinaInfo}>
                     <span className={styles.roleLabel}>PEMBINA BAND</span>
                     <h3 className={styles.pembinaName}>{pembinaCurrent.name}</h3>
-                    <p style={{ fontSize: '0.8125rem', color: 'var(--color-text-muted)', marginBottom: '12px' }}>Menjabat sejak {pembinaCurrent.yearStart}</p>
+                    <p className={styles.pembinaMeta}>Menjabat sejak {pembinaCurrent.yearStart}</p>
                     {pembinaCurrent.quote && (
                       <blockquote className={styles.pembinaQuote}>
                         "{pembinaCurrent.quote}"
@@ -177,65 +170,25 @@ export default function KamiPage() {
 
               {/* Ketua & Wakil */}
               <div className={styles.coreGrid}>
-                {ketuaCurrent && (
-                  <div className={styles.coreCard}>
-                    <div className={styles.coreImgWrap}>
-                      {ketuaCurrent.photoPath ? (
-                        <img src={getUploadUrl(ketuaCurrent.photoPath)} alt={ketuaCurrent.name} />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{ketuaCurrent.name[0]}</div>
-                      )}
-                    </div>
-                    <span className={styles.coreRole}>KETUA UMUM</span>
-                    <h4 className={styles.coreName}>{ketuaCurrent.name}</h4>
-                    {ketuaCurrent.quote && <p className={styles.coreQuote}>"{ketuaCurrent.quote}"</p>}
-                  </div>
-                )}
-
-                {wakilCurrent && (
-                  <div className={styles.coreCard}>
-                    <div className={styles.coreImgWrap}>
-                      {wakilCurrent.photoPath ? (
-                        <img src={getUploadUrl(wakilCurrent.photoPath)} alt={wakilCurrent.name} />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{wakilCurrent.name[0]}</div>
-                      )}
-                    </div>
-                    <span className={styles.coreRole}>WAKIL KETUA</span>
-                    <h4 className={styles.coreName}>{wakilCurrent.name}</h4>
-                    {wakilCurrent.quote && <p className={styles.coreQuote}>"{wakilCurrent.quote}"</p>}
-                  </div>
-                )}
-
-                {sekretarisCurrent && (
-                  <div className={styles.coreCard}>
-                    <div className={styles.coreImgWrap}>
-                      {sekretarisCurrent.photoPath ? (
-                        <img src={getUploadUrl(sekretarisCurrent.photoPath)} alt={sekretarisCurrent.name} />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{sekretarisCurrent.name[0]}</div>
-                      )}
-                    </div>
-                    <span className={styles.coreRole}>SEKRETARIS UMUM</span>
-                    <h4 className={styles.coreName}>{sekretarisCurrent.name}</h4>
-                    {sekretarisCurrent.quote && <p className={styles.coreQuote}>"{sekretarisCurrent.quote}"</p>}
-                  </div>
-                )}
-
-                {bendaharaCurrent && (
-                  <div className={styles.coreCard}>
-                    <div className={styles.coreImgWrap}>
-                      {bendaharaCurrent.photoPath ? (
-                        <img src={getUploadUrl(bendaharaCurrent.photoPath)} alt={bendaharaCurrent.name} />
-                      ) : (
-                        <div style={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.5rem', fontWeight: '800', color: 'var(--color-accent)' }}>{bendaharaCurrent.name[0]}</div>
-                      )}
-                    </div>
-                    <span className={styles.coreRole}>BENDAHARA UMUM</span>
-                    <h4 className={styles.coreName}>{bendaharaCurrent.name}</h4>
-                    {bendaharaCurrent.quote && <p className={styles.coreQuote}>"{bendaharaCurrent.quote}"</p>}
-                  </div>
-                )}
+                {[ketuaCurrent, wakilCurrent, sekretarisCurrent, bendaharaCurrent]
+                  .filter(Boolean)
+                  .map((member, idx) => {
+                    const roleLabels = ['KETUA UMUM', 'WAKIL KETUA', 'SEKRETARIS UMUM', 'BENDAHARA UMUM'];
+                    return (
+                      <div key={member.id || idx} className={styles.coreCard}>
+                        <div className={styles.coreImgWrap}>
+                          {member.photoPath ? (
+                            <img src={getUploadUrl(member.photoPath)} alt={member.name} />
+                          ) : (
+                            <Avatar name={member.name} sizeVariant="lg" />
+                          )}
+                        </div>
+                        <span className={styles.coreRole}>{roleLabels[idx]}</span>
+                        <h4 className={styles.coreName}>{member.name}</h4>
+                        {member.quote && <p className={styles.coreQuote}>"{member.quote}"</p>}
+                      </div>
+                    );
+                  })}
               </div>
             </>
           )}
@@ -262,7 +215,7 @@ export default function KamiPage() {
                       {d.ketua.photoPath ? (
                         <img src={getUploadUrl(d.ketua.photoPath)} alt={d.ketua.name} className={styles.leaderImg} />
                       ) : (
-                        <div style={{ width: '52px', height: '52px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.15)', fontSize: '1.1rem', fontWeight: '800', color: 'var(--color-accent)' }}>{d.ketua.name[0]}</div>
+                        <Avatar name={d.ketua.name} sizeVariant="md" />
                       )}
                       <div>
                         <h4 className={styles.leaderName}>{d.ketua.name}</h4>
@@ -273,7 +226,7 @@ export default function KamiPage() {
                 )}
 
                 {/* Anggota Seksi */}
-                <div style={{ marginTop: '24px' }}>
+                <div className={styles.membersContainer}>
                   <span className={styles.membersTitle}>Pemain / Anggota Seksi:</span>
                   {d.anggota.length > 0 ? (
                     <div className={styles.membersGrid}>
@@ -282,7 +235,7 @@ export default function KamiPage() {
                           {a.photoPath ? (
                             <img src={getUploadUrl(a.photoPath)} alt={a.name} className={styles.memberMiniImg} />
                           ) : (
-                            <div style={{ width: '32px', height: '32px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'rgba(184,112,255,0.1)', fontSize: '0.8rem', fontWeight: '800', color: 'var(--color-accent)', flexShrink: 0 }}>{a.name[0]}</div>
+                            <Avatar name={a.name} sizeVariant="sm" />
                           )}
                           <div>
                             <div className={styles.memberMiniName}>{a.name}</div>
@@ -292,7 +245,7 @@ export default function KamiPage() {
                       ))}
                     </div>
                   ) : (
-                    <p style={{ fontStyle: 'italic', fontSize: '0.875rem', color: 'var(--color-text-muted)' }}>Belum ada pemain aktif terdaftar.</p>
+                    <p className={styles.emptyMembers}>Belum ada pemain aktif terdaftar.</p>
                   )}
                 </div>
               </div>
@@ -340,11 +293,11 @@ export default function KamiPage() {
       )}
 
       {/* 6. CTA Ajakan Bergabung */}
-      <section className={`section ${styles.historySection}`} style={{ borderTop: '1px solid var(--color-border)', background: 'var(--color-bg)' }}>
+      <section className={`section ${styles.ctaSection}`}>
         <div className="container">
-          <div className="glass-panel" style={{ padding: '40px', borderRadius: '16px', textAlign: 'center' }}>
-            <h2 style={{ fontFamily: 'var(--font-display)', fontWeight: 800, color: 'var(--color-text-primary)', fontSize: '1.75rem', marginBottom: '12px' }}>Ingin Menjadi Bagian Dari Kami?</h2>
-            <p style={{ color: 'var(--color-text-secondary)', fontSize: '0.9375rem', marginBottom: '24px', maxWidth: '580px', marginInline: 'auto' }}>
+          <div className={`glass-panel ${styles.ctaBox}`}>
+            <h2 className={styles.ctaTitle}>Ingin Menjadi Bagian Dari Kami?</h2>
+            <p className={styles.ctaDesc}>
               Daftarkan dirimu sekarang untuk bergabung sebagai pemain musik atau penyanyi MANSAME Band generasi selanjutnya.
             </p>
             <Link to="/daftar" className="btn btn-primary btn-lg">Daftar Sekarang</Link>

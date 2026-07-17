@@ -11,7 +11,8 @@ import {
   MessageSquare, 
   X, 
   FolderOpen, 
-  Shield 
+  Shield,
+  Images
 } from 'lucide-react';
 import styles from './AdminSidebar.module.css';
 
@@ -27,6 +28,7 @@ export default function AdminSidebar({ isOpen = false, onClose }) {
     { to: '/admin/anggota', label: 'Anggota Band', icon: Users, allowedRoles: ['DEVELOPER', 'KABINET_UMUM', 'MEDINFO'] },
     { to: '/admin/org', label: 'Struktur Org', icon: Network, allowedRoles: ['DEVELOPER', 'KABINET_UMUM'] },
     { to: '/admin/testimoni', label: 'Testimoni Alumni', icon: MessageSquare, allowedRoles: ['DEVELOPER', 'KABINET_UMUM'] },
+    { to: '/admin/gallery', label: 'Galeri Foto', icon: Images, allowedRoles: ['DEVELOPER', 'KABINET_UMUM', 'MEDINFO'] },
     { to: '/admin/blog', label: 'Blog', icon: FileText, allowedRoles: ['DEVELOPER', 'KABINET_UMUM', 'MEDINFO'] },
     { to: '/admin/web-editor', label: 'Web Editor', icon: LayoutDashboard, allowedRoles: ['DEVELOPER', 'KABINET_UMUM'] },
     { to: '/admin/file-manager', label: 'File Manager', icon: FolderOpen, allowedRoles: ['DEVELOPER', 'KABINET_UMUM'] },

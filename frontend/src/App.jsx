@@ -32,6 +32,7 @@ import ProfilePage from '@/pages/public/ProfilePage';
 import KamiPage from '@/pages/public/KamiPage';
 import AnggotaPublikPage from '@/pages/public/AnggotaPublikPage';
 import AlumniPage from '@/pages/public/AlumniPage';
+import GaleriPage from '@/pages/public/GaleriPage';
 
 // Admin Pages
 import AdminLoginPage from '@/pages/admin/AdminLoginPage';
@@ -46,6 +47,7 @@ import AdminOrgPage from '@/pages/admin/AdminOrgPage';
 import AdminTestimonialsPage from '@/pages/admin/AdminTestimonialsPage';
 import AdminFileManagerPage from '@/pages/admin/AdminFileManagerPage';
 import AdminUsersPage from '@/pages/admin/AdminUsersPage';
+import AdminGalleryPage from '@/pages/admin/AdminGalleryPage';
 import { useAuthStore } from '@/stores/authStore';
 
 // Admin Layout
@@ -98,6 +100,7 @@ function App() {
           <Route path="/kami" element={<KamiPage />} />
           <Route path="/anggota" element={<AnggotaPublikPage />} />
           <Route path="/alumni" element={<AlumniPage />} />
+          <Route path="/galeri" element={<GaleriPage />} />
           <Route
             path="/profil"
             element={
@@ -178,6 +181,14 @@ function App() {
             element={
               <RoleProtectedRoute allowedRoles={['DEVELOPER', 'KABINET_UMUM']}>
                 <AdminTestimonialsPage />
+              </RoleProtectedRoute>
+            } 
+          />
+          <Route 
+            path="gallery" 
+            element={
+              <RoleProtectedRoute allowedRoles={['DEVELOPER', 'KABINET_UMUM', 'MEDINFO']}>
+                <AdminGalleryPage />
               </RoleProtectedRoute>
             } 
           />
