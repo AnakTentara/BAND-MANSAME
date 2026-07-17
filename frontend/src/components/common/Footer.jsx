@@ -13,7 +13,7 @@ export default function Footer() {
           <Link to="/" aria-label="MANSAME Band — Beranda">
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '12px' }}>
               <img src="/media/logos/mansame-band.png" alt="MANSAME Band" style={{ height: '32px', width: 'auto', borderRadius: '4px' }} />
-              <span style={{ fontWeight: '800', fontSize: '1.25rem', color: '#ffffff' }}>
+              <span style={{ fontFamily: 'var(--font-display)', fontWeight: '800', fontSize: '1.25rem', color: 'var(--color-text-primary)' }}>
                 MANSAME <span style={{ color: 'var(--color-accent)' }}>BAND</span>
               </span>
             </div>
