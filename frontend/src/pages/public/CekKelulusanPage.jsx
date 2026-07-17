@@ -160,7 +160,7 @@ export default function CekKelulusanPage() {
         <SEO title="Selamat! Anda Lulus Seleksi" description="Selamat! Hasil seleksi menyatakan Anda LULUS menjadi bagian dari grup MANSAME Band." />
         <div className={styles.ticketWrap}>
           
-          <div className={styles.ticketBody}>
+          <div className={`${styles.ticketBody} ${styles.ticketBodyLulus}`}>
             {/* Stamp */}
             <div className={`${styles.stamp} ${styles.stampLulus}`}>Selected</div>
 
@@ -236,7 +236,7 @@ export default function CekKelulusanPage() {
         <SEO title="Hasil Seleksi: Tetap Semangat" description="Audisi MANSAME Band menyatakan Anda belum lulus kali ini. Tetap berkarya!" />
         <div className={styles.ticketWrap}>
           
-          <div className={styles.ticketBody} style={{ filter: 'grayscale(0.6)' }}>
+          <div className={`${styles.ticketBody} ${styles.ticketBodyGagal}`}>
             {/* Stamp */}
             <div className={`${styles.stamp} ${styles.stampGagal}`}>Keep Practicing</div>
 
@@ -303,7 +303,7 @@ export default function CekKelulusanPage() {
       <SEO title="Status Seleksi: Menunggu Pengumuman" description="Status pendaftaran MANSAME Band Anda saat ini masih dalam proses peninjauan." />
       <div className={styles.ticketWrap}>
         
-        <div className={styles.ticketBody}>
+        <div className={`${styles.ticketBody} ${styles.ticketBodyPending}`}>
           {/* Stamp */}
           <div className={`${styles.stamp} ${styles.stampPending}`}>Pending review</div>
 

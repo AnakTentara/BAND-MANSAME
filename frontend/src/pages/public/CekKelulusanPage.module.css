@@ -99,8 +99,8 @@
 .searchInput {
   width: 100%;
   padding: 14px 16px 14px 48px;
-  background: rgba(4, 1, 8, 0.5);
-  border: 1px solid rgba(184, 112, 255, 0.2);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-sm);
   font-size: 1rem;
   color: var(--color-text-primary);
@@ -110,8 +110,8 @@
 
 .searchInput:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px var(--color-accent-subtle), 0 0 15px rgba(184, 112, 255, 0.2);
-  background: rgba(4, 1, 8, 0.7);
+  box-shadow: 0 0 0 3px var(--color-accent-subtle), 0 0 15px rgba(139, 92, 246, 0.15);
+  background: var(--color-surface-2);
 }
 
 .errorMsg {
@@ -181,14 +181,29 @@
 .ticketBody {
   display: grid;
   grid-template-columns: 2.2fr 1fr;
-  background: linear-gradient(135deg, #1e103c 0%, #0c0619 100%);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(139, 92, 246, 0.3);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(139, 92, 246, 0.15), inset 0 0 20px rgba(139, 92, 246, 0.05);
+  box-shadow: var(--shadow-lg);
   position: relative;
+}
+
+.ticketBodyLulus {
+  background: rgba(240, 253, 244, 0.65);
+  border-color: rgba(34, 197, 94, 0.25);
+}
+
+.ticketBodyGagal {
+  background: rgba(254, 242, 242, 0.65);
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+.ticketBodyPending {
+  background: rgba(254, 243, 199, 0.65);
+  border-color: rgba(245, 158, 11, 0.25);
 }
 
 /* Left Ticket Main Panel */
@@ -246,21 +261,18 @@
   font-size: clamp(1.5rem, 3vw, 2.25rem);
   font-weight: 800;
   line-height: 1.1;
-  color: #fff;
+  color: var(--color-text-primary);
   margin-bottom: 28px;
-  background: linear-gradient(135deg, #ffffff 0%, #baf3d1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
 }
 
 .ticketTitleLulus {
-  background: linear-gradient(135deg, #ffffff 0%, #d099ff 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-accent) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .ticketTitleGagal {
-  background: linear-gradient(135deg, #ffffff 0%, #f43f5e 100%);
+  background: linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-error) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -303,7 +315,7 @@
 /* Right Ticket Tear Stub Panel */
 .ticketStub {
   padding: 32px 24px;
-  background: rgba(4, 1, 8, 0.2);
+  background: rgba(139, 92, 246, 0.06);
   display: flex;
   flex-direction: column;
   align-items: center;

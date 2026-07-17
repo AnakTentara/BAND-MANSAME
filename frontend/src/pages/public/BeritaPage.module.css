@@ -7,10 +7,10 @@
   flex-direction: column;
   gap: 20px;
   padding: 32px;
-  background: rgba(25, 14, 52, 0.25);
+  background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(24px);
   -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(184, 112, 255, 0.15);
+  border: 1px solid var(--color-border-strong);
   border-radius: var(--radius-lg);
   margin-bottom: var(--space-2xl);
   box-shadow: var(--shadow-md);
@@ -23,7 +23,7 @@
   align-items: center;
   font-size: 0.8125rem;
   color: var(--color-text-muted);
-  border-bottom: 1px solid rgba(184, 112, 255, 0.1);
+  border-bottom: 1px solid var(--color-border);
   padding-bottom: 12px;
 }
 
@@ -52,7 +52,7 @@
   align-items: center;
   flex-wrap: wrap;
   gap: 16px;
-  border-top: 1px solid rgba(184, 112, 255, 0.1);
+  border-top: 1px solid var(--color-border);
   padding-top: 16px;
   font-size: 0.875rem;
   color: var(--color-text-secondary);
